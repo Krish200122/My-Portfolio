@@ -21,12 +21,12 @@ class CustomStyles {
       ),
     ),
     textTheme: TextTheme(
-      titleLarge: GoogleFonts.lato(
+      titleLarge: GoogleFonts.montserrat(
         fontSize: 35,
         fontWeight: FontWeight.w600,
         color: AppColorPalette.primarycolor,
       ),
-      titleMedium: GoogleFonts.lato(
+      titleMedium: GoogleFonts.openSans(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Colors.black,
