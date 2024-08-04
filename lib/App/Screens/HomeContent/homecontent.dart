@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myportfolio/App/Screens/Aboutme/aboutme.dart';
+import 'package:myportfolio/App/Screens/Projects/projects.dart';
 import 'package:myportfolio/App/Utils/Variables.dart';
 import 'package:myportfolio/Views/Animations/animation.dart';
 import 'package:myportfolio/Views/Themes/Icons/icons.dart';
@@ -31,9 +32,10 @@ class _HomeContentState extends State<HomeContent> {
       // color: Colors.amber,
       // padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
-        controller: Variables.scrollController,
+        // controller: Variables.scrollController,
         scrollDirection: Axis.vertical,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -148,8 +150,14 @@ class _HomeContentState extends State<HomeContent> {
                                   duration: const Duration(milliseconds: 1100),
                                   horizontalOffset: 50.0,
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Scrollable.ensureVisible(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.easeInOut,
+                                          Variables.key1.currentContext!);
+                                    },
                                     child: AnimatedContainer(
+                                      key: Variables.key1,
                                       duration:
                                           const Duration(milliseconds: 200),
                                       transform: Matrix4.translationValues(0,
@@ -200,7 +208,7 @@ class _HomeContentState extends State<HomeContent> {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                             width: Measures.getWidth(context) * 0.35,
                             //  color: Colors.amber,
                             child: Row(
@@ -212,7 +220,7 @@ class _HomeContentState extends State<HomeContent> {
                                     index: 6,
                                     duration: const Duration(milliseconds: 500),
                                     horizontalOffset: 50.0,
-                                    child: Container(
+                                    child: SizedBox(
                                       height:
                                           Measures.getHeight(context) * 0.16,
                                       // width: Measures.getWidth(context) * 0.085,
@@ -242,7 +250,7 @@ class _HomeContentState extends State<HomeContent> {
                                                           color: Colors.white),
                                                 ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 height: Measures.getHeight(
                                                         context) *
                                                     0.07,
@@ -255,7 +263,7 @@ class _HomeContentState extends State<HomeContent> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: Measures.getWidth(
                                                               context) *
                                                           0.02,
@@ -265,7 +273,7 @@ class _HomeContentState extends State<HomeContent> {
                                                                   .high,
                                                           CustomIcons.mondoDb),
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: Measures.getWidth(
                                                               context) *
                                                           0.02,
@@ -275,7 +283,7 @@ class _HomeContentState extends State<HomeContent> {
                                                                   .high,
                                                           CustomIcons.firebase),
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: Measures.getWidth(
                                                               context) *
                                                           0.025,
@@ -296,7 +304,7 @@ class _HomeContentState extends State<HomeContent> {
                                     index: 7,
                                     duration: const Duration(milliseconds: 700),
                                     horizontalOffset: 50.0,
-                                    child: Container(
+                                    child: SizedBox(
                                       height:
                                           Measures.getHeight(context) * 0.16,
                                       // width: Measures.getWidth(context) * 0.085,
@@ -326,7 +334,7 @@ class _HomeContentState extends State<HomeContent> {
                                                           color: Colors.white),
                                                 ),
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 height: Measures.getHeight(
                                                         context) *
                                                     0.07,
@@ -343,7 +351,7 @@ class _HomeContentState extends State<HomeContent> {
                                     index: 8,
                                     duration: const Duration(milliseconds: 900),
                                     horizontalOffset: 50.0,
-                                    child: Container(
+                                    child: SizedBox(
                                       height:
                                           Measures.getHeight(context) * 0.16,
                                       // width: Measures.getWidth(context) * 0.085,
@@ -413,7 +421,7 @@ class _HomeContentState extends State<HomeContent> {
                               height: Measures.getHeight(context) * 0.35,
                               width: Measures.getWidth(context) * 0.25,
                               decoration: BoxDecoration(
-                                  color: Colors.white70,
+                                  color: Colors.white24,
                                   borderRadius: BorderRadius.circular(20.0)),
                             ),
                           )),
@@ -438,8 +446,9 @@ class _HomeContentState extends State<HomeContent> {
               ],
             ),
             const SizedBox(height: 50.0),
-            const AboutMe(
+            AboutMe(
               txtno: "01.",
+              keys: Variables.key1,
               title: "About Me",
               descrption:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
@@ -449,21 +458,25 @@ class _HomeContentState extends State<HomeContent> {
               descrption4:
                   "Here are few Technologioes I've been Working with Recently",
               isprofile: true,
-              duration: Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 700),
               index: 11,
             ),
             const SizedBox(height: 70.0),
-            const AboutMe(
+            AboutMe(
               txtno: "02.",
+              keys: Variables.key2,
               title: "Where I've Worked",
               descrption:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
               descrption2: "",
-              descrption4: "Senior Flutter Developer",
+              descrption3: "Senior Flutter Developer",
+              descrption4: "January 2023 ",
               isprofile: false,
-              duration: Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 800),
               index: 12,
             ),
+            const SizedBox(height: 40.0),
+            const projects()
           ],
         ),
       ),

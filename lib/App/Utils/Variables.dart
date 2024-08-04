@@ -13,4 +13,7 @@ class Variables {
   static bool isprofile = false;
   static int hoveredIndex = -1;
   static final ScrollController scrollController = ScrollController();
+
+  static var key1 = GlobalKey();
+  static var key2 = GlobalKey();
 }

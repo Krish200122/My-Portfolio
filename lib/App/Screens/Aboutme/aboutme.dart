@@ -14,6 +14,7 @@ class AboutMe extends StatefulWidget {
   final String? descrption4;
   final bool isprofile;
   final Duration duration;
+  final Key? keys;
   final int index;
   const AboutMe(
       {super.key,
@@ -22,6 +23,7 @@ class AboutMe extends StatefulWidget {
       required this.descrption,
       this.descrption2,
       this.descrption3,
+      this.keys,
       this.descrption4,
       required this.index,
       required this.duration,
@@ -41,17 +43,18 @@ class _AboutMeState extends State<AboutMe> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //height: Measures.getHeight(context) * 0.5,
+      // height: Measures.getHeight(context) * 0.5,
       width: Measures.getWidth(context) * 0.65,
       // color: Colors.green,
       child: Column(
+        key: widget.key,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: Measures.getHeight(context) * 0.09,
             width: Measures.getWidth(context) * 0.3,
-//color: Colors.black,
+            // color: Colors.black,
             child: CustomAnimation(
               duration: widget.duration,
               index: widget.index,
@@ -88,7 +91,7 @@ class _AboutMeState extends State<AboutMe> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                //height: Measures.getHeight(context) * 0.3,
+                // height: Measures.getHeight(context) * 0.3,
                 width: Measures.getWidth(context) * 0.3,
                 //   color: Colors.amber,
                 child: CustomAnimation(
@@ -147,20 +150,27 @@ class _AboutMeState extends State<AboutMe> {
                                 ),
                               ],
                             )
-                          : Container(),
-                      SizedBox(height: widget.descrption2 == "" ? 0.0 : 30.0),
+                          : Text(
+                              widget.descrption3!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: 19,
+                                      foreground: Paint()
+                                        ..shader =
+                                            AppColorPalette.textGradient),
+                            ),
+                      SizedBox(height: widget.descrption2 == "" ? 10.0 : 30.0),
                       Text(
-                        widget.descrption4 ?? "",
+                        widget.descrption4!,
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
                             .copyWith(
                                 fontSize: 17,
                                 foreground: Paint()
-                                  ..shader = widget.descrption4 ==
-                                          "Senior Flutter Developer"
-                                      ? AppColorPalette.textGradient
-                                      : AppColorPalette.white),
+                                  ..shader = AppColorPalette.white),
                       ),
                     ],
                   ),
