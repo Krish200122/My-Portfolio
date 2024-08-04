@@ -13,6 +13,8 @@ class AboutMe extends StatefulWidget {
   final String? descrption3;
   final String? descrption4;
   final bool isprofile;
+  final Duration duration;
+  final int index;
   const AboutMe(
       {super.key,
       required this.txtno,
@@ -21,6 +23,8 @@ class AboutMe extends StatefulWidget {
       this.descrption2,
       this.descrption3,
       this.descrption4,
+      required this.index,
+      required this.duration,
       required this.isprofile});
 
   @override
@@ -49,8 +53,8 @@ class _AboutMeState extends State<AboutMe> {
             width: Measures.getWidth(context) * 0.3,
 //color: Colors.black,
             child: CustomAnimation(
-              duration: const Duration(milliseconds: 700),
-              index: 11,
+              duration: widget.duration,
+              index: widget.index,
               horizontalOffset: 50.0,
               child: Row(
                 children: [
