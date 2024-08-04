@@ -6,6 +6,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:myportfolio/App/Screens/Aboutme/aboutme.dart';
 import 'package:myportfolio/App/Utils/Variables.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Icons/icons.dart';
@@ -287,25 +288,27 @@ class _HomePageState extends State<HomePage> {
                     Variables.selectedindex == 0
                         ? Container(
                             height: Measures.getHeight(context) * 0.85,
-                            width: Measures.getWidth(context),
-                            //color: Colors.amber,
-                            padding: const EdgeInsets.all(10.0),
+                            width: Measures.getWidth(context) * 0.85,
+                            // color: Colors.amber,
+                            // padding: const EdgeInsets.all(10.0),
                             child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Align(
                                         alignment: Alignment.topCenter,
-                                        child: SizedBox(
+                                        child: Container(
                                           height:
                                               Measures.getHeight(context) * 0.7,
-                                          width:
-                                              Measures.getWidth(context) * 0.4,
                                           // color: Colors.white,
                                           child: Column(
                                             crossAxisAlignment:
@@ -324,7 +327,7 @@ class _HomePageState extends State<HomePage> {
                                                       CrossAxisAlignment.start,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceEvenly,
+                                                          .spaceBetween,
                                                   children: [
                                                     CustomAnimation(
                                                         index: 1,
@@ -335,6 +338,9 @@ class _HomePageState extends State<HomePage> {
                                                         horizontalOffset: 50.0,
                                                         child: FadeInAnimation(
                                                             child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               "Hey I'm",
@@ -362,7 +368,6 @@ class _HomePageState extends State<HomePage> {
                                                                           context) *
                                                                   0.04,
                                                               child: Lottie.asset(
-                                                                  repeat: false,
                                                                   "Assets/Animation/Wave.json"),
                                                             )
                                                           ],
@@ -705,11 +710,12 @@ class _HomePageState extends State<HomePage> {
                                   //   width: 300,
                                   //   color: Colors.pink,
                                   // )
+                                  const AboutMe()
                                 ],
                               ),
                             ),
                           )
-                        : Container()
+                        : Container(),
                   ],
                 ),
               ),
