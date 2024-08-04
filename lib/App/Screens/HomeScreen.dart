@@ -292,6 +292,7 @@ class _HomePageState extends State<HomePage> {
                             // color: Colors.amber,
                             // padding: const EdgeInsets.all(10.0),
                             child: SingleChildScrollView(
+                              controller: Variables.scrollController,
                               scrollDirection: Axis.vertical,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -314,14 +315,16 @@ class _HomePageState extends State<HomePage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              SizedBox(
-                                                //  height: Measures.getHeight(context) * 0.25,
+                                              Container(
+                                                height: Measures.getHeight(
+                                                        context) *
+                                                    0.38,
                                                 width:
                                                     Measures.getWidth(context) *
                                                         0.3,
-                                                //   color: Colors.pink,
+                                                //    color: Colors.pink,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -450,87 +453,91 @@ class _HomePageState extends State<HomePage> {
                                                                 milliseconds:
                                                                     1100),
                                                         horizontalOffset: 50.0,
-                                                        child:
-                                                            AnimatedContainer(
-                                                          duration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      200),
-                                                          transform: Matrix4
-                                                              .translationValues(
-                                                                  0,
-                                                                  Variables
-                                                                          .abtmeisHovered
-                                                                      ? -5
-                                                                      : 0,
-                                                                  0),
-                                                          height: Measures
-                                                                  .getHeight(
-                                                                      context) *
-                                                              0.04,
-                                                          width:
-                                                              Measures.getWidth(
-                                                                      context) *
-                                                                  0.07,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
+                                                        child: GestureDetector(
+                                                          onTap: () {},
+                                                          child:
+                                                              AnimatedContainer(
+                                                            duration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        200),
+                                                            transform: Matrix4
+                                                                .translationValues(
+                                                                    0,
+                                                                    Variables
+                                                                            .abtmeisHovered
+                                                                        ? -5
+                                                                        : 0,
+                                                                    0),
+                                                            height: Measures
+                                                                    .getHeight(
+                                                                        context) *
+                                                                0.04,
+                                                            width: Measures
+                                                                    .getWidth(
+                                                                        context) *
+                                                                0.07,
+                                                            alignment: Alignment
+                                                                .center,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: Variables
+                                                                        .abtmeisHovered
+                                                                    ? Colors
+                                                                        .transparent
+                                                                    : const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        135,
+                                                                        24,
+                                                                        245),
+                                                              ),
+
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              gradient: Variables
+                                                                      .abtmeisHovered
+                                                                  ? const LinearGradient(
+                                                                      colors: [
+                                                                        Color.fromARGB(
+                                                                            255,
+                                                                            135,
+                                                                            24,
+                                                                            245),
+                                                                        Color.fromARGB(
+                                                                            255,
+                                                                            154,
+                                                                            11,
+                                                                            173)
+                                                                      ],
+                                                                      begin: Alignment
+                                                                          .topCenter,
+                                                                      end: Alignment
+                                                                          .bottomRight,
+                                                                    )
+                                                                  : null, // No gradient when not hovered
                                                               color: Variables
                                                                       .abtmeisHovered
-                                                                  ? Colors
-                                                                      .transparent
-                                                                  : const Color
-                                                                      .fromARGB(
-                                                                      255,
-                                                                      135,
-                                                                      24,
-                                                                      245),
+                                                                  ? null
+                                                                  : Colors
+                                                                      .transparent, // White background when not hovered
                                                             ),
-
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            gradient: Variables
-                                                                    .abtmeisHovered
-                                                                ? const LinearGradient(
-                                                                    colors: [
-                                                                      Color.fromARGB(
-                                                                          255,
-                                                                          135,
-                                                                          24,
-                                                                          245),
-                                                                      Color.fromARGB(
-                                                                          255,
-                                                                          154,
-                                                                          11,
-                                                                          173)
-                                                                    ],
-                                                                    begin: Alignment
-                                                                        .topCenter,
-                                                                    end: Alignment
-                                                                        .bottomRight,
-                                                                  )
-                                                                : null, // No gradient when not hovered
-                                                            color: Variables
-                                                                    .abtmeisHovered
-                                                                ? null
-                                                                : Colors
-                                                                    .transparent, // White background when not hovered
-                                                          ),
-                                                          child: Text(
-                                                            "About me",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .titleSmall!
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        15,
-                                                                    color: Colors
-                                                                        .white),
+                                                            child: Text(
+                                                              "About me",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .titleSmall!
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          15,
+                                                                      color: Colors
+                                                                          .white),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -661,7 +668,7 @@ class _HomePageState extends State<HomePage> {
                                                             context) *
                                                         0.25,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.white24,
+                                                        color: Colors.white70,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(
@@ -710,7 +717,28 @@ class _HomePageState extends State<HomePage> {
                                   //   width: 300,
                                   //   color: Colors.pink,
                                   // )
-                                  const AboutMe()
+                                  const AboutMe(
+                                    txtno: "01.",
+                                    title: "About Me",
+                                    descrption:
+                                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                                    descrption2:
+                                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                                    descrption3: "",
+                                    descrption4:
+                                        "Here are few Technologioes I've been Working with Recently",
+                                    isprofile: true,
+                                  ),
+                                  const SizedBox(height: 70.0),
+                                  const AboutMe(
+                                    txtno: "02.",
+                                    title: "Where I've Worked",
+                                    descrption:
+                                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                                    descrption2: "",
+                                    descrption4: "Senior Flutter Developer",
+                                    isprofile: false,
+                                  ),
                                 ],
                               ),
                             ),
