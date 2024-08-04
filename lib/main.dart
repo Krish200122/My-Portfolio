@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myportfolio/App/Screens/HomeScreen.dart';
-import 'package:myportfolio/Themes/Styles/styles.dart';
+import 'package:myportfolio/Views/Themes/Styles/styles.dart';
 
 void main() {
   runApp(const MyApp());

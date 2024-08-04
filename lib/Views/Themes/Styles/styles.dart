@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myportfolio/Themes/Colors/colors.dart';
+import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 
 class CustomStyles {
   static final themeData = ThemeData().copyWith(
