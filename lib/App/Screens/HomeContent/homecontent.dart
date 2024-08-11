@@ -489,7 +489,7 @@ class _HomeContentState extends State<HomeContent> {
             ),
             projects(
               ischangePosition: true,
-              keys: Variables.key4,
+              keys: null,
               texttitle: "Featured Projects",
               textsubtitle: "AlgoTrading - Projects",
               textdesc:

@@ -21,7 +21,7 @@ class CustomStyles {
       ),
     ),
     textTheme: TextTheme(
-      titleLarge: GoogleFonts.montserrat(
+      titleLarge: GoogleFonts.merriweather(
         fontSize: 35,
         fontWeight: FontWeight.w600,
         color: AppColorPalette.primarycolor,
@@ -33,7 +33,7 @@ class CustomStyles {
       ),
       titleSmall: GoogleFonts.lato(
         fontSize: 17,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         color: AppColorPalette.primarycolor,
       ),
     ),

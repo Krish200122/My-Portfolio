@@ -44,7 +44,6 @@ class _projectsState extends State<projects> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // key: Variables.key2,
       height: Measures.getHeight(context) * 0.45,
       width: Measures.getWidth(context) * 0.8,
       //color: Colors.pink,
@@ -106,17 +105,17 @@ class _projectsState extends State<projects> {
                     children: [
                       Text(
                         widget.texttitle,
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontSize: 18,
-                            foreground: Paint()
-                              ..shader = AppColorPalette.white),
-                      ),
-                      Text(
-                        widget.textsubtitle,
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
-                            .copyWith(fontSize: 18, color: Colors.white54),
+                            .copyWith(fontSize: 15, color: Colors.white54),
+                      ),
+                      Text(
+                        widget.textsubtitle,
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontSize: 22,
+                            foreground: Paint()
+                              ..shader = AppColorPalette.white),
                       ),
                       CustomAnimation(
                         index: 12,
@@ -140,7 +139,7 @@ class _projectsState extends State<projects> {
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    fontSize: 18,
+                                    fontSize: 17,
                                     color: const Color.fromARGB(
                                         255, 156, 156, 156),
                                     fontWeight: FontWeight.w500),
@@ -150,7 +149,7 @@ class _projectsState extends State<projects> {
                       Text(
                         widget.textend,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              fontSize: 18,
+                              fontSize: 14,
                               color: Colors.white54,
                             ),
                       ),
@@ -207,16 +206,17 @@ class _projectsState extends State<projects> {
                   children: [
                     Text(
                       widget.texttitle,
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontSize: 18,
-                          foreground: Paint()..shader = AppColorPalette.white),
-                    ),
-                    Text(
-                      widget.textsubtitle,
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall!
-                          .copyWith(fontSize: 18, color: Colors.white54),
+                          .copyWith(fontSize: 15, color: Colors.white54),
+                    ),
+                    Text(
+                      widget.textsubtitle,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontSize: 22,
+                            foreground: Paint()..shader = AppColorPalette.white,
+                          ),
                     ),
                     Container(
                       //  height: Measures.getHeight(context) * 0.2,
@@ -231,7 +231,7 @@ class _projectsState extends State<projects> {
                         widget.textdesc,
                         textAlign: TextAlign.end,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontSize: 18,
+                            fontSize: 17,
                             color: const Color.fromARGB(255, 156, 156, 156),
                             fontWeight: FontWeight.w500),
                       ),
@@ -239,7 +239,7 @@ class _projectsState extends State<projects> {
                     Text(
                       widget.textend,
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontSize: 18,
+                            fontSize: 14,
                             color: Colors.white54,
                           ),
                     ),
