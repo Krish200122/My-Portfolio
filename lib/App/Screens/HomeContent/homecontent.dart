@@ -26,16 +26,16 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: Measures.getHeight(context) * 0.85,
       width: Measures.getWidth(context) * 0.85,
-      // color: Colors.amber,
+//color: Colors.amber,
       // padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
         // controller: Variables.scrollController,
-        scrollDirection: Axis.vertical,
+        //  scrollDirection: Axis.vertical,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,10 +52,10 @@ class _HomeContentState extends State<HomeContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
+                        Container(
                           height: Measures.getHeight(context) * 0.38,
                           width: Measures.getWidth(context) * 0.3,
-                          //    color: Colors.pink,
+                          // color: Colors.pink,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -445,7 +445,7 @@ class _HomeContentState extends State<HomeContent> {
                 )
               ],
             ),
-            const SizedBox(height: 50.0),
+            // const SizedBox(height: 50.0),
             AboutMe(
               txtno: "01.",
               keys: Variables.key1,
@@ -461,7 +461,7 @@ class _HomeContentState extends State<HomeContent> {
               duration: const Duration(milliseconds: 700),
               index: 11,
             ),
-            const SizedBox(height: 70.0),
+            //    const SizedBox(height: 70.0),
             AboutMe(
               txtno: "02.",
               keys: Variables.key2,
@@ -475,8 +475,27 @@ class _HomeContentState extends State<HomeContent> {
               duration: const Duration(milliseconds: 800),
               index: 12,
             ),
-            const SizedBox(height: 40.0),
-            const projects()
+            //   const SizedBox(height: 80.0),
+            projects(
+              textno: "03.",
+              keys: Variables.key4,
+              texttitle: "Featured Projects",
+              ischangePosition: false,
+              textsubtitle: "Travel Management - Projects",
+              textdesc:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+              textend: "Dart  Android  IOS",
+              title: "Project's Which I've Build ",
+            ),
+            projects(
+              ischangePosition: true,
+              keys: Variables.key4,
+              texttitle: "Featured Projects",
+              textsubtitle: "AlgoTrading - Projects",
+              textdesc:
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+              textend: "Dart  Android  IOS",
+            ),
           ],
         ),
       ),

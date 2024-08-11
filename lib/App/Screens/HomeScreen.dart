@@ -35,10 +35,10 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: Measures.getHeight(context),
             width: Measures.getWidth(context),
-            child: Lottie.asset(CustomIcons.bganimation),
+            child: Lottie.asset(CustomIcons.bganimation, fit: BoxFit.fitHeight),
           ),
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+            filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0),
             child: Align(
               alignment: Alignment.topCenter,
               child: Container(
@@ -276,9 +276,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 40.0),
-                    Variables.selectedindex == 0
-                        ? const HomeContent()
-                        : Container(),
+                    const HomeContent()
+                    // : Container(),
                   ],
                 ),
               ),

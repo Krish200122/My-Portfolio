@@ -43,9 +43,9 @@ class _AboutMeState extends State<AboutMe> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: Measures.getHeight(context) * 0.5,
-      width: Measures.getWidth(context) * 0.65,
-      // color: Colors.green,
+      height: Measures.getHeight(context) * 0.5,
+      width: Measures.getWidth(context),
+//color: Colors.green,
       child: Column(
         key: widget.key,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,7 @@ class _AboutMeState extends State<AboutMe> {
                         foreground: Paint()
                           ..shader = AppColorPalette.textGradient),
                   ),
-                  const SizedBox(width: 20.0),
+                  const SizedBox(width: 30.0),
                   Text(
                     widget.title,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
