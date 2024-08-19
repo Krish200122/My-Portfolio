@@ -131,8 +131,21 @@ class _HomePageState extends State<HomePage> {
                                                                 .selectedindex =
                                                             index;
                                                       });
+                                                      Scrollable.ensureVisible(
+                                                          duration:
+                                                              const Duration(
+                                                                  seconds: 1),
+                                                          curve:
+                                                              Curves.easeInOut,
+                                                          Variables.abt2key
+                                                              .currentContext!);
                                                     },
                                                     child: AnimatedContainer(
+                                                      key: Variables.indextext[
+                                                                  index] ==
+                                                              "Projects"
+                                                          ? Variables.abt2key
+                                                          : null,
                                                       duration: const Duration(
                                                           milliseconds: 200),
                                                       transform: Matrix4

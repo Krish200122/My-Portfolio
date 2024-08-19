@@ -16,6 +16,8 @@ class AboutMe extends StatefulWidget {
   final Duration duration;
   final Key? keys;
   final int index;
+  final double? isVisible;
+
   const AboutMe(
       {super.key,
       required this.txtno,
@@ -26,6 +28,7 @@ class AboutMe extends StatefulWidget {
       this.keys,
       this.descrption4,
       required this.index,
+      this.isVisible,
       required this.duration,
       required this.isprofile});
 
@@ -42,92 +45,83 @@ class _AboutMeState extends State<AboutMe> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: Measures.getHeight(context) * 0.5,
-      width: Measures.getWidth(context),
-//color: Colors.green,
-      child: Column(
-        key: widget.key,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: Measures.getHeight(context) * 0.09,
-            width: Measures.getWidth(context) * 0.3,
-            // color: Colors.black,
-            child: CustomAnimation(
-              duration: widget.duration,
-              index: widget.index,
-              horizontalOffset: 50.0,
-              child: Row(
-                children: [
-                  Text(
-                    widget.txtno,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontSize: 19,
-                        foreground: Paint()
-                          ..shader = AppColorPalette.textGradient),
-                  ),
-                  const SizedBox(width: 30.0),
-                  Text(
-                    widget.title,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontSize: 22,
-                        foreground: Paint()..shader = AppColorPalette.white),
-                  ),
-                  const SizedBox(width: 30.0),
-                  SizedBox(
-                    width: Measures.getWidth(context) * 0.1,
-                    child: const Divider(
-                      height: 0.3,
-                      color: Colors.white60,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                // height: Measures.getHeight(context) * 0.3,
+    return AnimatedOpacity(
+      opacity: widget.isVisible!,
+      duration: widget.duration,
+      child: SizedBox(
+        height: Measures.getHeight(context) * 0.5,
+        width: Measures.getWidth(context),
+        //color: Colors.green,
+        child: Column(
+          key: widget.keys,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+                height: Measures.getHeight(context) * 0.09,
                 width: Measures.getWidth(context) * 0.3,
-                //   color: Colors.amber,
-                child: CustomAnimation(
-                  duration: const Duration(milliseconds: 800),
-                  index: 12,
-                  horizontalOffset: 50.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.descrption,
-                        style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  fontSize: 17,
-                                  color: Colors.white60,
-                                ),
-                      ),
-                      const SizedBox(height: 10.0),
-                      widget.descrption2 != null
-                          ? Text(
-                              widget.descrption2!,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
-                                    fontSize: 17,
-                                    color: Colors.white60,
-                                  ),
-                            )
-                          : Container(),
-                      SizedBox(height: widget.descrption2 == "" ? 0.0 : 20.0),
-                      widget.descrption3 == ""
-                          ? Row(
+                // color: Colors.black,
+                child: AnimatedOpacity(
+                    opacity: widget.isVisible!,
+                    duration: widget.duration,
+                    child: widget.isVisible! != 0.0
+                        ? CustomAnimation(
+                            duration: widget.duration,
+                            index: widget.index,
+                            horizontalOffset: 50.0,
+                            child: Row(
                               children: [
                                 Text(
-                                  "I have Build ",
+                                  widget.txtno,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          fontSize: 19,
+                                          foreground: Paint()
+                                            ..shader =
+                                                AppColorPalette.textGradient),
+                                ),
+                                const SizedBox(width: 30.0),
+                                Text(
+                                  widget.title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          fontSize: 22,
+                                          foreground: Paint()
+                                            ..shader = AppColorPalette.white),
+                                ),
+                                const SizedBox(width: 30.0),
+                                SizedBox(
+                                  width: Measures.getWidth(context) * 0.1,
+                                  child: const Divider(
+                                    height: 0.3,
+                                    color: Colors.white60,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : const SizedBox.shrink())),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    // height: Measures.getHeight(context) * 0.3,
+                    width: Measures.getWidth(context) * 0.3,
+                    //   color: Colors.amber,
+                    child: widget.isVisible! != 0.0
+                        ? CustomAnimation(
+                            duration: const Duration(milliseconds: 800),
+                            index: widget.index,
+                            horizontalOffset: 50.0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.descrption,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium!
@@ -136,104 +130,154 @@ class _AboutMeState extends State<AboutMe> {
                                         color: Colors.white60,
                                       ),
                                 ),
-                                const SizedBox(width: 5.0),
+                                const SizedBox(height: 10.0),
+                                widget.descrption2 != null
+                                    ? Text(
+                                        widget.descrption2!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .copyWith(
+                                              fontSize: 17,
+                                              color: Colors.white60,
+                                            ),
+                                      )
+                                    : Container(),
+                                SizedBox(
+                                    height:
+                                        widget.descrption2 == "" ? 0.0 : 20.0),
+                                widget.descrption3 == ""
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            "I have Build ",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                                  fontSize: 17,
+                                                  color: Colors.white60,
+                                                ),
+                                          ),
+                                          const SizedBox(width: 5.0),
+                                          Text(
+                                            "Awesome Apps",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .copyWith(
+                                                    fontSize: 19,
+                                                    foreground: Paint()
+                                                      ..shader = AppColorPalette
+                                                          .textGradient),
+                                          ),
+                                        ],
+                                      )
+                                    : Text(
+                                        widget.descrption3!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 19,
+                                                foreground: Paint()
+                                                  ..shader = AppColorPalette
+                                                      .textGradient),
+                                      ),
+                                SizedBox(
+                                    height:
+                                        widget.descrption2 == "" ? 10.0 : 30.0),
                                 Text(
-                                  "Awesome Apps",
+                                  widget.descrption4!,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleSmall!
+                                      .titleMedium!
                                       .copyWith(
-                                          fontSize: 19,
+                                          fontSize: 17,
                                           foreground: Paint()
-                                            ..shader =
-                                                AppColorPalette.textGradient),
+                                            ..shader = AppColorPalette.white),
                                 ),
                               ],
-                            )
-                          : Text(
-                              widget.descrption3!,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      fontSize: 19,
-                                      foreground: Paint()
-                                        ..shader =
-                                            AppColorPalette.textGradient),
                             ),
-                      SizedBox(height: widget.descrption2 == "" ? 10.0 : 30.0),
-                      Text(
-                        widget.descrption4!,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                                fontSize: 17,
-                                foreground: Paint()
-                                  ..shader = AppColorPalette.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              widget.isprofile
-                  ? Container(
-                      height: Measures.getHeight(context) * 0.4,
-                      width: Measures.getWidth(context) * 0.3,
-                      //  color: Colors.pink,
-                      padding: const EdgeInsets.all(10.0),
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          CustomAnimation(
-                            duration: const Duration(milliseconds: 900),
-                            index: 13,
-                            horizontalOffset: 50.0,
-                            child: Container(
-                                height: Measures.getHeight(context) * 0.35,
-                                width: Measures.getWidth(context) * 0.17,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                  width: 3,
-                                  color:
-                                      const Color.fromARGB(255, 135, 24, 245),
-                                ))),
-                          ),
-                          Positioned(
-                            top: 0,
-                            left: 40,
-                            bottom: 40,
-                            child: MouseRegion(
-                              onEnter: (event) => _onprofile(true),
-                              onExit: (event) => _onprofile(false),
-                              child: CustomAnimation(
-                                duration: const Duration(milliseconds: 900),
-                                index: 14,
-                                verticalOffset: 50.0,
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 200),
-                                  transform: Matrix4.translationValues(
-                                      0, Variables.isprofile ? -20 : 0, 0),
-                                  child: Container(
-                                    height: Measures.getHeight(context) * 0.15,
-                                    width: Measures.getWidth(context) * 0.18,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    child: Image.asset(CustomIcons.profile),
-                                  ),
-                                ),
-                              ),
+                          )
+                        : const SizedBox.shrink()),
+                widget.isprofile
+                    ? Container(
+                        height: Measures.getHeight(context) * 0.4,
+                        width: Measures.getWidth(context) * 0.3,
+                        //  color: Colors.pink,
+                        padding: const EdgeInsets.all(10.0),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            widget.isVisible! != 0.0
+                                ? CustomAnimation(
+                                    duration: const Duration(milliseconds: 900),
+                                    index: widget.index,
+                                    horizontalOffset: 50.0,
+                                    child: Container(
+                                        height:
+                                            Measures.getHeight(context) * 0.35,
+                                        width:
+                                            Measures.getWidth(context) * 0.17,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                          width: 3,
+                                          color: const Color.fromARGB(
+                                              255, 135, 24, 245),
+                                        ))),
+                                  )
+                                : const SizedBox.shrink(),
+                            Positioned(
+                              top: 0,
+                              left: 40,
+                              bottom: 40,
+                              child: MouseRegion(
+                                  onEnter: (event) => _onprofile(true),
+                                  onExit: (event) => _onprofile(false),
+                                  child: widget.isVisible! != 0.0
+                                      ? CustomAnimation(
+                                          duration:
+                                              const Duration(milliseconds: 900),
+                                          index: widget.index,
+                                          verticalOffset: 50.0,
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 200),
+                                            transform:
+                                                Matrix4.translationValues(
+                                                    0,
+                                                    Variables.isprofile
+                                                        ? -20
+                                                        : 0,
+                                                    0),
+                                            child: Container(
+                                              height:
+                                                  Measures.getHeight(context) *
+                                                      0.15,
+                                              width:
+                                                  Measures.getWidth(context) *
+                                                      0.18,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0)),
+                                              child: Image.asset(
+                                                  CustomIcons.profile),
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox.shrink()),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container()
-            ],
-          )
-        ],
+                          ],
+                        ),
+                      )
+                    : Container()
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

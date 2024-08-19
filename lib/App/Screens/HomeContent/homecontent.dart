@@ -25,17 +25,29 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Variables.scrollControllers.addListener(() {
+      setState(() {
+        Variables.scrollPosition = Variables.scrollControllers.position.pixels;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    Variables.scrollControllers.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Measures.getHeight(context) * 0.85,
       width: Measures.getWidth(context) * 0.85,
-//color: Colors.amber,
-      // padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
-        // controller: Variables.scrollController,
-        //  scrollDirection: Axis.vertical,
+        controller: Variables.scrollControllers,
         child: Column(
-          // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,7 +64,7 @@ class _HomeContentState extends State<HomeContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
+                        SizedBox(
                           height: Measures.getHeight(context) * 0.38,
                           width: Measures.getWidth(context) * 0.3,
                           // color: Colors.pink,
@@ -448,7 +460,7 @@ class _HomeContentState extends State<HomeContent> {
             // const SizedBox(height: 50.0),
             AboutMe(
               txtno: "01.",
-              keys: Variables.key1,
+              keys: Variables.abt1key,
               title: "About Me",
               descrption:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
@@ -458,13 +470,14 @@ class _HomeContentState extends State<HomeContent> {
               descrption4:
                   "Here are few Technologioes I've been Working with Recently",
               isprofile: true,
-              duration: const Duration(milliseconds: 700),
-              index: 11,
+              duration: const Duration(milliseconds: 400),
+              index: 1,
+              isVisible: Measures.isInView(Variables.abt1key, context),
             ),
             //    const SizedBox(height: 70.0),
             AboutMe(
               txtno: "02.",
-              keys: Variables.key2,
+              keys: Variables.abt2key,
               title: "Where I've Worked",
               descrption:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
@@ -472,13 +485,15 @@ class _HomeContentState extends State<HomeContent> {
               descrption3: "Senior Flutter Developer",
               descrption4: "January 2023 ",
               isprofile: false,
-              duration: const Duration(milliseconds: 800),
-              index: 12,
+              duration: const Duration(milliseconds: 500),
+              index: 2,
+              isVisible: Measures.isInView(Variables.abt2key, context),
             ),
             //   const SizedBox(height: 80.0),
             projects(
               textno: "03.",
-              keys: Variables.key4,
+              keys: Variables.abt3key,
+              duration: const Duration(milliseconds: 700),
               texttitle: "Featured Projects",
               ischangePosition: false,
               textsubtitle: "Travel Management - Projects",
@@ -486,15 +501,20 @@ class _HomeContentState extends State<HomeContent> {
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
               textend: "Dart  Android  IOS",
               title: "Project's Which I've Build ",
+              index: 3,
+              isVisible: Measures.isInView(Variables.abt3key, context),
             ),
             projects(
               ischangePosition: true,
-              keys: null,
+              keys: Variables.abt4key,
+              duration: const Duration(milliseconds: 800),
               texttitle: "Featured Projects",
               textsubtitle: "AlgoTrading - Projects",
               textdesc:
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
               textend: "Dart  Android  IOS",
+              index: 4,
+              isVisible: Measures.isInView(Variables.abt4key, context),
             ),
           ],
         ),
