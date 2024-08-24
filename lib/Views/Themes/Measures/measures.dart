@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 class Measures {
   static double getHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
+  }
+
+  static bool islargerScreen(context) {
+    return ResponsiveWrapper.of(context).isDesktop ||
+        ResponsiveWrapper.of(context).isTablet ||
+        ResponsiveWrapper.of(context).equals('4k');
   }
 
   static double getWidth(BuildContext context) {

@@ -9,6 +9,7 @@ import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Icons/icons.dart';
 import 'package:myportfolio/Views/Themes/Measures/measures.dart';
 import 'package:myportfolio/Views/Animations/animation.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         width: Measures.getWidth(context),
         decoration: const BoxDecoration(),
         child: Stack(children: [
-          SizedBox(
+          Container(
             height: Measures.getHeight(context),
             width: Measures.getWidth(context),
             child: Lottie.asset(CustomIcons.bganimation, fit: BoxFit.fitHeight),
@@ -91,17 +92,24 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          Container(
-                              height: Measures.getHeight(context) * 0.08,
-                              width: Measures.getWidth(context) * 0.3,
-                              // color: Colors.pink,
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, top: 20.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width < 600
+                                      ? MediaQuery.of(context).size.width * 0.8
+                                      : MediaQuery.of(context).size.width * 0.2,
+                                  //    color: Colors.amber,
+                                  child: ScrollConfiguration(
+                                    behavior: ScrollConfiguration.of(context)
+                                        .copyWith(scrollbars: false),
                                     child: GridView.builder(
-                                        padding: const EdgeInsets.all(15.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 35.0),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 4,
@@ -134,14 +142,33 @@ class _HomePageState extends State<HomePage> {
                                                       if (Variables.indextext[
                                                               index] ==
                                                           "Projects") {
-                                                        Scrollable.ensureVisible(
-                                                            duration:
-                                                                const Duration(
-                                                                    seconds: 1),
-                                                            curve: Curves
-                                                                .easeInOut,
-                                                            Variables.abt4key
-                                                                .currentContext!);
+                                                        Scrollable
+                                                            .ensureVisible(
+                                                                //alignment: -50.0,
+                                                                duration:
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            1),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                                Variables
+                                                                    .abt4key
+                                                                    .currentContext!);
+                                                      }
+                                                      if (Variables.indextext[
+                                                              index] ==
+                                                          "Home") {
+                                                        Scrollable
+                                                            .ensureVisible(
+                                                                //alignment: -50.0,
+                                                                duration:
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            1),
+                                                                curve: Curves
+                                                                    .easeInOut,
+                                                                Variables.key1
+                                                                    .currentContext!);
                                                       }
                                                     },
                                                     child: AnimatedContainer(
@@ -170,8 +197,13 @@ class _HomePageState extends State<HomePage> {
                                                                               index ||
                                                                           Variables.hoveredIndex ==
                                                                               index
-                                                                      ? 18
-                                                                      : 17,
+                                                                      ? ResponsiveWrapper.of(context).screenWidth <
+                                                                              600
+                                                                          ? 14 // Font size for small screens
+                                                                          : ResponsiveWrapper.of(context).screenWidth < 1000
+                                                                              ? 16 // Font size for medium screens
+                                                                              : 18 // Font size for large screens
+                                                                      : 16,
                                                                   foreground: Paint()
                                                                     ..shader = Variables.selectedindex ==
                                                                                 index ||
@@ -225,14 +257,25 @@ class _HomePageState extends State<HomePage> {
                                           );
                                         }),
                                   ),
-                                  MouseRegion(
-                                    onEnter: (event) => _onHover(true),
-                                    onExit: (event) => _onHover(false),
-                                    child: CustomAnimation(
-                                      index: 5,
-                                      duration:
-                                          const Duration(milliseconds: 1100),
-                                      horizontalOffset: 50.0,
+                                ),
+                                MouseRegion(
+                                  onEnter: (event) => _onHover(true),
+                                  onExit: (event) => _onHover(false),
+                                  child: CustomAnimation(
+                                    index: 5,
+                                    duration:
+                                        const Duration(milliseconds: 1100),
+                                    horizontalOffset: 50.0,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Scrollable.ensureVisible(
+                                            alignment: 0.0,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            curve: Curves.easeInOut,
+                                            Variables
+                                                .headerKey.currentContext!);
+                                      },
                                       child: AnimatedContainer(
                                         duration:
                                             const Duration(milliseconds: 200),
@@ -281,15 +324,16 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                  )
-                                ],
-                              )),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
                     const SizedBox(height: 40.0),
-                    const HomeContent()
-                    // : Container(),
+                    const HomeContent(),
                   ],
                 ),
               ),

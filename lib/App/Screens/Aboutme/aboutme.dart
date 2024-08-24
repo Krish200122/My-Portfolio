@@ -49,7 +49,7 @@ class _AboutMeState extends State<AboutMe> {
       opacity: widget.isVisible!,
       duration: widget.duration,
       child: SizedBox(
-        height: Measures.getHeight(context) * 0.5,
+        // height: Measures.getHeight(context) * 0.5,
         width: Measures.getWidth(context),
         //color: Colors.green,
         child: Column(
@@ -59,7 +59,7 @@ class _AboutMeState extends State<AboutMe> {
           children: [
             SizedBox(
                 height: Measures.getHeight(context) * 0.09,
-                width: Measures.getWidth(context) * 0.3,
+                // width: Measures.getWidth(context) * 0.3,
                 // color: Colors.black,
                 child: AnimatedOpacity(
                     opacity: widget.isVisible!,
@@ -111,7 +111,7 @@ class _AboutMeState extends State<AboutMe> {
                 SizedBox(
                     // height: Measures.getHeight(context) * 0.3,
                     width: Measures.getWidth(context) * 0.3,
-                    //   color: Colors.amber,
+                    // color: Colors.amber,
                     child: widget.isVisible! != 0.0
                         ? CustomAnimation(
                             duration: const Duration(milliseconds: 800),
@@ -205,7 +205,7 @@ class _AboutMeState extends State<AboutMe> {
                     ? Container(
                         height: Measures.getHeight(context) * 0.4,
                         width: Measures.getWidth(context) * 0.3,
-                        //  color: Colors.pink,
+                        //color: Colors.pink,
                         padding: const EdgeInsets.all(10.0),
                         child: Stack(
                           alignment: Alignment.bottomCenter,

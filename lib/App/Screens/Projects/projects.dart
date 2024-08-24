@@ -210,7 +210,11 @@ class _projectsState extends State<projects> {
                               height: Measures.getHeight(context) * 0.3,
                               width: Measures.getWidth(context) * 0.3,
                               decoration: BoxDecoration(
-                                  color: Colors.white30,
+                                  color: Colors.white,
+                                  image: const DecorationImage(
+                                      image: AssetImage(
+                                          "Assets/Images/TravelAppMangement.jpg"),
+                                      fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(16.0)),
                             ),
                           )
@@ -233,7 +237,10 @@ class _projectsState extends State<projects> {
                                   height: Measures.getHeight(context) * 0.3,
                                   width: Measures.getWidth(context) * 0.3,
                                   decoration: BoxDecoration(
-                                      color: Colors.white30,
+                                      image: const DecorationImage(
+                                          image: AssetImage(
+                                              "Assets/Images/TravelAppMangement.jpg"),
+                                          fit: BoxFit.cover),
                                       borderRadius:
                                           BorderRadius.circular(16.0)),
                                 ),

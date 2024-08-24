@@ -17,7 +17,7 @@ class Variables {
   static final ScrollController scrollController = ScrollController();
   static final ScrollController scrollControllers = ScrollController();
   static double scrollPosition = 0.0;
-
+  static var headerKey = GlobalKey();
   static var key1 = GlobalKey();
   static var key2 = GlobalKey();
   static var key3 = GlobalKey();
