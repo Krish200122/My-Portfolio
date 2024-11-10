@@ -115,9 +115,7 @@ class _projectsState extends State<projects> {
                           duration: widget.duration!,
                           horizontalOffset: 50.0,
                           child: Container(
-                            height: Measures.getHeight(context) * 0.3,
                             width: Measures.getWidth(context) * 0.3,
-                            //color: Colors.green,
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment:
@@ -151,8 +149,8 @@ class _projectsState extends State<projects> {
                                         horizontalOffset: 50.0,
                                         child: Container(
                                           //  height: Measures.getHeight(context) * 0.2,
-                                          width:
-                                              Measures.getWidth(context) * 0.25,
+                                          // width:
+                                          //     Measures.getWidth(context) * 0.25,
                                           padding: const EdgeInsets.all(10.0),
                                           decoration: BoxDecoration(
                                               color: const Color.fromARGB(
@@ -253,9 +251,7 @@ class _projectsState extends State<projects> {
                           duration: widget.duration!,
                           horizontalOffset: 50.0,
                           child: Container(
-                            height: Measures.getHeight(context) * 0.3,
                             width: Measures.getWidth(context) * 0.3,
-                            // color: Colors.green,
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: widget.ischangePosition
@@ -284,7 +280,8 @@ class _projectsState extends State<projects> {
                                 ),
                                 Container(
                                   //  height: Measures.getHeight(context) * 0.2,
-                                  width: Measures.getWidth(context) * 0.25,
+                                  // width: Measures.getWidth(context) * 0.25,
+
                                   padding: const EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                       color:

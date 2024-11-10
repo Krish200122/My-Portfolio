@@ -49,9 +49,7 @@ class _AboutMeState extends State<AboutMe> {
       opacity: widget.isVisible!,
       duration: widget.duration,
       child: SizedBox(
-        // height: Measures.getHeight(context) * 0.5,
         width: Measures.getWidth(context),
-        //color: Colors.green,
         child: Column(
           key: widget.keys,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,8 +57,6 @@ class _AboutMeState extends State<AboutMe> {
           children: [
             SizedBox(
                 height: Measures.getHeight(context) * 0.09,
-                // width: Measures.getWidth(context) * 0.3,
-                // color: Colors.black,
                 child: AnimatedOpacity(
                     opacity: widget.isVisible!,
                     duration: widget.duration,

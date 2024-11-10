@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         width: Measures.getWidth(context),
         decoration: const BoxDecoration(),
         child: Stack(children: [
-          Container(
+          SizedBox(
             height: Measures.getHeight(context),
             width: Measures.getWidth(context),
             child: Lottie.asset(CustomIcons.bganimation, fit: BoxFit.fitHeight),
@@ -55,8 +55,6 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SizedBox(
                             height: Measures.getHeight(context) * 0.08,
-                            width: Measures.getWidth(context) * 0.1,
-                            // /color: Colors.green,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -97,9 +95,9 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width < 600
-                                      ? MediaQuery.of(context).size.width * 0.8
+                                      ? MediaQuery.of(context).size.width * 0.9
                                       : MediaQuery.of(context).size.width * 0.2,
                                   //    color: Colors.amber,
                                   child: ScrollConfiguration(

@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
@@ -622,6 +621,7 @@ class _HomeContentState extends State<HomeContent> {
                 index: 4,
                 isVisible: Measures.isInView(Variables.abt4key, context),
               ),
+              const SizedBox(height: 200.0),
               const Contactus(),
             ],
           ),
@@ -630,349 +630,333 @@ class _HomeContentState extends State<HomeContent> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Row ProfileRowContent(BuildContext context) {
     return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            //height: Measures.getHeight(context) * 0.7,
-            // color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  //  height: Measures.getHeight(context) * 0.38,
-                  width: Measures.getWidth(context) * 0.3,
-                  // color: Colors.pink,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomAnimation(
-                          index: 1,
-                          duration: const Duration(milliseconds: 500),
-                          horizontalOffset: 50.0,
-                          child: FadeInAnimation(
-                              child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hey I'm",
-                                textAlign: TextAlign.start,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              const SizedBox(width: 20.0),
-                              SizedBox(
-                                height: Measures.getHeight(context) * 0.04,
-                                child:
-                                    Lottie.asset("Assets/Animation/Wave.json"),
-                              )
-                            ],
-                          ))),
-                      const SizedBox(height: 10.0),
-                      CustomAnimation(
-                          index: 2,
-                          duration: const Duration(milliseconds: 800),
-                          horizontalOffset: 50.0,
-                          child: AnimatedTextKit(
-                            animatedTexts: [
-                              TypewriterAnimatedText(
-                                'Tarun Krishna',
-                                cursor: '',
-                                textStyle: TextStyle(
-                                  foreground: Paint()
-                                    ..shader = AppColorPalette.textGradient,
-                                  fontSize: 70.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                speed: const Duration(milliseconds: 200),
-                              ),
-                            ],
-                            totalRepeatCount: 4,
-                            pause: const Duration(milliseconds: 200),
-                            displayFullTextOnTap: true,
-                            stopPauseOnTap: true,
-                          )
-                          // runs after the above w/new duration
-                          ),
-                      const SizedBox(height: 10.0),
-                      CustomAnimation(
-                          index: 3,
-                          duration: const Duration(milliseconds: 900),
-                          horizontalOffset: 50.0,
-                          child: Text(
-                            "Flutter Developer",
-                            textAlign: TextAlign.start,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(fontSize: 40, color: Colors.white),
-                          )),
-                      const SizedBox(height: 10.0),
-                      CustomAnimation(
-                          index: 4,
-                          duration: const Duration(milliseconds: 1000),
-                          horizontalOffset: 50.0,
-                          child: Text(
-                            "Passionate about crafting beautiful and functional mobile applications with Flutter. Specializing in creating seamless user experiences with cutting-edge technology.",
-                            textAlign: TextAlign.start,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                  fontSize: 18,
-                                  color: Colors.white54,
-                                ),
-                          )),
-                      const SizedBox(height: 30.0),
-                      MouseRegion(
-                        onEnter: (event) => _onabtmeHover(true),
-                        onExit: (event) => _onabtmeHover(false),
-                        child: CustomAnimation(
-                          index: 5,
-                          duration: const Duration(milliseconds: 1100),
-                          horizontalOffset: 50.0,
-                          child: GestureDetector(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.easeInOut,
-                                  Variables.key1.currentContext!);
-                            },
-                            child: AnimatedContainer(
-                              key: Variables.key1,
-                              duration: const Duration(milliseconds: 200),
-                              transform: Matrix4.translationValues(
-                                  0, Variables.abtmeisHovered ? -5 : 0, 0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                //  height: Measures.getHeight(context) * 0.38,
+                width: Measures.getWidth(context) * 0.3,
+                // color: Colors.pink,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomAnimation(
+                        index: 1,
+                        duration: const Duration(milliseconds: 500),
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                            child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hey I'm",
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(width: 20.0),
+                            SizedBox(
                               height: Measures.getHeight(context) * 0.04,
-                              width: Measures.getWidth(context) * 0.07,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Variables.abtmeisHovered
-                                      ? Colors.transparent
-                                      : const Color.fromARGB(255, 135, 24, 245),
-                                ),
-
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: Variables.abtmeisHovered
-                                    ? const LinearGradient(
-                                        colors: [
-                                          Color.fromARGB(255, 135, 24, 245),
-                                          Color.fromARGB(255, 154, 11, 173)
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomRight,
-                                      )
-                                    : null, // No gradient when not hovered
+                              child: Lottie.asset("Assets/Animation/Wave.json"),
+                            )
+                          ],
+                        ))),
+                    const SizedBox(height: 10.0),
+                    CustomAnimation(
+                        index: 2,
+                        duration: const Duration(milliseconds: 800),
+                        horizontalOffset: 50.0,
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              'Tarun Krishna',
+                              cursor: '',
+                              textStyle: TextStyle(
+                                foreground: Paint()
+                                  ..shader = AppColorPalette.textGradient,
+                                fontSize: 70.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              speed: const Duration(milliseconds: 200),
+                            ),
+                          ],
+                          totalRepeatCount: 4,
+                          pause: const Duration(milliseconds: 200),
+                          displayFullTextOnTap: true,
+                          stopPauseOnTap: true,
+                        )
+                        // runs after the above w/new duration
+                        ),
+                    const SizedBox(height: 10.0),
+                    CustomAnimation(
+                        index: 3,
+                        duration: const Duration(milliseconds: 900),
+                        horizontalOffset: 50.0,
+                        child: Text(
+                          "Flutter Developer",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(fontSize: 40, color: Colors.white),
+                        )),
+                    const SizedBox(height: 10.0),
+                    CustomAnimation(
+                        index: 4,
+                        duration: const Duration(milliseconds: 1000),
+                        horizontalOffset: 50.0,
+                        child: Text(
+                          "Passionate about crafting beautiful and functional mobile applications with Flutter. Specializing in creating seamless user experiences with cutting-edge technology.",
+                          textAlign: TextAlign.start,
+                          style:
+                              Theme.of(context).textTheme.titleSmall!.copyWith(
+                                    fontSize: 18,
+                                    color: Colors.white54,
+                                  ),
+                        )),
+                    const SizedBox(height: 30.0),
+                    MouseRegion(
+                      onEnter: (event) => _onabtmeHover(true),
+                      onExit: (event) => _onabtmeHover(false),
+                      child: CustomAnimation(
+                        index: 5,
+                        duration: const Duration(milliseconds: 1100),
+                        horizontalOffset: 50.0,
+                        child: GestureDetector(
+                          onTap: () {
+                            Scrollable.ensureVisible(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                Variables.key1.currentContext!);
+                          },
+                          child: AnimatedContainer(
+                            key: Variables.key1,
+                            duration: const Duration(milliseconds: 200),
+                            transform: Matrix4.translationValues(
+                                0, Variables.abtmeisHovered ? -5 : 0, 0),
+                            height: Measures.getHeight(context) * 0.04,
+                            width: Measures.getWidth(context) * 0.07,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(
                                 color: Variables.abtmeisHovered
-                                    ? null
-                                    : Colors
-                                        .transparent, // White background when not hovered
+                                    ? Colors.transparent
+                                    : const Color.fromARGB(255, 135, 24, 245),
                               ),
-                              child: Text(
-                                "About me",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        fontSize: 15, color: Colors.white),
-                              ),
+
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: Variables.abtmeisHovered
+                                  ? const LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 135, 24, 245),
+                                        Color.fromARGB(255, 154, 11, 173)
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomRight,
+                                    )
+                                  : null, // No gradient when not hovered
+                              color: Variables.abtmeisHovered
+                                  ? null
+                                  : Colors
+                                      .transparent, // White background when not hovered
+                            ),
+                            child: Text(
+                              "About me",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(fontSize: 15, color: Colors.white),
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(height: 30.0),
-                SizedBox(
-                    width: Measures.getWidth(context) * 0.35,
-                    //   color: Colors.amber,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomAnimation(
-                            index: 6,
-                            duration: const Duration(milliseconds: 500),
-                            horizontalOffset: 50.0,
-                            child: SizedBox(
-                              height: Measures.getHeight(context) * 0.16,
-                              // width: Measures.getWidth(context) * 0.085,
-                              child: DottedBorder(
-                                  color: Colors.white54,
-                                  dashPattern: const [2, 4],
-                                  radius: const Radius.circular(20.0),
-                                  borderType: BorderType.RRect,
-                                  padding: const EdgeInsets.all(20.0),
-                                  strokeWidth: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        // color: Colors.white,
-                                        child: Text(
-                                          "Services",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontSize: 15,
-                                                  color: Colors.white),
-                                        ),
+              ),
+              const SizedBox(height: 30.0),
+              SizedBox(
+                  width: Measures.getWidth(context) * 0.35,
+                  //   color: Colors.amber,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomAnimation(
+                          index: 6,
+                          duration: const Duration(milliseconds: 500),
+                          horizontalOffset: 50.0,
+                          child: SizedBox(
+                            height: Measures.getHeight(context) * 0.16,
+                            // width: Measures.getWidth(context) * 0.085,
+                            child: DottedBorder(
+                                color: Colors.white54,
+                                dashPattern: const [2, 4],
+                                radius: const Radius.circular(20.0),
+                                borderType: BorderType.RRect,
+                                padding: const EdgeInsets.all(20.0),
+                                strokeWidth: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // color: Colors.white,
+                                      child: Text(
+                                        "Services",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 15,
+                                                color: Colors.white),
                                       ),
-                                      SizedBox(
-                                        height:
-                                            Measures.getHeight(context) * 0.07,
-                                        width:
-                                            Measures.getWidth(context) * 0.07,
-                                        // color: Colors.white,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              width:
-                                                  Measures.getWidth(context) *
-                                                      0.02,
-                                              child: Image.asset(
-                                                  filterQuality:
-                                                      FilterQuality.high,
-                                                  CustomIcons.mondoDb),
-                                            ),
-                                            SizedBox(
-                                              width:
-                                                  Measures.getWidth(context) *
-                                                      0.02,
-                                              child: Image.asset(
-                                                  filterQuality:
-                                                      FilterQuality.high,
-                                                  CustomIcons.firebase),
-                                            ),
-                                            SizedBox(
-                                              width:
-                                                  Measures.getWidth(context) *
-                                                      0.025,
-                                              child: Image.asset(
-                                                  filterQuality:
-                                                      FilterQuality.high,
-                                                  CustomIcons.nodejs),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )),
-                            ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          Measures.getHeight(context) * 0.07,
+                                      width: Measures.getWidth(context) * 0.07,
+                                      // color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: Measures.getWidth(context) *
+                                                0.02,
+                                            child: Image.asset(
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.mondoDb),
+                                          ),
+                                          SizedBox(
+                                            width: Measures.getWidth(context) *
+                                                0.02,
+                                            child: Image.asset(
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.firebase),
+                                          ),
+                                          SizedBox(
+                                            width: Measures.getWidth(context) *
+                                                0.025,
+                                            child: Image.asset(
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.nodejs),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )),
                           ),
-                          CustomAnimation(
-                            index: 7,
-                            duration: const Duration(milliseconds: 700),
-                            horizontalOffset: 50.0,
-                            child: SizedBox(
-                              height: Measures.getHeight(context) * 0.16,
-                              // width: Measures.getWidth(context) * 0.085,
-                              child: DottedBorder(
-                                  color: Colors.white54,
-                                  dashPattern: const [2, 4],
-                                  radius: const Radius.circular(20.0),
-                                  borderType: BorderType.RRect,
-                                  padding: const EdgeInsets.all(20.0),
-                                  strokeWidth: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        // color: Colors.white,
-                                        child: Text(
-                                          "Projects",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontSize: 15,
-                                                  color: Colors.white),
-                                        ),
+                        ),
+                        CustomAnimation(
+                          index: 7,
+                          duration: const Duration(milliseconds: 700),
+                          horizontalOffset: 50.0,
+                          child: SizedBox(
+                            height: Measures.getHeight(context) * 0.16,
+                            // width: Measures.getWidth(context) * 0.085,
+                            child: DottedBorder(
+                                color: Colors.white54,
+                                dashPattern: const [2, 4],
+                                radius: const Radius.circular(20.0),
+                                borderType: BorderType.RRect,
+                                padding: const EdgeInsets.all(20.0),
+                                strokeWidth: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // color: Colors.white,
+                                      child: Text(
+                                        "Projects",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 15,
+                                                color: Colors.white),
                                       ),
-                                      SizedBox(
-                                        height:
-                                            Measures.getHeight(context) * 0.07,
-                                        width:
-                                            Measures.getWidth(context) * 0.07,
-                                        // color: Colors.white,
-                                      )
-                                    ],
-                                  )),
-                            ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          Measures.getHeight(context) * 0.07,
+                                      width: Measures.getWidth(context) * 0.07,
+                                      // color: Colors.white,
+                                    )
+                                  ],
+                                )),
                           ),
-                          CustomAnimation(
-                            index: 8,
-                            duration: const Duration(milliseconds: 900),
-                            horizontalOffset: 50.0,
-                            child: SizedBox(
-                              height: Measures.getHeight(context) * 0.16,
-                              // width: Measures.getWidth(context) * 0.085,
-                              child: DottedBorder(
-                                  color: Colors.white54,
-                                  dashPattern: const [2, 4],
-                                  radius: const Radius.circular(20.0),
-                                  borderType: BorderType.RRect,
-                                  padding: const EdgeInsets.all(20.0),
-                                  strokeWidth: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        // color: Colors.white,
-                                        child: Text(
-                                          "Cloud",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  fontSize: 15,
-                                                  color: Colors.white),
-                                        ),
+                        ),
+                        CustomAnimation(
+                          index: 8,
+                          duration: const Duration(milliseconds: 900),
+                          horizontalOffset: 50.0,
+                          child: SizedBox(
+                            height: Measures.getHeight(context) * 0.16,
+                            // width: Measures.getWidth(context) * 0.085,
+                            child: DottedBorder(
+                                color: Colors.white54,
+                                dashPattern: const [2, 4],
+                                radius: const Radius.circular(20.0),
+                                borderType: BorderType.RRect,
+                                padding: const EdgeInsets.all(20.0),
+                                strokeWidth: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // color: Colors.white,
+                                      child: Text(
+                                        "Cloud",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 15,
+                                                color: Colors.white),
                                       ),
-                                      Container(
-                                        height:
-                                            Measures.getHeight(context) * 0.07,
-                                        width:
-                                            Measures.getWidth(context) * 0.07,
-                                        // color: Colors.white,
-                                        alignment: Alignment.center,
-                                        child: Image.asset(
-                                            filterQuality: FilterQuality.high,
-                                            CustomIcons.azure),
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          )
-                        ]))
-              ],
-            ),
+                                    ),
+                                    Container(
+                                      height:
+                                          Measures.getHeight(context) * 0.07,
+                                      width: Measures.getWidth(context) * 0.07,
+                                      // color: Colors.white,
+                                      alignment: Alignment.center,
+                                      child: Image.asset(
+                                          filterQuality: FilterQuality.high,
+                                          CustomIcons.azure),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        )
+                      ]))
+            ],
           ),
           Container(
             height: Measures.getHeight(context) * 0.6,
