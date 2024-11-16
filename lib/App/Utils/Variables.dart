@@ -14,6 +14,7 @@ class Variables {
   static bool isprofile = false;
   static bool isprojects1 = false;
   static bool isprojects2 = false;
+  static bool isemailprocess = false;
   static int hoveredIndex = -1;
   static final ScrollController scrollController = ScrollController();
   static final ScrollController scrollControllers = ScrollController();
@@ -28,4 +29,5 @@ class Variables {
   static var abt3key = GlobalKey();
   static var abt4key = GlobalKey();
   static var abt5key = GlobalKey();
+  static var contactuskey = GlobalKey();
 }
