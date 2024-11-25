@@ -29,27 +29,39 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: Measures.getHeight(context),
         width: Measures.getWidth(context),
         decoration: const BoxDecoration(),
         child: Stack(children: [
           SizedBox(
-            height: Measures.getHeight(context),
+            // height: Measures.getHeight(context),
             width: Measures.getWidth(context),
             child: Lottie.asset(CustomIcons.bganimation, fit: BoxFit.fitHeight),
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                color: Colors.black.withOpacity(0.8),
-                child: Column(
+            child: SizedBox(
+              width: Measures.getWidth(context),
+
+              // color: Colors.amber,
+              // padding: EdgeInsets.all(10.0),
+              child: Stack(
+                children: [
+                  Container(
+              width: Measures.getWidth(context),
+                    color: Colors.black.withOpacity(0.8),
+                                  alignment: Alignment.center,
+
+                   // padding: const EdgeInsets.all(10.0),
+                    child:
+                      SizedBox(
+                       width: Measures.getWidth(context) * 0.85,
+                     //   color: Colors.amber,
+                        child: Column(
                   children: [
                     SizedBox(
                       height: Measures.getHeight(context) * 0.1,
                       width: Measures.getWidth(context) * 0.95,
-                      // color: Colors.amber,
+                    
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -57,10 +69,10 @@ class _HomePageState extends State<HomePage> {
                             height: Measures.getHeight(context) * 0.08,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 20.0),
+                                  padding: const EdgeInsets.only(top: 18.0),
                                   child: Text(
                                     "Krish",
                                     style: Theme.of(context)
@@ -90,22 +102,27 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          Expanded(
+                          Container(
+                            width: Measures.getWidth(context)*0.3,
+                        
+                            alignment: Alignment.center,
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                          
                               children: [
-                                SizedBox(
+                                Container(
                                   width: MediaQuery.of(context).size.width < 600
                                       ? MediaQuery.of(context).size.width * 0.9
                                       : MediaQuery.of(context).size.width * 0.2,
-                                  //    color: Colors.amber,
+                                     
+                                    
                                   child: ScrollConfiguration(
                                     behavior: ScrollConfiguration.of(context)
                                         .copyWith(scrollbars: false),
                                     child: GridView.builder(
-                                        padding:
-                                            const EdgeInsets.only(top: 35.0),
+                                      
+                                       padding:  EdgeInsets.only(top: ResponsiveWrapper.of(context).screenWidth <=
+                                                                                1500 
+                                                                            ? 20.0:30.0),
                                         physics:
                                             const NeverScrollableScrollPhysics(),
                                         gridDelegate:
@@ -114,144 +131,148 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         itemCount: Variables.indextext.length,
                                         itemBuilder: (context, index) {
-                                          return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              MouseRegion(
-                                                onEnter: (_) {
-                                                  setState(() {
-                                                    Variables.hoveredIndex =
-                                                        index;
-                                                  });
-                                                },
-                                                onExit: (_) {
-                                                  setState(() {
-                                                    Variables.hoveredIndex = -1;
-                                                  });
-                                                },
-                                                child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        Variables
-                                                                .selectedindex =
-                                                            index;
-                                                      });
-                                                      if (Variables.indextext[
-                                                              index] ==
-                                                          "Projects") {
-                                                        Scrollable
-                                                            .ensureVisible(
-                                                                //alignment: -50.0,
-                                                                duration:
-                                                                    const Duration(
-                                                                        seconds:
-                                                                            1),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                                Variables
-                                                                    .abt4key
-                                                                    .currentContext!);
-                                                      }
-                                                      if (Variables.indextext[
-                                                              index] ==
-                                                          "Home") {
-                                                        Scrollable
-                                                            .ensureVisible(
-                                                                //alignment: -50.0,
-                                                                duration:
-                                                                    const Duration(
-                                                                        seconds:
-                                                                            1),
-                                                                curve: Curves
-                                                                    .easeInOut,
-                                                                Variables.key1
-                                                                    .currentContext!);
-                                                      }
-                                                    },
-                                                    child: AnimatedContainer(
-                                                      duration: const Duration(
-                                                          milliseconds: 200),
-                                                      transform: Matrix4
-                                                          .translationValues(
-                                                              0,
-                                                              Variables.hoveredIndex ==
-                                                                          index &&
-                                                                      Variables
-                                                                              .selectedindex !=
-                                                                          index
-                                                                  ? -5
-                                                                  : 0,
-                                                              0),
-                                                      child: Text(
-                                                        Variables
-                                                            .indextext[index],
-                                                        style:
-                                                            Theme.of(context)
-                                                                .textTheme
-                                                                .titleMedium!
-                                                                .copyWith(
-                                                                  fontSize: Variables.selectedindex ==
-                                                                              index ||
-                                                                          Variables.hoveredIndex ==
-                                                                              index
-                                                                      ? ResponsiveWrapper.of(context).screenWidth <
-                                                                              600
-                                                                          ? 14 // Font size for small screens
-                                                                          : ResponsiveWrapper.of(context).screenWidth < 1000
-                                                                              ? 16 // Font size for medium screens
-                                                                              : 18 // Font size for large screens
-                                                                      : 16,
-                                                                  foreground: Paint()
-                                                                    ..shader = Variables.selectedindex ==
+                                          return CustomAnimation(
+                                            index: index,
+                                                        duration: const Duration(
+                                                            milliseconds: 500),
+                                                        horizontalOffset: 50.0,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                MouseRegion(
+                                                  onEnter: (_) {
+                                                    setState(() {
+                                                      Variables.hoveredIndex =
+                                                          index;
+                                                    });
+                                                  },
+                                                  onExit: (_) {
+                                                    setState(() {
+                                                      Variables.hoveredIndex = -1;
+                                                    });
+                                                  },
+                                                  child: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Variables
+                                                                  .selectedindex =
+                                                              index;
+                                                        });
+                                                        if (Variables.indextext[
+                                                                index] ==
+                                                            "Projects") {
+                                                          Scrollable
+                                                              .ensureVisible(
+                                                                  //alignment: -50.0,
+                                                                  duration:
+                                                                      const Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                  Variables
+                                                                      .abt4key
+                                                                      .currentContext!);
+                                                        }
+                                                        if (Variables.indextext[
+                                                                index] ==
+                                                            "Home") {
+                                                          Scrollable
+                                                              .ensureVisible(
+                                                                  //alignment: -50.0,
+                                                                  duration:
+                                                                      const Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  curve: Curves
+                                                                      .easeInOut,
+                                                                  Variables.key1
+                                                                      .currentContext!);
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: const Duration(
+                                                            milliseconds: 200),
+                                                        transform: Matrix4
+                                                            .translationValues(
+                                                                0,
+                                                                Variables.hoveredIndex ==
+                                                                            index &&
+                                                                        Variables
+                                                                                .selectedindex !=
+                                                                            index
+                                                                    ? -5
+                                                                    : 0,
+                                                                0),
+                                                        child: Text(
+                                                          Variables
+                                                              .indextext[index],
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .titleMedium!
+                                                                  .copyWith(
+                                                                    fontSize: Variables.selectedindex ==
                                                                                 index ||
                                                                             Variables.hoveredIndex ==
                                                                                 index
-                                                                        ? AppColorPalette
-                                                                            .textGradient
-                                                                        : AppColorPalette
-                                                                            .white,
-                                                                ),
-                                                      ),
-                                                    )),
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Variables.selectedindex == index
-                                                  ? CustomAnimation(
-                                                      index: index,
-                                                      duration: const Duration(
-                                                          milliseconds: 200),
-                                                      horizontalOffset: 50.0,
-                                                      child: Container(
-                                                          height: Measures
-                                                                  .getHeight(
-                                                                      context) *
-                                                              0.003,
-                                                          width:
-                                                              Measures.getWidth(
-                                                                      context) *
-                                                                  0.02,
-                                                          decoration: const BoxDecoration(
-                                                              gradient: LinearGradient(
-                                                                  colors: [
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    95,
-                                                                    36,
-                                                                    153),
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    93,
-                                                                    13,
-                                                                    104)
-                                                              ],
-                                                                  begin: Alignment
-                                                                      .topCenter,
-                                                                  end: Alignment
-                                                                      .bottomRight))),
-                                                    )
-                                                  : Container()
-                                            ],
+                                                                        ?  ResponsiveWrapper.of(context).screenWidth <
+                                                                                1400
+                                                                            ? 14 // Font size for small screens
+                                                                            : 16
+                                                                        : 16,
+                                                                    foreground: Paint()
+                                                                      ..shader = Variables.selectedindex ==
+                                                                                  index ||
+                                                                              Variables.hoveredIndex ==
+                                                                                  index
+                                                                          ? AppColorPalette
+                                                                              .textGradient
+                                                                          : AppColorPalette
+                                                                              .white,
+                                                                  ),
+                                                        ),
+                                                      )),
+                                                ),
+                                                const SizedBox(height: 5.0),
+                                                Variables.selectedindex == index
+                                                    ? CustomAnimation(
+                                                        index: index,
+                                                        duration: const Duration(
+                                                            milliseconds: 200),
+                                                        horizontalOffset: 50.0,
+                                                        child: Container(
+                                                            height: Measures
+                                                                    .getHeight(
+                                                                        context) *
+                                                                0.003,
+                                                            width:
+                                                                Measures.getWidth(
+                                                                        context) *
+                                                                    0.02,
+                                                            decoration: const BoxDecoration(
+                                                                gradient: LinearGradient(
+                                                                    colors: [
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      95,
+                                                                      36,
+                                                                      153),
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      93,
+                                                                      13,
+                                                                      104)
+                                                                ],
+                                                                    begin: Alignment
+                                                                        .topCenter,
+                                                                    end: Alignment
+                                                                        .bottomRight))),
+                                                      )
+                                                    : Container()
+                                              ],
+                                            ),
                                           );
                                         }),
                                   ),
@@ -260,7 +281,7 @@ class _HomePageState extends State<HomePage> {
                                   onEnter: (event) => _onHover(true),
                                   onExit: (event) => _onHover(false),
                                   child: CustomAnimation(
-                                    index: 5,
+                                    index: 6,
                                     duration:
                                         const Duration(milliseconds: 1100),
                                     horizontalOffset: 50.0,
@@ -327,13 +348,21 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           )
+                          
+                        
                         ],
                       ),
                     ),
-                    const SizedBox(height: 40.0),
-                    const HomeContent(),
+                  const  SizedBox(height:20.0),
+                   const HomeContent()
+                    
                   ],
                 ),
+
+                      ),
+                    
+                  ),
+                ],
               ),
             ),
           )

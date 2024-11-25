@@ -24,7 +24,7 @@ class _ContactusState extends State<Contactus> {
     return SizedBox(
       key: Variables.headerKey,
 
-      width: Measures.getWidth(context) * 0.8,
+      width: Measures.getWidth(context) * 0.85,
       //  color: Colors.amber,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -54,9 +54,9 @@ class _projectsState extends State<projects> {
     return AnimatedOpacity(
         opacity: widget.isVisible!,
         duration: widget.duration!,
-        child: SizedBox(
+        child: Container(
           height: Measures.getHeight(context) * 0.45,
-          width: Measures.getWidth(context) * 0.8,
+         padding:EdgeInsets.all(25.0),
           //color: Colors.pink,
           child: Column(
             key: widget.keys,

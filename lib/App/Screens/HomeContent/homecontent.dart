@@ -757,7 +757,7 @@ class _HomeContentState extends State<HomeContent> {
                                 duration: const Duration(milliseconds: 200),
                                 transform: Matrix4.translationValues(
                                     0, Variables.abtmeisHovered ? -5 : 0, 0),
-                                height: Measures.getHeight(context) * 0.04,
+                                height: Measures.getHeight(context) * 0.06,
                                 width: Measures.getWidth(context) * 0.07,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
@@ -820,8 +820,8 @@ class _HomeContentState extends State<HomeContent> {
                                 padding: const EdgeInsets.all(10.0),
                                 transform: Matrix4.translationValues(
                                     0, Variables.resumedownHovered ? -5 : 0, 0),
-                                // height: Measures.getHeight(context) * 0.04,
-                                // width: Measures.getWidth(context) * 0.07,
+                                height: Measures.getHeight(context) * 0.06,
+                                // width: Measures.getWidth(context) * 0.09,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   border: Border.all(
