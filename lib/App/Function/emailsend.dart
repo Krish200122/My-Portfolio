@@ -1,7 +1,12 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, avoid_print
 
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 class emailservice {
   static Future<bool> sendemail(
@@ -25,6 +30,41 @@ class emailservice {
       return true;
     } else {
       throw Exception();
+    }
+  }
+
+  static Future<void> downloadPdf() async {
+    try {
+      // Request Storage Permission
+
+      // Get the device's Download directory
+      Directory? downloadsDir = await getExternalStorageDirectory();
+      String savePath = "${downloadsDir!.path}/KrishResume.pdf";
+
+      // Load PDF from assets
+      ByteData data = await rootBundle.load("Assets/Images/KrishResume.pdf");
+      List<int> bytes = data.buffer.asUint8List();
+      File file = File(savePath);
+      await file.writeAsBytes(bytes);
+
+      // Download using flutter_downloader
+      final taskId = await FlutterDownloader.enqueue(
+        url: savePath,
+        savedDir: downloadsDir.path,
+        fileName: "MyResume.pdf",
+        showNotification: true, // Show download progress in notifications
+        openFileFromNotification: true, // Open after download
+      );
+      // Show Error Message
+      Fluttertoast.showToast(
+        msg: "Download Complete: ${file.path}",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+      );
+
+      print("Download started: $taskId");
+    } catch (e) {
+      print("Error downloading file: $e");
     }
   }
 }

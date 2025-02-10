@@ -4,7 +4,7 @@ class Variables {
   static final List<String> indextext = [
     "Home",
     "Projects",
-    "Services",
+    "Certificates",
   ];
   static int selectedindex = 0;
 

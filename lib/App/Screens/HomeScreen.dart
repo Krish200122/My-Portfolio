@@ -3,7 +3,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:myportfolio/App/Screens/ContactUs/contactus.dart';
 import 'package:myportfolio/App/Screens/HomeContent/homecontent.dart';
 import 'package:myportfolio/App/Utils/Variables.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
@@ -458,9 +457,10 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(height: 20.0),
                               const HomeContent(),
                               const SizedBox(height: 50.0),
-                              MediaQuery.of(context).size.width < 600
-                                  ? const MobileViewContactus()
-                                  : const Contactus()
+                              // MediaQuery.of(context).size.width < 600
+                              //     ? const MobileViewContactus()
+                              //     :
+                              // const Contactus()
                             ],
                           ),
                         ),

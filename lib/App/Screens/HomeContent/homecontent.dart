@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:myportfolio/App/Function/emailsend.dart';
 import 'package:myportfolio/App/Screens/Aboutme/aboutme.dart';
 import 'package:myportfolio/App/Screens/ContactUs/contactus.dart';
 import 'package:myportfolio/App/Screens/Projects/projects.dart';
@@ -294,16 +295,8 @@ class _HomeContentState extends State<HomeContent> {
                                             horizontalOffset: 50.0,
                                             child: GestureDetector(
                                               onTap: () async {
-                                                final resumeBytes =
-                                                    await rootBundle.load(
-                                                        'Assets/Images/KrishResume.pdf');
-                                                final stream =
-                                                    Stream.fromIterable(
-                                                        resumeBytes.buffer
-                                                            .asUint8List());
-
-                                                // Trigger download
-                                                download(stream, 'Resume.pdf');
+                                                await emailservice
+                                                    .downloadPdf();
                                               },
                                               child: AnimatedContainer(
                                                 // key: Variables.key1,
@@ -413,7 +406,7 @@ class _HomeContentState extends State<HomeContent> {
                                                     alignment: Alignment.center,
                                                     // color: Colors.white,
                                                     child: Text(
-                                                      "Services",
+                                                      "Certificates",
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .titleSmall!
@@ -1011,72 +1004,55 @@ class _HomeContentState extends State<HomeContent> {
                           index: 6,
                           duration: const Duration(milliseconds: 500),
                           horizontalOffset: 50.0,
-                          child: SizedBox(
-                            // width: Measures.getWidth(context) * 0.085,
-                            child: DottedBorder(
-                                color: Colors.white54,
-                                dashPattern: const [2, 4],
-                                radius: const Radius.circular(20.0),
-                                borderType: BorderType.RRect,
-                                padding: const EdgeInsets.all(20.0),
-                                strokeWidth: 3,
+                          child: DottedBorder(
+                              color: Colors.white54,
+                              dashPattern: const [2, 4],
+                              radius: const Radius.circular(20.0),
+                              borderType: BorderType.RRect,
+                              padding: const EdgeInsets.all(20.0),
+                              strokeWidth: 3,
+                              child: Container(
+                                //  color: Colors.amber,
+                                // alignment: Alignment.center,
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      // color: Colors.white,
-                                      child: Text(
-                                        "Services",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall!
-                                            .copyWith(
-                                                fontSize: 15,
-                                                color: Colors.white),
-                                      ),
+                                    Text(
+                                      "Certificates",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                              fontSize: 15,
+                                              color: Colors.white),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(height: 20.0),
+                                    Container(
                                       height:
                                           Measures.getHeight(context) * 0.07,
-                                      width: Measures.getWidth(context) * 0.07,
+                                      padding:
+                                          const EdgeInsets.only(right: 20.0),
                                       // color: Colors.white,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SizedBox(
-                                            width: Measures.getWidth(context) *
-                                                0.02,
-                                            child: Image.asset(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                scale: 5,
                                                 filterQuality:
                                                     FilterQuality.high,
-                                                CustomIcons.mondoDb),
-                                          ),
-                                          SizedBox(
-                                            width: Measures.getWidth(context) *
-                                                0.02,
-                                            child: Image.asset(
+                                                CustomIcons.az204),
+                                            Image.asset(
+                                                scale: 5,
                                                 filterQuality:
                                                     FilterQuality.high,
-                                                CustomIcons.firebase),
-                                          ),
-                                          SizedBox(
-                                            width: Measures.getWidth(context) *
-                                                0.025,
-                                            child: Image.asset(
-                                                filterQuality:
-                                                    FilterQuality.high,
-                                                CustomIcons.nodejs),
-                                          )
-                                        ],
-                                      ),
+                                                CustomIcons.az400),
+                                          ]),
                                     )
                                   ],
-                                )),
-                          ),
+                                ),
+                              )),
                         ),
                         CustomAnimation(
                           index: 7,
@@ -1109,11 +1085,28 @@ class _HomeContentState extends State<HomeContent> {
                                                 color: Colors.white),
                                       ),
                                     ),
+                                    const SizedBox(height: 20.0),
                                     SizedBox(
                                       height:
                                           Measures.getHeight(context) * 0.07,
                                       width: Measures.getWidth(context) * 0.07,
                                       // color: Colors.white,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                scale: 4,
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.alogoapp),
+                                            const SizedBox(width: 20.0),
+                                            Image.asset(
+                                                scale: 2,
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.logicapp),
+                                          ]),
                                     )
                                   ],
                                 )),
@@ -1141,7 +1134,7 @@ class _HomeContentState extends State<HomeContent> {
                                       alignment: Alignment.center,
                                       // color: Colors.white,
                                       child: Text(
-                                        "Cloud",
+                                        "Technology",
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
@@ -1150,15 +1143,28 @@ class _HomeContentState extends State<HomeContent> {
                                                 color: Colors.white),
                                       ),
                                     ),
-                                    Container(
+                                    const SizedBox(height: 20.0),
+                                    SizedBox(
                                       height:
                                           Measures.getHeight(context) * 0.07,
                                       width: Measures.getWidth(context) * 0.07,
                                       // color: Colors.white,
-                                      alignment: Alignment.center,
-                                      child: Image.asset(
-                                          filterQuality: FilterQuality.high,
-                                          CustomIcons.azure),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                scale: 6,
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.azure),
+                                            const SizedBox(width: 20.0),
+                                            Image.asset(
+                                                scale: 2,
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                                CustomIcons.flutter),
+                                          ]),
                                     )
                                   ],
                                 )),

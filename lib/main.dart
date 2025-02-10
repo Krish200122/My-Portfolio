@@ -1,9 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:myportfolio/App/Screens/HomeScreen.dart';
 import 'package:myportfolio/Views/Themes/Styles/styles.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb) {
+    await FlutterDownloader.initialize();
+  }
   runApp(const MyApp());
 }
 
