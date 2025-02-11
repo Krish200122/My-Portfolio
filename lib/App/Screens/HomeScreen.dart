@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: "Krish",
+                                            text: "Krishh",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
