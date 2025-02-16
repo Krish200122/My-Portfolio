@@ -1,9 +1,10 @@
 name: Deploy to Firebase Hosting
 
 on:
-  pull_request:
+  push:
     branches:
-      - main  # Deploy when pushing to this branch
+      - Krish/UIChanges  # Trigger on direct commits to this branch
+  # Deploy when pushing to this branch
 
 jobs:
   build-and-deploy:
