@@ -4,13 +4,14 @@ class Variables {
   static final List<String> indextext = [
     "Home",
     "Projects",
-    "Services",
+    "Certificates",
   ];
   static int selectedindex = 0;
 
   static bool isHovered = false;
   static bool iscontactHovered = false;
   static bool abtmeisHovered = false;
+  static bool resumedownHovered = false;
   static bool isprofile = false;
   static bool isprojects1 = false;
   static bool isprojects2 = false;
