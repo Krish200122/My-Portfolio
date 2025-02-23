@@ -51,6 +51,7 @@ dependencies:
   share_plus: ^10.1.4
   flutter_downloader: ^1.12.0
   fluttertoast: ^8.2.11
+  font_awesome_flutter: ^10.8.0
   
 
 

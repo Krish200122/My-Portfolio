@@ -33,36 +33,62 @@ class emailservice {
     }
   }
 
-  static Future<void> downloadPdf() async {
+  static Future<void> downloadPdf(String type) async {
     try {
-      // Request Storage Permission
+      if (type == "Cloud") {
+        Directory? downloadsDir = await getExternalStorageDirectory();
+        String savePath = "${downloadsDir!.path}/KrishResume.pdf";
 
-      // Get the device's Download directory
-      Directory? downloadsDir = await getExternalStorageDirectory();
-      String savePath = "${downloadsDir!.path}/KrishResume.pdf";
+        // Load PDF from assets
+        ByteData data = await rootBundle.load("Assets/Images/DevopsResume.pdf");
+        List<int> bytes = data.buffer.asUint8List();
+        File file = File(savePath);
+        await file.writeAsBytes(bytes);
 
-      // Load PDF from assets
-      ByteData data = await rootBundle.load("Assets/Images/KrishResume.pdf");
-      List<int> bytes = data.buffer.asUint8List();
-      File file = File(savePath);
-      await file.writeAsBytes(bytes);
+        // Download using flutter_downloader
+        final taskId = await FlutterDownloader.enqueue(
+          url: savePath,
+          savedDir: downloadsDir.path,
+          fileName: "Krish.pdf",
+          showNotification: true, // Show download progress in notifications
+          openFileFromNotification: true, // Open after download
+        );
+        // Show Error Message
+        Fluttertoast.showToast(
+          msg: "Download Complete: ${file.path}",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+        );
 
-      // Download using flutter_downloader
-      final taskId = await FlutterDownloader.enqueue(
-        url: savePath,
-        savedDir: downloadsDir.path,
-        fileName: "MyResume.pdf",
-        showNotification: true, // Show download progress in notifications
-        openFileFromNotification: true, // Open after download
-      );
-      // Show Error Message
-      Fluttertoast.showToast(
-        msg: "Download Complete: ${file.path}",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-      );
+        print("Download started: $taskId");
+      } else {
+        Directory? downloadsDir = await getExternalStorageDirectory();
+        String savePath = "${downloadsDir!.path}/KrishResume.pdf";
 
-      print("Download started: $taskId");
+        // Load PDF from assets
+        ByteData data =
+            await rootBundle.load("Assets/Images/FlutterResume.pdf");
+        List<int> bytes = data.buffer.asUint8List();
+        File file = File(savePath);
+        await file.writeAsBytes(bytes);
+
+        // Download using flutter_downloader
+        final taskId = await FlutterDownloader.enqueue(
+          url: savePath,
+          savedDir: downloadsDir.path,
+          fileName: "Krish.pdf",
+          showNotification: true, // Show download progress in notifications
+          openFileFromNotification: true, // Open after download
+        );
+        // Show Error Message
+        Fluttertoast.showToast(
+          msg: "Download Complete: ${file.path}",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+        );
+
+        print("Download started: $taskId");
+      }
     } catch (e) {
       print("Error downloading file: $e");
     }

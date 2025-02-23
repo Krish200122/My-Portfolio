@@ -6,7 +6,7 @@ import 'package:myportfolio/Views/Animations/animation.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Measures/measures.dart';
 
-class projects extends StatefulWidget {
+class Certification extends StatefulWidget {
   String? textno;
   String texttitle;
   Key? keys;
@@ -18,7 +18,7 @@ class projects extends StatefulWidget {
   final double? isVisible;
   int? index;
   bool ischangePosition;
-  projects(
+  Certification(
       {super.key,
       this.textno = "",
       this.keys,
@@ -33,19 +33,19 @@ class projects extends StatefulWidget {
       this.ischangePosition = false});
 
   @override
-  State<projects> createState() => _projectsState();
+  State<Certification> createState() => _CertificationState();
 }
 
-class _projectsState extends State<projects> {
+class _CertificationState extends State<Certification> {
   void _onprofile(bool isHovered) {
     setState(() {
-      Variables.isprojects1 = isHovered;
+      Variables.iscertificate1 = isHovered;
     });
   }
 
   void _onprofile2(bool isHovered) {
     setState(() {
-      Variables.isprojects2 = isHovered;
+      Variables.iscertificate2 = isHovered;
     });
   }
 
@@ -205,16 +205,16 @@ class _projectsState extends State<projects> {
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
                               transform: Matrix4.translationValues(
-                                  0, Variables.isprojects1 ? -20 : 0, 0),
+                                  0, Variables.iscertificate1 ? -20 : 0, 0),
                               height: Measures.getHeight(context) * 0.3,
-                              width: Measures.getWidth(context) * 0.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  image: const DecorationImage(
-                                      image: AssetImage(
-                                          "Assets/Images/TravelAppMangement.jpg"),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(16.0)),
+                              width: Measures.getWidth(context) * 0.25,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage("Assets/Images/az-400.png"),
+                                    fit: BoxFit.contain),
+                              ),
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -231,15 +231,15 @@ class _projectsState extends State<projects> {
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
                                 transform: Matrix4.translationValues(
-                                    0, Variables.isprojects2 ? -20 : 0, 0),
+                                    0, Variables.iscertificate2 ? -20 : 0, 0),
                                 child: Container(
                                   height: Measures.getHeight(context) * 0.3,
                                   width: Measures.getWidth(context) * 0.3,
                                   decoration: BoxDecoration(
                                       image: const DecorationImage(
                                           image: AssetImage(
-                                              "Assets/Images/TravelAppMangement.jpg"),
-                                          fit: BoxFit.cover),
+                                              "Assets/Images/az-204.png"),
+                                          fit: BoxFit.fitHeight),
                                       borderRadius:
                                           BorderRadius.circular(16.0)),
                                 ),
@@ -326,7 +326,7 @@ class _projectsState extends State<projects> {
   }
 }
 
-class MobileViewProjects extends StatefulWidget {
+class MobileViewCertificate extends StatefulWidget {
   String? textno;
   String texttitle;
   Key? keys;
@@ -338,7 +338,7 @@ class MobileViewProjects extends StatefulWidget {
   final double? isVisible;
   int? index;
   bool ischangePosition;
-  MobileViewProjects(
+  MobileViewCertificate(
       {super.key,
       this.textno = "",
       this.keys,
@@ -353,10 +353,10 @@ class MobileViewProjects extends StatefulWidget {
       this.ischangePosition = false});
 
   @override
-  State<MobileViewProjects> createState() => _MobileViewProjectsState();
+  State<MobileViewCertificate> createState() => _MobileViewCertificateState();
 }
 
-class _MobileViewProjectsState extends State<MobileViewProjects> {
+class _MobileViewCertificateState extends State<MobileViewCertificate> {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
@@ -519,7 +519,7 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         transform: Matrix4.translationValues(
-                            0, Variables.isprojects1 ? -20 : 0, 0),
+                            0, Variables.iscertificate1 ? -20 : 0, 0),
                         height: Measures.getHeight(context) * 0.3,
                         width: Measures.getWidth(context),
                         decoration: BoxDecoration(
@@ -539,7 +539,7 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         transform: Matrix4.translationValues(
-                            0, Variables.isprojects2 ? -20 : 0, 0),
+                            0, Variables.iscertificate2 ? -20 : 0, 0),
                         child: Container(
                           height: Measures.getHeight(context) * 0.35,
                           width: Measures.getWidth(context),
