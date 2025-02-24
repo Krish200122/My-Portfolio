@@ -1,10 +1,12 @@
 // ignore_for_file: camel_case_types, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myportfolio/App/Utils/Variables.dart';
 import 'package:myportfolio/Views/Animations/animation.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Measures/measures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Certification extends StatefulWidget {
   String? textno;
@@ -195,25 +197,56 @@ class _CertificationState extends State<Certification> {
                         )
                       : const SizedBox.shrink(),
                   MouseRegion(
+                    cursor: SystemMouseCursors.click,
                     onEnter: (event) => _onprofile(true),
                     onExit: (event) => _onprofile(false),
                     child: widget.isVisible! != 0.0
-                        ? CustomAnimation(
-                            index: widget.index!,
-                            duration: widget.duration!,
-                            horizontalOffset: 50.0,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              transform: Matrix4.translationValues(
-                                  0, Variables.iscertificate1 ? -20 : 0, 0),
-                              height: Measures.getHeight(context) * 0.3,
-                              width: Measures.getWidth(context) * 0.25,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage("Assets/Images/az-400.png"),
-                                    fit: BoxFit.contain),
+                        ? GestureDetector(
+                            onTap: () async {
+                              final Uri url = Uri.parse(
+                                  "https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/AEA48F7A80C874EB?sharingId=15C466BCFBAB71DD");
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url,
+                                    mode: LaunchMode.externalApplication);
+                              } else {
+                                throw "Could not launch $widget.hyperlink!";
+                              }
+                            },
+                            child: CustomAnimation(
+                              index: widget.index!,
+                              duration: widget.duration!,
+                              horizontalOffset: 50.0,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    transform: Matrix4.translationValues(0,
+                                        Variables.iscertificate1 ? -20 : 0, 0),
+                                    height: Measures.getHeight(context) * 0.3,
+                                    width: Measures.getWidth(context) * 0.25,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "Assets/Images/az-400.png"),
+                                          fit: BoxFit.contain),
+                                    ),
+                                    foregroundDecoration: BoxDecoration(
+                                      color: Variables.iscertificate1
+                                          ? Colors.black.withOpacity(0.8)
+                                          : Colors.transparent,
+                                    ),
+                                  ),
+                                  if (Variables.iscertificate1)
+                                    Text(
+                                      "Explore My AZ-204 Certification ",
+                                      style: GoogleFonts.lato(
+                                          fontSize: 25,
+                                          foreground: Paint()
+                                            ..shader = AppColorPalette.white),
+                                    ),
+                                ],
                               ),
                             ),
                           )
@@ -221,27 +254,64 @@ class _CertificationState extends State<Certification> {
                   ),
                 ] else ...[
                   MouseRegion(
+                      cursor: SystemMouseCursors.click,
                       onEnter: (event) => _onprofile2(true),
                       onExit: (event) => _onprofile2(false),
                       child: widget.isVisible! != 0
-                          ? CustomAnimation(
-                              index: widget.index!,
-                              duration: widget.duration!,
-                              horizontalOffset: 50.0,
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                transform: Matrix4.translationValues(
-                                    0, Variables.iscertificate2 ? -20 : 0, 0),
-                                child: Container(
-                                  height: Measures.getHeight(context) * 0.3,
-                                  width: Measures.getWidth(context) * 0.3,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              "Assets/Images/az-204.png"),
-                                          fit: BoxFit.fitHeight),
-                                      borderRadius:
-                                          BorderRadius.circular(16.0)),
+                          ? GestureDetector(
+                              onTap: () async {
+                                final Uri url = Uri.parse(
+                                    "https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/FE428A667ED49C58?sharingId=15C466BCFBAB71DD");
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url,
+                                      mode: LaunchMode.externalApplication);
+                                } else {
+                                  throw "Could not launch $widget.hyperlink!";
+                                }
+                              },
+                              child: CustomAnimation(
+                                index: widget.index!,
+                                duration: widget.duration!,
+                                horizontalOffset: 50.0,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      transform: Matrix4.translationValues(
+                                          0,
+                                          Variables.iscertificate2 ? -20 : 0,
+                                          0),
+                                      child: Container(
+                                        height:
+                                            Measures.getHeight(context) * 0.3,
+                                        width: Measures.getWidth(context) * 0.3,
+                                        decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    "Assets/Images/az-204.png"),
+                                                fit: BoxFit.fitHeight),
+                                            borderRadius:
+                                                BorderRadius.circular(16.0)),
+                                        foregroundDecoration: BoxDecoration(
+                                          color: Variables.iscertificate2
+                                              ? Colors.black.withOpacity(0.8)
+                                              : Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                      ),
+                                    ),
+                                    if (Variables.iscertificate2)
+                                      Text(
+                                        "Explore My Az-400 Certification ",
+                                        style: GoogleFonts.lato(
+                                            fontSize: 25,
+                                            foreground: Paint()
+                                              ..shader = AppColorPalette.white),
+                                      ),
+                                  ],
                                 ),
                               ),
                             )
@@ -497,6 +567,41 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                                           ),
                                         )
                                       : const SizedBox.shrink(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "My AZ-400 Certification – ",
+                                        style: GoogleFonts.lato(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          final Uri url = Uri.parse(
+                                              "https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/FE428A667ED49C58?sharingId=15C466BCFBAB71DD"); // Replace with your actual link
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url,
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          } else {
+                                            throw "Could not launch $url";
+                                          }
+                                        },
+                                        child: Text(
+                                          "AZ-400",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 20,
+                                            color: Colors.blue,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
                                   Text(
                                     widget.textend,
                                     style: Theme.of(context)
@@ -525,8 +630,7 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             image: const DecorationImage(
-                                image: AssetImage(
-                                    "Assets/Images/az-204.png"),
+                                image: AssetImage("Assets/Images/az-400.png"),
                                 fit: BoxFit.contain),
                             borderRadius: BorderRadius.circular(16.0)),
                       ),
@@ -545,8 +649,7 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                           width: Measures.getWidth(context),
                           decoration: BoxDecoration(
                               image: const DecorationImage(
-                                  image: AssetImage(
-                                      "Assets/Images/az-400.png"),
+                                  image: AssetImage("Assets/Images/az-204.png"),
                                   fit: BoxFit.contain),
                               borderRadius: BorderRadius.circular(16.0)),
                         ),
@@ -615,6 +718,41 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                                     ),
                                   ),
                                   const SizedBox(height: 10.0),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "My AZ-204 Certification – ",
+                                        style: GoogleFonts.lato(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          final Uri url = Uri.parse(
+                                              "https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/AEA48F7A80C874EB?sharingId=15C466BCFBAB71DD"); // Replace with your actual link
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url,
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          } else {
+                                            throw "Could not launch $url";
+                                          }
+                                        },
+                                        child: Text(
+                                          "AZ-204",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 20,
+                                            color: Colors.blue,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
                                   Text(
                                     widget.textend,
                                     style: Theme.of(context)

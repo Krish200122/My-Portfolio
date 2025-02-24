@@ -185,226 +185,270 @@ class _HomeContentState extends State<HomeContent> {
                                               ),
                                         )),
                                     const SizedBox(height: 30.0),
-                                     Row(
-                                        children: [
-                                          MouseRegion(
-                                            onEnter: (event) =>
-                                                _onabtmeHover(true),
-                                            onExit: (event) =>
-                                                _onabtmeHover(false),
-                                            child: CustomAnimation(
-                                              index: 5,
-                                              duration: const Duration(
-                                                  milliseconds: 1100),
-                                              horizontalOffset: 50.0,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  Scrollable.ensureVisible(
-                                                      duration: const Duration(
-                                                          seconds: 1),
-                                                      curve: Curves.easeInOut,
-                                                      Variables
-                                                          .key1.currentContext!);
-                                                },
-                                                child: AnimatedContainer(
-                                                  key: Variables.key1,
-                                                  duration: const Duration(
-                                                      milliseconds: 200),
-                                                  transform:
-                                                      Matrix4.translationValues(
-                                                          0,
-                                                          Variables.abtmeisHovered
-                                                              ? -5
-                                                              : 0,
-                                                          0),
-                                                  height: Measures.getHeight(
-                                                          context) *
-                                                      0.05,
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width >=
-                                                          1400
-                                                      ? MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.35 // Large screens
-                                                      : MediaQuery.of(context)
-                                                                  .size
-                                                                  .width >=
-                                                              1024
-                                                          ? MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4 // Medium screens
-                                                          : MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.2,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Variables
-                                                              .abtmeisHovered
-                                                          ? Colors.transparent
-                                                          : const Color.fromARGB(
-                                                              255, 135, 24, 245),
-                                                    ),
-                                      
-                                                    borderRadius:
-                                                        BorderRadius.circular(10),
-                                                    gradient: ResponsiveWrapper
-                                                                    .of(context)
-                                                                .screenWidth <
-                                                            1024
-                                                        ? const LinearGradient(
-                                                            colors: [
-                                                              Color.fromARGB(255,
-                                                                  135, 24, 245),
-                                                              Color.fromARGB(255,
-                                                                  154, 11, 173)
-                                                            ],
-                                                            begin: Alignment
-                                                                .topCenter,
-                                                            end: Alignment
-                                                                .bottomRight,
-                                                          )
-                                                        : Variables.abtmeisHovered
-                                                            ? const LinearGradient(
-                                                                colors: [
-                                                                  Color.fromARGB(
-                                                                      255,
-                                                                      135,
-                                                                      24,
-                                                                      245),
-                                                                  Color.fromARGB(
-                                                                      255,
-                                                                      154,
-                                                                      11,
-                                                                      173)
-                                                                ],
-                                                                begin: Alignment
-                                                                    .topCenter,
-                                                                end: Alignment
-                                                                    .bottomRight,
-                                                              )
-                                                            : null, // No gradient when not hovered
-                                                    color: ResponsiveWrapper.of(
-                                                                    context)
-                                                                .screenWidth <
-                                                            1024
-                                                        ? const Color.fromARGB(
-                                                            255, 135, 24, 245)
-                                                        : Variables.abtmeisHovered
-                                                            ? null
-                                                            : Colors
-                                                                .transparent, // White background when not hovered
-                                                  ),
-                                                  child: Text(
-                                                    "About me",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall!
-                                                        .copyWith(
-                                                            fontSize: 15,
-                                                            color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 20.0),
-                                          CustomAnimation(
-                                              index: 6,
-                                              duration: const Duration(
-                                                  milliseconds: 1100),
-                                              horizontalOffset: 50.0,
-                                            child:DropdownButtonHideUnderline(
-                                        child: Container(
-                                          width: Measures.getWidth(context) * 0.42, // Controls the button width
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            gradient: const LinearGradient(
-                                              colors: [
-                                                Color.fromARGB(255, 135, 24, 245),
-                                                Color.fromARGB(255, 154, 11, 173)
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomRight,
-                                            ),
-                                          ),
-                                          child:  DropdownButton2<String>(
-                                              value: selectedValue,
-                                              dropdownStyleData: DropdownStyleData(
-                                                offset: const Offset(-8, -2),
-                                                width: Measures.getWidth(context) * 0.42, // Reduce dropdown width
-                                                decoration: BoxDecoration(
-                                                  color: const Color.fromARGB(255, 135, 24, 245),
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                              ),
-                                              buttonStyleData: const ButtonStyleData(
-                                               
-                                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                              ),
-                                              iconStyleData: const IconStyleData(
-                                                icon: Icon(Icons.arrow_drop_down, color: Colors.white),
-                                              ),
-                                              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                                                    fontSize: ResponsiveWrapper.of(context).isTablet ? 12 : 15,
-                                                    color: Colors.white,
-                                                  ),
-                                              items: [
-                                                DropdownMenuItem(
-                                                  value: "download_resume",
-                                                  child: Text("Download Resume",
-                                                      style: GoogleFonts.lato(color: const Color.fromARGB(221, 250, 250, 250))),
-                                                ),
-                                                DropdownMenuItem(
-                                                  value: "cloud_resume",
-                                                  child: Text("Cloud Resume",
-                                                      style: GoogleFonts.lato(color: Colors.white)),
-                                                ),
-                                                DropdownMenuItem(
-                                                  value: "flutter_resume",
-                                                  child: Text("Flutter Resume",
-                                                      style: GoogleFonts.lato(color: Colors.white)),
-                                                ),
-                                              ],
-                                              onChanged: (value) async {
-                                                if (value != null) {
-                                                  setState(() {
-                                                    selectedValue = value;
-                                                  });
-                                      
-                                                  if (value == "cloud_resume") {
-                                                    final resumeBytes = await rootBundle.load(
-                                                        'Assets/Images/DevopsResume.pdf');
-                                                    final stream =
-                                                        Stream.fromIterable(resumeBytes.buffer.asUint8List());
-                                      
-                                                    // Trigger download
-                                                    download(stream, 'CloudResume.pdf');
-                                                  } else if (value == "flutter_resume") {
-                                                    final resumeBytes = await rootBundle.load(
-                                                        'Assets/Images/FlutterResume.pdf');
-                                                    final stream =
-                                                        Stream.fromIterable(resumeBytes.buffer.asUint8List());
-                                      
-                                                    // Trigger download
-                                                    download(stream, 'FlutterResume.pdf');
-                                                  }
-                                                }
+                                    Row(
+                                      children: [
+                                        MouseRegion(
+                                          onEnter: (event) =>
+                                              _onabtmeHover(true),
+                                          onExit: (event) =>
+                                              _onabtmeHover(false),
+                                          child: CustomAnimation(
+                                            index: 5,
+                                            duration: const Duration(
+                                                milliseconds: 1100),
+                                            horizontalOffset: 50.0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Scrollable.ensureVisible(
+                                                    duration: const Duration(
+                                                        seconds: 1),
+                                                    curve: Curves.easeInOut,
+                                                    Variables
+                                                        .key1.currentContext!);
                                               },
+                                              child: AnimatedContainer(
+                                                key: Variables.key1,
+                                                duration: const Duration(
+                                                    milliseconds: 200),
+                                                transform:
+                                                    Matrix4.translationValues(
+                                                        0,
+                                                        Variables.abtmeisHovered
+                                                            ? -5
+                                                            : 0,
+                                                        0),
+                                                height: Measures.getHeight(
+                                                        context) *
+                                                    0.05,
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width >=
+                                                        1400
+                                                    ? MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.35 // Large screens
+                                                    : MediaQuery.of(context)
+                                                                .size
+                                                                .width >=
+                                                            1024
+                                                        ? MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.4 // Medium screens
+                                                        : MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Variables
+                                                            .abtmeisHovered
+                                                        ? Colors.transparent
+                                                        : const Color.fromARGB(
+                                                            255, 135, 24, 245),
+                                                  ),
+
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  gradient: ResponsiveWrapper
+                                                                  .of(context)
+                                                              .screenWidth <
+                                                          1024
+                                                      ? const LinearGradient(
+                                                          colors: [
+                                                            Color.fromARGB(255,
+                                                                135, 24, 245),
+                                                            Color.fromARGB(255,
+                                                                154, 11, 173)
+                                                          ],
+                                                          begin: Alignment
+                                                              .topCenter,
+                                                          end: Alignment
+                                                              .bottomRight,
+                                                        )
+                                                      : Variables.abtmeisHovered
+                                                          ? const LinearGradient(
+                                                              colors: [
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    135,
+                                                                    24,
+                                                                    245),
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    154,
+                                                                    11,
+                                                                    173)
+                                                              ],
+                                                              begin: Alignment
+                                                                  .topCenter,
+                                                              end: Alignment
+                                                                  .bottomRight,
+                                                            )
+                                                          : null, // No gradient when not hovered
+                                                  color: ResponsiveWrapper.of(
+                                                                  context)
+                                                              .screenWidth <
+                                                          1024
+                                                      ? const Color.fromARGB(
+                                                          255, 135, 24, 245)
+                                                      : Variables.abtmeisHovered
+                                                          ? null
+                                                          : Colors
+                                                              .transparent, // White background when not hovered
+                                                ),
+                                                child: Text(
+                                                  "About me",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall!
+                                                      .copyWith(
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      
-                                          
-                                        ],
-                                      ),
-                                    
+                                        const SizedBox(width: 20.0),
+                                        CustomAnimation(
+                                          index: 6,
+                                          duration: const Duration(
+                                              milliseconds: 1100),
+                                          horizontalOffset: 50.0,
+                                          child: DropdownButtonHideUnderline(
+                                            child: Container(
+                                              width: Measures.getWidth(
+                                                      context) *
+                                                  0.42, // Controls the button width
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                gradient: const LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        255, 135, 24, 245),
+                                                    Color.fromARGB(
+                                                        255, 154, 11, 173)
+                                                  ],
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomRight,
+                                                ),
+                                              ),
+                                              child: DropdownButton2<String>(
+                                                value: selectedValue,
+                                                dropdownStyleData:
+                                                    DropdownStyleData(
+                                                  offset: const Offset(-8, -2),
+                                                  width: Measures.getWidth(
+                                                          context) *
+                                                      0.42, // Reduce dropdown width
+                                                  decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 135, 24, 245),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                ),
+                                                buttonStyleData:
+                                                    const ButtonStyleData(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                ),
+                                                iconStyleData:
+                                                    const IconStyleData(
+                                                  icon: Icon(
+                                                      Icons.arrow_drop_down,
+                                                      color: Colors.white),
+                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall!
+                                                    .copyWith(
+                                                      fontSize:
+                                                          ResponsiveWrapper.of(
+                                                                      context)
+                                                                  .isTablet
+                                                              ? 12
+                                                              : 15,
+                                                      color: Colors.white,
+                                                    ),
+                                                items: [
+                                                  DropdownMenuItem(
+                                                    value: "download_resume",
+                                                    child: Text(
+                                                        "Download Resume",
+                                                        style: GoogleFonts.lato(
+                                                            color: const Color
+                                                                .fromARGB(
+                                                                221,
+                                                                250,
+                                                                250,
+                                                                250))),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "cloud_resume",
+                                                    child: Text("Cloud Resume",
+                                                        style: GoogleFonts.lato(
+                                                            color:
+                                                                Colors.white)),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "flutter_resume",
+                                                    child: Text(
+                                                        "Flutter Resume",
+                                                        style: GoogleFonts.lato(
+                                                            color:
+                                                                Colors.white)),
+                                                  ),
+                                                ],
+                                                onChanged: (value) async {
+                                                  if (value != null) {
+                                                    setState(() {
+                                                      selectedValue = value;
+                                                    });
+
+                                                    if (value ==
+                                                        "cloud_resume") {
+                                                      final resumeBytes =
+                                                          await rootBundle.load(
+                                                              'Assets/Images/DevopsResume.pdf');
+                                                      final stream =
+                                                          Stream.fromIterable(
+                                                              resumeBytes.buffer
+                                                                  .asUint8List());
+
+                                                      // Trigger download
+                                                      download(stream,
+                                                          'CloudResume.pdf');
+                                                    } else if (value ==
+                                                        "flutter_resume") {
+                                                      final resumeBytes =
+                                                          await rootBundle.load(
+                                                              'Assets/Images/FlutterResume.pdf');
+                                                      final stream =
+                                                          Stream.fromIterable(
+                                                              resumeBytes.buffer
+                                                                  .asUint8List());
+
+                                                      // Trigger download
+                                                      download(stream,
+                                                          'FlutterResume.pdf');
+                                                    }
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(
@@ -764,7 +808,7 @@ class _HomeContentState extends State<HomeContent> {
                       ischangePosition: false,
                       textsubtitle: "Travel Management - Projects",
                       textdesc:
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                          "TravelEase is a live travel management app designed for seamless trip planning and bookings. Integrated with Razorpay for secure payments and Google Maps for smart navigation, it streamlines hotel and vehicle bookings with real-time updates. Whether for business or leisure, TravelEase makes traveling effortless and efficient.",
                       textend: "Dart  Android  IOS",
                       title: "Project's Which I've Build ",
                       index: 3,
@@ -778,7 +822,7 @@ class _HomeContentState extends State<HomeContent> {
                       ischangePosition: false,
                       textsubtitle: "Travel Management - Projects",
                       textdesc:
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                          "TravelEase is a live travel management app designed for seamless trip planning and bookings. Integrated with Razorpay for secure payments and Google Maps for smart navigation, it streamlines hotel and vehicle bookings with real-time updates. Whether for business or leisure, TravelEase makes traveling effortless and efficient.",
                       textend: "Dart  Android  IOS",
                       title: "Project's Which I've Build ",
                       index: 3,
@@ -792,7 +836,7 @@ class _HomeContentState extends State<HomeContent> {
                       texttitle: "Featured Projects",
                       textsubtitle: "AlgoTrading - Projects",
                       textdesc:
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                          "AlgoTrading is a live automated trading app that analyzes market trends and executes trades with precision. Using advanced algorithms and real-time data, it optimizes strategies for maximum profit while minimizing risk. With multi-asset support, backtesting, and customizable indicators, it's the perfect tool for traders looking to automate and refine their decisions",
                       textend: "Dart  Android  IOS",
                       index: 4,
                       isVisible: Measures.isInView(Variables.abt4key, context),
@@ -804,7 +848,7 @@ class _HomeContentState extends State<HomeContent> {
                       texttitle: "Featured Projects",
                       textsubtitle: "AlgoTrading - Projects",
                       textdesc:
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+                          "AlgoTrading is a live automated trading app that analyzes market trends and executes trades with precision. Using advanced algorithms and real-time data, it optimizes strategies for maximum profit while minimizing risk. With multi-asset support, backtesting, and customizable indicators, it's the perfect tool for traders looking to automate and refine their decisions",
                       textend: "Dart  Android  IOS",
                       index: 4,
                       isVisible: Measures.isInView(Variables.abt4key, context),
@@ -1125,63 +1169,62 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                               if (Variables
                                   .resumedownHovered) // Show options on hover
-                               AnimatedOpacity(
+                                AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 300),
+                                  opacity:
+                                      Variables.resumedownHovered ? 1.0 : 0.0,
+                                  child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 300),
-                                    opacity:
-                                        Variables.resumedownHovered ? 1.0 : 0.0,
-                                    child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                      transform: Matrix4.translationValues(
-                                          0,
-                                          Variables.resumedownHovered ? 0 : -10,
-                                          0),
-                                      width: 145,
-                                      margin: const EdgeInsets.only(top: 65),
-                                      decoration:  BoxDecoration(
-                                        color: Colors.white,
+                                    curve: Curves.easeInOut,
+                                    transform: Matrix4.translationValues(
+                                        0,
+                                        Variables.resumedownHovered ? 0 : -10,
+                                        0),
+                                    width: 145,
+                                    margin: const EdgeInsets.only(top: 65),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
-                                        boxShadow: const  [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            blurRadius: 5,
-                                            spreadRadius: 1,
-                                          )
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          _downloadOption(
-                                            context,
-                                            "Cloud Resume",
-                                            () async {
-                                              final resumeBytes =
-                                                  await rootBundle.load(
-                                                      'Assets/Images/DevopsResume.pdf');
-                                              final stream = Stream.fromIterable(
-                                                  resumeBytes.buffer
-                                                      .asUint8List());
-                                  
-                                              // Trigger download
-                                              download(stream, 'CloudResume.pdf');
-                                            },
-                                          ),
-                                          _downloadOption(
-                                              context, "Flutter Resume",
-                                              () async {
-                                            final resumeBytes = await rootBundle.load(
-                                                'Assets/Images/FlutterResume.pdf');
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          blurRadius: 5,
+                                          spreadRadius: 1,
+                                        )
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        _downloadOption(
+                                          context,
+                                          "Cloud Resume",
+                                          () async {
+                                            final resumeBytes =
+                                                await rootBundle.load(
+                                                    'Assets/Images/DevopsResume.pdf');
                                             final stream = Stream.fromIterable(
-                                                resumeBytes.buffer.asUint8List());
-                                  
+                                                resumeBytes.buffer
+                                                    .asUint8List());
+
                                             // Trigger download
-                                            download(stream, 'FlutterResume.pdf');
-                                          }),
-                                        ],
-                                      ),
+                                            download(stream, 'CloudResume.pdf');
+                                          },
+                                        ),
+                                        _downloadOption(
+                                            context, "Flutter Resume",
+                                            () async {
+                                          final resumeBytes = await rootBundle.load(
+                                              'Assets/Images/FlutterResume.pdf');
+                                          final stream = Stream.fromIterable(
+                                              resumeBytes.buffer.asUint8List());
+
+                                          // Trigger download
+                                          download(stream, 'FlutterResume.pdf');
+                                        }),
+                                      ],
                                     ),
                                   ),
-                                
+                                ),
                             ],
                           ),
                         ),
@@ -1427,8 +1470,13 @@ class _HomeContentState extends State<HomeContent> {
           padding: const EdgeInsets.all(10.0),
           width: double.infinity,
           decoration: BoxDecoration(
-         borderRadius: text =="Flutter Resume"? const BorderRadius.only(bottomLeft:Radius.circular(10),bottomRight:Radius.circular(10)):const  BorderRadius.only(topLeft:Radius.circular(10),topRight:Radius.circular(10)),
-
+            borderRadius: text == "Flutter Resume"
+                ? const BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10))
+                : const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
             gradient: Variables.resumedownHovered
                 ? const LinearGradient(
                     colors: [
@@ -1439,23 +1487,22 @@ class _HomeContentState extends State<HomeContent> {
                     end: Alignment.bottomRight,
                   )
                 : null,
-          
             color: Variables.resumedownHovered ? null : Colors.transparent,
           ),
-          child:  MouseRegion(
-              cursor: SystemMouseCursors.click, // Changes cursor to hand pointer on hover
+          child: MouseRegion(
+            cursor: SystemMouseCursors
+                .click, // Changes cursor to hand pointer on hover
 
             child: Text(
-                text,
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontSize: 14,
-                      color: Variables.resumedownHovered
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-              ),
+              text,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 14,
+                    color: Variables.resumedownHovered
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+            ),
           ),
-          
         ),
       ),
     );

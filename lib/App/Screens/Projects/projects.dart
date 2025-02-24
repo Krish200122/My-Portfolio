@@ -1,10 +1,12 @@
 // ignore_for_file: camel_case_types, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myportfolio/App/Utils/Variables.dart';
 import 'package:myportfolio/Views/Animations/animation.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Measures/measures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class projects extends StatefulWidget {
   String? textno;
@@ -48,6 +50,8 @@ class _projectsState extends State<projects> {
       Variables.isprojects2 = isHovered;
     });
   }
+
+  bool isHovered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -195,26 +199,70 @@ class _projectsState extends State<projects> {
                         )
                       : const SizedBox.shrink(),
                   MouseRegion(
+                    cursor: SystemMouseCursors.click,
                     onEnter: (event) => _onprofile(true),
                     onExit: (event) => _onprofile(false),
                     child: widget.isVisible! != 0.0
-                        ? CustomAnimation(
-                            index: widget.index!,
-                            duration: widget.duration!,
-                            horizontalOffset: 50.0,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              transform: Matrix4.translationValues(
-                                  0, Variables.isprojects1 ? -20 : 0, 0),
-                              height: Measures.getHeight(context) * 0.3,
-                              width: Measures.getWidth(context) * 0.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  image: const DecorationImage(
-                                      image: AssetImage(
-                                          "Assets/Images/TravelAppMangement.jpg"),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(16.0)),
+                        ? GestureDetector(
+                            onTap: () async {
+                              final Uri url = Uri.parse(
+                                  "https://play.google.com/store/apps/details?id=com.myalgoai.alicealgo_app&hl=en");
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url,
+                                    mode: LaunchMode.externalApplication);
+                              } else {
+                                throw "Could not launch $widget.hyperlink!";
+                              }
+                            },
+                            child: CustomAnimation(
+                              index: widget.index!,
+                              duration: widget.duration!,
+                              horizontalOffset: 50.0,
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_) =>
+                                    setState(() => isHovered = true),
+                                onExit: (_) =>
+                                    setState(() => isHovered = false),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      transform: Matrix4.translationValues(0,
+                                          Variables.isprojects1 ? -20 : 0, 0),
+                                      height: Measures.getHeight(context) * 0.3,
+                                      width: Measures.getWidth(context) * 0.3,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                              "Assets/Images/DALL·E 2025-02-24 21.36.37 - A clean and simple mobile app interface for an Algo Trading strategy application. The design features a minimalist light-themed UI with intuitive navi.webp"),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      foregroundDecoration: BoxDecoration(
+                                        color: isHovered
+                                            ? Colors.black.withOpacity(0.8)
+                                            : Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                    ),
+                                    if (isHovered)
+                                      Text(
+                                        "Explore AlgoTrading App",
+                                        style: GoogleFonts.lato(
+                                            fontSize: 28,
+                                            foreground: Paint()
+                                              ..shader = AppColorPalette.white),
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -446,7 +494,7 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                                             fontSize: 15,
                                             color: Colors.white54),
                                   ),
-                                  const SizedBox(height: 10.0),
+                                  const SizedBox(height: 20.0),
                                   Text(
                                     widget.textsubtitle,
                                     style: Theme.of(context)
@@ -457,7 +505,7 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                                             foreground: Paint()
                                               ..shader = AppColorPalette.white),
                                   ),
-                                  const SizedBox(height: 10.0),
+                                  const SizedBox(height: 20.0),
                                   widget.isVisible! != 0
                                       ? CustomAnimation(
                                           index: widget.index!,
@@ -497,6 +545,42 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                                           ),
                                         )
                                       : const SizedBox.shrink(),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "MyAlgoTrading – ",
+                                        style: GoogleFonts.lato(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          final Uri url = Uri.parse(
+                                              "https://play.google.com/store/apps/details?id=com.myalgoai.alicealgo_app&hl=en"); // Replace with your actual link
+                                          if (await canLaunchUrl(url)) {
+                                            await launchUrl(url,
+                                                mode: LaunchMode
+                                                    .externalApplication);
+                                          } else {
+                                            throw "Could not launch $url";
+                                          }
+                                        },
+                                        child: Text(
+                                          "AlgoTrading App",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 20,
+                                            color: Colors.blue,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
                                   Text(
                                     widget.textend,
                                     style: Theme.of(context)
@@ -526,7 +610,7 @@ class _MobileViewProjectsState extends State<MobileViewProjects> {
                             color: Colors.white,
                             image: const DecorationImage(
                                 image: AssetImage(
-                                    "Assets/Images/TravelAppMangement.jpg"),
+                                    "Assets/Images/DALL·E 2025-02-24 21.36.37 - A clean and simple mobile app interface for an Algo Trading strategy application. The design features a minimalist light-themed UI with intuitive navi.webp"),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(16.0)),
                       ),
