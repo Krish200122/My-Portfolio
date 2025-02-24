@@ -1,11 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:download/download.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:myportfolio/App/Function/emailsend.dart';
 import 'package:myportfolio/App/Screens/Aboutme/aboutme.dart';
 import 'package:myportfolio/App/Screens/Certification/certificates.dart';
 import 'package:myportfolio/App/Screens/ContactUs/contactus.dart';
@@ -37,6 +37,8 @@ class _HomeContentState extends State<HomeContent> {
       Variables.resumedownHovered = isHovered;
     });
   }
+
+  String selectedValue = "download_resume"; // Initial value
 
   @override
   void initState() {
@@ -183,248 +185,226 @@ class _HomeContentState extends State<HomeContent> {
                                               ),
                                         )),
                                     const SizedBox(height: 30.0),
-                                    Row(
-                                      children: [
-                                        MouseRegion(
-                                          onEnter: (event) =>
-                                              _onabtmeHover(true),
-                                          onExit: (event) =>
-                                              _onabtmeHover(false),
-                                          child: CustomAnimation(
-                                            index: 5,
-                                            duration: const Duration(
-                                                milliseconds: 1100),
-                                            horizontalOffset: 50.0,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Scrollable.ensureVisible(
-                                                    duration: const Duration(
-                                                        seconds: 1),
-                                                    curve: Curves.easeInOut,
-                                                    Variables
-                                                        .key1.currentContext!);
-                                              },
-                                              child: AnimatedContainer(
-                                                key: Variables.key1,
-                                                duration: const Duration(
-                                                    milliseconds: 200),
-                                                transform:
-                                                    Matrix4.translationValues(
-                                                        0,
-                                                        Variables.abtmeisHovered
-                                                            ? -5
-                                                            : 0,
-                                                        0),
-                                                height: Measures.getHeight(
-                                                        context) *
-                                                    0.05,
-                                                width: MediaQuery.of(context)
-                                                            .size
-                                                            .width >=
-                                                        1400
-                                                    ? MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.35 // Large screens
-                                                    : MediaQuery.of(context)
-                                                                .size
-                                                                .width >=
+                                     Row(
+                                        children: [
+                                          MouseRegion(
+                                            onEnter: (event) =>
+                                                _onabtmeHover(true),
+                                            onExit: (event) =>
+                                                _onabtmeHover(false),
+                                            child: CustomAnimation(
+                                              index: 5,
+                                              duration: const Duration(
+                                                  milliseconds: 1100),
+                                              horizontalOffset: 50.0,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Scrollable.ensureVisible(
+                                                      duration: const Duration(
+                                                          seconds: 1),
+                                                      curve: Curves.easeInOut,
+                                                      Variables
+                                                          .key1.currentContext!);
+                                                },
+                                                child: AnimatedContainer(
+                                                  key: Variables.key1,
+                                                  duration: const Duration(
+                                                      milliseconds: 200),
+                                                  transform:
+                                                      Matrix4.translationValues(
+                                                          0,
+                                                          Variables.abtmeisHovered
+                                                              ? -5
+                                                              : 0,
+                                                          0),
+                                                  height: Measures.getHeight(
+                                                          context) *
+                                                      0.05,
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width >=
+                                                          1400
+                                                      ? MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.35 // Large screens
+                                                      : MediaQuery.of(context)
+                                                                  .size
+                                                                  .width >=
+                                                              1024
+                                                          ? MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4 // Medium screens
+                                                          : MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.2,
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: Variables
+                                                              .abtmeisHovered
+                                                          ? Colors.transparent
+                                                          : const Color.fromARGB(
+                                                              255, 135, 24, 245),
+                                                    ),
+                                      
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                    gradient: ResponsiveWrapper
+                                                                    .of(context)
+                                                                .screenWidth <
                                                             1024
-                                                        ? MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4 // Medium screens
-                                                        : MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.2,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Variables
-                                                            .abtmeisHovered
-                                                        ? Colors.transparent
-                                                        : const Color.fromARGB(
-                                                            255, 135, 24, 245),
+                                                        ? const LinearGradient(
+                                                            colors: [
+                                                              Color.fromARGB(255,
+                                                                  135, 24, 245),
+                                                              Color.fromARGB(255,
+                                                                  154, 11, 173)
+                                                            ],
+                                                            begin: Alignment
+                                                                .topCenter,
+                                                            end: Alignment
+                                                                .bottomRight,
+                                                          )
+                                                        : Variables.abtmeisHovered
+                                                            ? const LinearGradient(
+                                                                colors: [
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      135,
+                                                                      24,
+                                                                      245),
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      154,
+                                                                      11,
+                                                                      173)
+                                                                ],
+                                                                begin: Alignment
+                                                                    .topCenter,
+                                                                end: Alignment
+                                                                    .bottomRight,
+                                                              )
+                                                            : null, // No gradient when not hovered
+                                                    color: ResponsiveWrapper.of(
+                                                                    context)
+                                                                .screenWidth <
+                                                            1024
+                                                        ? const Color.fromARGB(
+                                                            255, 135, 24, 245)
+                                                        : Variables.abtmeisHovered
+                                                            ? null
+                                                            : Colors
+                                                                .transparent, // White background when not hovered
                                                   ),
-
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  gradient: ResponsiveWrapper
-                                                                  .of(context)
-                                                              .screenWidth <
-                                                          1024
-                                                      ? const LinearGradient(
-                                                          colors: [
-                                                            Color.fromARGB(255,
-                                                                135, 24, 245),
-                                                            Color.fromARGB(255,
-                                                                154, 11, 173)
-                                                          ],
-                                                          begin: Alignment
-                                                              .topCenter,
-                                                          end: Alignment
-                                                              .bottomRight,
-                                                        )
-                                                      : Variables.abtmeisHovered
-                                                          ? const LinearGradient(
-                                                              colors: [
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    135,
-                                                                    24,
-                                                                    245),
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    154,
-                                                                    11,
-                                                                    173)
-                                                              ],
-                                                              begin: Alignment
-                                                                  .topCenter,
-                                                              end: Alignment
-                                                                  .bottomRight,
-                                                            )
-                                                          : null, // No gradient when not hovered
-                                                  color: ResponsiveWrapper.of(
-                                                                  context)
-                                                              .screenWidth <
-                                                          1024
-                                                      ? const Color.fromARGB(
-                                                          255, 135, 24, 245)
-                                                      : Variables.abtmeisHovered
-                                                          ? null
-                                                          : Colors
-                                                              .transparent, // White background when not hovered
-                                                ),
-                                                child: Text(
-                                                  "About me",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall!
-                                                      .copyWith(
-                                                          fontSize: 15,
-                                                          color: Colors.white),
+                                                  child: Text(
+                                                    "About me",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleSmall!
+                                                        .copyWith(
+                                                            fontSize: 15,
+                                                            color: Colors.white),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 20.0),
-                                        MouseRegion(
-                                          onEnter: (event) =>
-                                              _ondownHover(true),
-                                          onExit: (event) =>
-                                              _ondownHover(false),
-                                          child: CustomAnimation(
-                                            index: 6,
-                                            duration: const Duration(
-                                                milliseconds: 1100),
-                                            horizontalOffset: 50.0,
-                                            child: GestureDetector(
-                                              onTap: () async {
-                                                await emailservice
-                                                    .downloadPdf("");
+                                          const SizedBox(width: 20.0),
+                                          CustomAnimation(
+                                              index: 6,
+                                              duration: const Duration(
+                                                  milliseconds: 1100),
+                                              horizontalOffset: 50.0,
+                                            child:DropdownButtonHideUnderline(
+                                        child: Container(
+                                          width: Measures.getWidth(context) * 0.42, // Controls the button width
+                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                Color.fromARGB(255, 135, 24, 245),
+                                                Color.fromARGB(255, 154, 11, 173)
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomRight,
+                                            ),
+                                          ),
+                                          child:  DropdownButton2<String>(
+                                              value: selectedValue,
+                                              dropdownStyleData: DropdownStyleData(
+                                                offset: const Offset(-8, -2),
+                                                width: Measures.getWidth(context) * 0.42, // Reduce dropdown width
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(255, 135, 24, 245),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                              ),
+                                              buttonStyleData: const ButtonStyleData(
+                                               
+                                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                              ),
+                                              iconStyleData: const IconStyleData(
+                                                icon: Icon(Icons.arrow_drop_down, color: Colors.white),
+                                              ),
+                                              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                                                    fontSize: ResponsiveWrapper.of(context).isTablet ? 12 : 15,
+                                                    color: Colors.white,
+                                                  ),
+                                              items: [
+                                                DropdownMenuItem(
+                                                  value: "download_resume",
+                                                  child: Text("Download Resume",
+                                                      style: GoogleFonts.lato(color: const Color.fromARGB(221, 250, 250, 250))),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: "cloud_resume",
+                                                  child: Text("Cloud Resume",
+                                                      style: GoogleFonts.lato(color: Colors.white)),
+                                                ),
+                                                DropdownMenuItem(
+                                                  value: "flutter_resume",
+                                                  child: Text("Flutter Resume",
+                                                      style: GoogleFonts.lato(color: Colors.white)),
+                                                ),
+                                              ],
+                                              onChanged: (value) async {
+                                                if (value != null) {
+                                                  setState(() {
+                                                    selectedValue = value;
+                                                  });
+                                      
+                                                  if (value == "cloud_resume") {
+                                                    final resumeBytes = await rootBundle.load(
+                                                        'Assets/Images/DevopsResume.pdf');
+                                                    final stream =
+                                                        Stream.fromIterable(resumeBytes.buffer.asUint8List());
+                                      
+                                                    // Trigger download
+                                                    download(stream, 'CloudResume.pdf');
+                                                  } else if (value == "flutter_resume") {
+                                                    final resumeBytes = await rootBundle.load(
+                                                        'Assets/Images/FlutterResume.pdf');
+                                                    final stream =
+                                                        Stream.fromIterable(resumeBytes.buffer.asUint8List());
+                                      
+                                                    // Trigger download
+                                                    download(stream, 'FlutterResume.pdf');
+                                                  }
+                                                }
                                               },
-                                              child: AnimatedContainer(
-                                                // key: Variables.key1,
-                                                duration: const Duration(
-                                                    milliseconds: 200),
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                transform:
-                                                    Matrix4.translationValues(
-                                                        0,
-                                                        Variables
-                                                                .resumedownHovered
-                                                            ? -5
-                                                            : 0,
-                                                        0),
-                                                height: Measures.getHeight(
-                                                        context) *
-                                                    0.05,
-                                                // width: Measures.getWidth(context) * 0.09,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Variables
-                                                            .resumedownHovered
-                                                        ? Colors.transparent
-                                                        : const Color.fromARGB(
-                                                            255, 135, 24, 245),
-                                                  ),
-
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  gradient: ResponsiveWrapper
-                                                                  .of(context)
-                                                              .screenWidth <
-                                                          1024
-                                                      ? const LinearGradient(
-                                                          colors: [
-                                                            Color.fromARGB(255,
-                                                                135, 24, 245),
-                                                            Color.fromARGB(255,
-                                                                154, 11, 173)
-                                                          ],
-                                                          begin: Alignment
-                                                              .topCenter,
-                                                          end: Alignment
-                                                              .bottomRight,
-                                                        )
-                                                      : Variables
-                                                              .resumedownHovered
-                                                          ? const LinearGradient(
-                                                              colors: [
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    135,
-                                                                    24,
-                                                                    245),
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    154,
-                                                                    11,
-                                                                    173)
-                                                              ],
-                                                              begin: Alignment
-                                                                  .topCenter,
-                                                              end: Alignment
-                                                                  .bottomRight,
-                                                            )
-                                                          : null, // No gradient when not hovered
-                                                  color: ResponsiveWrapper.of(
-                                                                  context)
-                                                              .screenWidth <
-                                                          1020
-                                                      ? const Color.fromARGB(
-                                                          255, 135, 24, 245)
-                                                      : Variables
-                                                              .resumedownHovered
-                                                          ? null
-                                                          : Colors
-                                                              .transparent, // White background when not hovered
-                                                ),
-                                                child: Text(
-                                                  "Download Resume",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall!
-                                                      .copyWith(
-                                                          fontSize:
-                                                              ResponsiveWrapper.of(
-                                                                          context)
-                                                                      .isTablet
-                                                                  ? 12
-                                                                  : 15,
-                                                          color: Colors.white),
-                                                ),
-                                              ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      
+                                          
+                                        ],
+                                      ),
+                                    
                                   ],
                                 ),
                                 const SizedBox(
@@ -1145,62 +1125,63 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                               if (Variables
                                   .resumedownHovered) // Show options on hover
-                                AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
-                                  opacity:
-                                      Variables.resumedownHovered ? 1.0 : 0.0,
-                                  child: AnimatedContainer(
+                               AnimatedOpacity(
                                     duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                    transform: Matrix4.translationValues(
-                                        0,
-                                        Variables.resumedownHovered ? 0 : -10,
-                                        0),
-                                    width: 160,
-                                    margin: const EdgeInsets.only(top: 50),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          blurRadius: 5,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        _downloadOption(
-                                          context,
-                                          "Cloud Resume",
-                                          () async {
-                                            final resumeBytes =
-                                                await rootBundle.load(
-                                                    'Assets/Images/DevopsResume.pdf');
-                                            final stream = Stream.fromIterable(
-                                                resumeBytes.buffer
-                                                    .asUint8List());
-
-                                            // Trigger download
-                                            download(stream, 'Resume.pdf');
-                                          },
-                                        ),
-                                        _downloadOption(
-                                            context, "Flutter Resume",
+                                    opacity:
+                                        Variables.resumedownHovered ? 1.0 : 0.0,
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                      transform: Matrix4.translationValues(
+                                          0,
+                                          Variables.resumedownHovered ? 0 : -10,
+                                          0),
+                                      width: 145,
+                                      margin: const EdgeInsets.only(top: 65),
+                                      decoration:  BoxDecoration(
+                                        color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const  [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            blurRadius: 5,
+                                            spreadRadius: 1,
+                                          )
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          _downloadOption(
+                                            context,
+                                            "Cloud Resume",
                                             () async {
-                                          final resumeBytes = await rootBundle.load(
-                                              'Assets/Images/FlutterResume.pdf');
-                                          final stream = Stream.fromIterable(
-                                              resumeBytes.buffer.asUint8List());
-
-                                          // Trigger download
-                                          download(stream, 'Resume.pdf');
-                                        }),
-                                      ],
+                                              final resumeBytes =
+                                                  await rootBundle.load(
+                                                      'Assets/Images/DevopsResume.pdf');
+                                              final stream = Stream.fromIterable(
+                                                  resumeBytes.buffer
+                                                      .asUint8List());
+                                  
+                                              // Trigger download
+                                              download(stream, 'CloudResume.pdf');
+                                            },
+                                          ),
+                                          _downloadOption(
+                                              context, "Flutter Resume",
+                                              () async {
+                                            final resumeBytes = await rootBundle.load(
+                                                'Assets/Images/FlutterResume.pdf');
+                                            final stream = Stream.fromIterable(
+                                                resumeBytes.buffer.asUint8List());
+                                  
+                                            // Trigger download
+                                            download(stream, 'FlutterResume.pdf');
+                                          }),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                
                             ],
                           ),
                         ),
@@ -1443,9 +1424,11 @@ class _HomeContentState extends State<HomeContent> {
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.all(10.0),
           width: double.infinity,
           decoration: BoxDecoration(
+         borderRadius: text =="Flutter Resume"? const BorderRadius.only(bottomLeft:Radius.circular(10),bottomRight:Radius.circular(10)):const  BorderRadius.only(topLeft:Radius.circular(10),topRight:Radius.circular(10)),
+
             gradient: Variables.resumedownHovered
                 ? const LinearGradient(
                     colors: [
@@ -1456,20 +1439,23 @@ class _HomeContentState extends State<HomeContent> {
                     end: Alignment.bottomRight,
                   )
                 : null,
-            borderRadius: BorderRadius.circular(5),
+          
             color: Variables.resumedownHovered ? null : Colors.transparent,
           ),
-          child: Center(
+          child:  MouseRegion(
+              cursor: SystemMouseCursors.click, // Changes cursor to hand pointer on hover
+
             child: Text(
-              text,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    fontSize: 14,
-                    color: Variables.resumedownHovered
-                        ? Colors.white
-                        : Colors.black,
-                  ),
-            ),
+                text,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 14,
+                      color: Variables.resumedownHovered
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+              ),
           ),
+          
         ),
       ),
     );

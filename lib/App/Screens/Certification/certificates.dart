@@ -396,7 +396,7 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                                     ..shader = AppColorPalette.white),
                         ),
                         const SizedBox(
-                          width: 30.0,
+                          width: 20.0,
                         ),
                         widget.textno == "" || widget.texttitle == ""
                             ? Container()
@@ -526,8 +526,8 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                             color: Colors.white,
                             image: const DecorationImage(
                                 image: AssetImage(
-                                    "Assets/Images/TravelAppMangement.jpg"),
-                                fit: BoxFit.cover),
+                                    "Assets/Images/az-204.png"),
+                                fit: BoxFit.contain),
                             borderRadius: BorderRadius.circular(16.0)),
                       ),
                     ),
@@ -546,8 +546,8 @@ class _MobileViewCertificateState extends State<MobileViewCertificate> {
                           decoration: BoxDecoration(
                               image: const DecorationImage(
                                   image: AssetImage(
-                                      "Assets/Images/TravelAppMangement.jpg"),
-                                  fit: BoxFit.cover),
+                                      "Assets/Images/az-400.png"),
+                                  fit: BoxFit.contain),
                               borderRadius: BorderRadius.circular(16.0)),
                         ),
                       ),

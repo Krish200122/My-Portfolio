@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 width: Measures.getWidth(context),
 
-                // color: Colors.amber,
+              
                 // padding: EdgeInsets.all(10.0),
                 child: Stack(children: [
                   Container(
@@ -63,10 +63,14 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Container(
                             height: Measures.getHeight(context) * 0.1,
-                            width: Measures.getWidth(context) * 0.95,
-                            //   color: Colors.amber,
+                            width:ResponsiveWrapper.of(context).screenWidth < 480 &&
+                              ResponsiveWrapper.of(context).screenWidth < 768
+                          ?Measures.getWidth(context): Measures.getWidth(context) * 0.95,
+                             
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:  ResponsiveWrapper.of(context).screenWidth < 480 &&
+                              ResponsiveWrapper.of(context).screenWidth < 768
+                          ? MainAxisAlignment.spaceEvenly:MainAxisAlignment.spaceBetween,
                               children: [
                                 RichText(
                                   text: TextSpan(
@@ -364,14 +368,14 @@ class _HomePageState extends State<HomePage> {
                                                         0),
                                                 height: Measures.getHeight(
                                                         context) *
-                                                    0.03,
+                                                    0.04,
                                                 width: ResponsiveWrapper.of(
                                                                 context)
                                                             .screenWidth <
                                                         600
                                                     ? Measures.getWidth(
                                                             context) *
-                                                        0.11 // For smaller screens
+                                                        0.13 // For smaller screens
                                                     : ResponsiveWrapper.of(
                                                                     context)
                                                                 .screenWidth >=
