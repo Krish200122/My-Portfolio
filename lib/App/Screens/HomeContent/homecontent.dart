@@ -1,10 +1,8 @@
+// ignore_for_file: deprecated_member_use
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:download/download.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myportfolio/App/Screens/Aboutme/aboutme.dart';
 import 'package:myportfolio/App/Screens/Certification/certificates.dart';
@@ -16,51 +14,36 @@ import 'package:myportfolio/Views/Animations/animation.dart';
 import 'package:myportfolio/Views/Themes/Colors/colors.dart';
 import 'package:myportfolio/Views/Themes/Icons/icons.dart';
 import 'package:myportfolio/Views/Themes/Measures/measures.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
 
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
-
   @override
   State<HomeContent> createState() => _HomeContentState();
 }
 
 class _HomeContentState extends State<HomeContent> {
-  void _onabtmeHover(bool isHovered) {
-    setState(() {
-      Variables.abtmeisHovered = isHovered;
-    });
-  }
+  void _onAbtHover(bool v) => setState(() => Variables.abtmeisHovered = v);
+  void _onDownHover(bool v) => setState(() => Variables.resumedownHovered = v);
 
-  void _ondownHover(bool isHovered) {
-    setState(() {
-      Variables.resumedownHovered = isHovered;
-    });
+  Future<void> _downloadResume() async {
+    final bytes = await rootBundle.load('Assets/Images/DevopsResume.pdf');
+    final stream = Stream.fromIterable(bytes.buffer.asUint8List());
+    download(stream, 'TarunKrishna_Resume.pdf');
   }
-
-  String selectedValue = "download_resume"; // Initial value
 
   @override
   void initState() {
     super.initState();
     Variables.scrollControllers.addListener(() {
-      if (mounted) {
-        setState(() {
-          Variables.scrollPosition =
-              Variables.scrollControllers.position.pixels;
-        });
-      }
+      if (mounted) setState(() => Variables.scrollPosition = Variables.scrollControllers.position.pixels);
     });
   }
 
   @override
-  void dispose() {
-    // Variables.scrollControllers.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final sw = MediaQuery.of(context).size.width;
+    final bool isMobile = sw < 600;
+
     return SizedBox(
       height: Measures.getHeight(context) * 0.85,
       width: Measures.getWidth(context) * 0.85,
@@ -68,1439 +51,494 @@ class _HomeContentState extends State<HomeContent> {
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
         child: SingleChildScrollView(
           controller: Variables.scrollControllers,
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 20),
+
+              // ── Hero ─────────────────────────────────────────────────
               Measures.islargerScreen(context)
-                  ? ProfileRowContent(context)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    CustomAnimation(
-                                        index: 1,
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        horizontalOffset: 50.0,
-                                        child: FadeInAnimation(
-                                            child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Hey I'm",
-                                              textAlign: TextAlign.start,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall!
-                                                  .copyWith(
-                                                      fontSize: 25,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                            const SizedBox(width: 20.0),
-                                            SizedBox(
-                                              height:
-                                                  Measures.getHeight(context) *
-                                                      0.04,
-                                              child: Lottie.asset(
-                                                  "Assets/Animation/Wave.json"),
-                                            )
-                                          ],
-                                        ))),
-                                    const SizedBox(height: 10.0),
-                                    CustomAnimation(
-                                        index: 2,
-                                        duration:
-                                            const Duration(milliseconds: 800),
-                                        horizontalOffset: 50.0,
-                                        child: AnimatedTextKit(
-                                          animatedTexts: [
-                                            TypewriterAnimatedText(
-                                              'Tarun Krishna',
-                                              cursor: '',
-                                              textStyle: TextStyle(
-                                                foreground: Paint()
-                                                  ..shader = AppColorPalette
-                                                      .textGradient,
-                                                fontSize: 60.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              speed: const Duration(
-                                                  milliseconds: 200),
-                                            ),
-                                          ],
-                                          totalRepeatCount: 4,
-                                          pause:
-                                              const Duration(milliseconds: 200),
-                                          displayFullTextOnTap: true,
-                                          stopPauseOnTap: true,
-                                        )
-                                        // runs after the above w/new duration
-                                        ),
-                                    const SizedBox(height: 10.0),
-                                    CustomAnimation(
-                                        index: 3,
-                                        duration:
-                                            const Duration(milliseconds: 900),
-                                        horizontalOffset: 50.0,
-                                        child: Text(
-                                          "Flutter Developer & Devops Engineer",
-                                          textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge!
-                                              .copyWith(
-                                                  fontSize: 40,
-                                                  color: Colors.white),
-                                        )),
-                                    const SizedBox(height: 10.0),
-                                    CustomAnimation(
-                                        index: 4,
-                                        duration:
-                                            const Duration(milliseconds: 1000),
-                                        horizontalOffset: 50.0,
-                                        child: Text(
-                                          "Passionate about crafting beautiful and functional mobile applications with Flutter. Specializing in creating seamless user experiences with cutting-edge technology.",
-                                          textAlign: TextAlign.start,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                fontSize: 18,
-                                                color: Colors.white54,
-                                              ),
-                                        )),
-                                    const SizedBox(height: 30.0),
-                                    Row(
-                                      children: [
-                                        MouseRegion(
-                                          onEnter: (event) =>
-                                              _onabtmeHover(true),
-                                          onExit: (event) =>
-                                              _onabtmeHover(false),
-                                          child: CustomAnimation(
-                                            index: 5,
-                                            duration: const Duration(
-                                                milliseconds: 1100),
-                                            horizontalOffset: 50.0,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Scrollable.ensureVisible(
-                                                    duration: const Duration(
-                                                        seconds: 1),
-                                                    curve: Curves.easeInOut,
-                                                    Variables
-                                                        .key1.currentContext!);
-                                              },
-                                              child: AnimatedContainer(
-                                                key: Variables.key1,
-                                                duration: const Duration(
-                                                    milliseconds: 200),
-                                                transform:
-                                                    Matrix4.translationValues(
-                                                        0,
-                                                        Variables.abtmeisHovered
-                                                            ? -5
-                                                            : 0,
-                                                        0),
-                                                height: Measures.getHeight(
-                                                        context) *
-                                                    0.05,
-                                                width: MediaQuery.of(context)
-                                                            .size
-                                                            .width >=
-                                                        1400
-                                                    ? MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.35 // Large screens
-                                                    : MediaQuery.of(context)
-                                                                .size
-                                                                .width >=
-                                                            1024
-                                                        ? MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.4 // Medium screens
-                                                        : MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.2,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Variables
-                                                            .abtmeisHovered
-                                                        ? Colors.transparent
-                                                        : const Color.fromARGB(
-                                                            255, 135, 24, 245),
-                                                  ),
+                  ? _HeroDesktop(onAbtHover: _onAbtHover, onDownHover: _onDownHover, downloadResume: _downloadResume)
+                  : _HeroMobile(onAbtHover: _onAbtHover, onDownHover: _onDownHover, downloadResume: _downloadResume),
 
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  gradient: ResponsiveWrapper
-                                                                  .of(context)
-                                                              .screenWidth <
-                                                          1024
-                                                      ? const LinearGradient(
-                                                          colors: [
-                                                            Color.fromARGB(255,
-                                                                135, 24, 245),
-                                                            Color.fromARGB(255,
-                                                                154, 11, 173)
-                                                          ],
-                                                          begin: Alignment
-                                                              .topCenter,
-                                                          end: Alignment
-                                                              .bottomRight,
-                                                        )
-                                                      : Variables.abtmeisHovered
-                                                          ? const LinearGradient(
-                                                              colors: [
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    135,
-                                                                    24,
-                                                                    245),
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    154,
-                                                                    11,
-                                                                    173)
-                                                              ],
-                                                              begin: Alignment
-                                                                  .topCenter,
-                                                              end: Alignment
-                                                                  .bottomRight,
-                                                            )
-                                                          : null, // No gradient when not hovered
-                                                  color: ResponsiveWrapper.of(
-                                                                  context)
-                                                              .screenWidth <
-                                                          1024
-                                                      ? const Color.fromARGB(
-                                                          255, 135, 24, 245)
-                                                      : Variables.abtmeisHovered
-                                                          ? null
-                                                          : Colors
-                                                              .transparent, // White background when not hovered
-                                                ),
-                                                child: Text(
-                                                  "About me",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall!
-                                                      .copyWith(
-                                                          fontSize: 15,
-                                                          color: Colors.white),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 20.0),
-                                        CustomAnimation(
-                                          index: 6,
-                                          duration: const Duration(
-                                              milliseconds: 1100),
-                                          horizontalOffset: 50.0,
-                                          child: DropdownButtonHideUnderline(
-                                            child: Container(
-                                              width: Measures.getWidth(
-                                                      context) *
-                                                  0.42, // Controls the button width
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                gradient: const LinearGradient(
-                                                  colors: [
-                                                    Color.fromARGB(
-                                                        255, 135, 24, 245),
-                                                    Color.fromARGB(
-                                                        255, 154, 11, 173)
-                                                  ],
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomRight,
-                                                ),
-                                              ),
-                                              child: DropdownButton2<String>(
-                                                value: selectedValue,
-                                                dropdownStyleData:
-                                                    DropdownStyleData(
-                                                  offset: const Offset(-8, -2),
-                                                  width: Measures.getWidth(
-                                                          context) *
-                                                      0.42, // Reduce dropdown width
-                                                  decoration: BoxDecoration(
-                                                    color: const Color.fromARGB(
-                                                        255, 135, 24, 245),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                                buttonStyleData:
-                                                    const ButtonStyleData(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                                ),
-                                                iconStyleData:
-                                                    const IconStyleData(
-                                                  icon: Icon(
-                                                      Icons.arrow_drop_down,
-                                                      color: Colors.white),
-                                                ),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleSmall!
-                                                    .copyWith(
-                                                      fontSize:
-                                                          ResponsiveWrapper.of(
-                                                                      context)
-                                                                  .isTablet
-                                                              ? 12
-                                                              : 15,
-                                                      color: Colors.white,
-                                                    ),
-                                                items: [
-                                                  DropdownMenuItem(
-                                                    value: "download_resume",
-                                                    child: Text(
-                                                        "Download Resume",
-                                                        style: GoogleFonts.lato(
-                                                            color: const Color
-                                                                .fromARGB(
-                                                                221,
-                                                                250,
-                                                                250,
-                                                                250))),
-                                                  ),
-                                                  DropdownMenuItem(
-                                                    value: "cloud_resume",
-                                                    child: Text("Cloud Resume",
-                                                        style: GoogleFonts.lato(
-                                                            color:
-                                                                Colors.white)),
-                                                  ),
-                                                  DropdownMenuItem(
-                                                    value: "flutter_resume",
-                                                    child: Text(
-                                                        "Flutter Resume",
-                                                        style: GoogleFonts.lato(
-                                                            color:
-                                                                Colors.white)),
-                                                  ),
-                                                ],
-                                                onChanged: (value) async {
-                                                  if (value != null) {
-                                                    setState(() {
-                                                      selectedValue = value;
-                                                    });
+              const SizedBox(height: 70),
 
-                                                    if (value ==
-                                                        "cloud_resume") {
-                                                      final resumeBytes =
-                                                          await rootBundle.load(
-                                                              'Assets/Images/DevopsResume.pdf');
-                                                      final stream =
-                                                          Stream.fromIterable(
-                                                              resumeBytes.buffer
-                                                                  .asUint8List());
+              // ── 01. About Me ─────────────────────────────────────────
+              AboutMe(
+                txtno: "01.", keys: Variables.abt1key, title: "About Me",
+                descrption:
+                    "I'm Tarun Krishna, a certified Azure DevOps Engineer (AZ-400) with 3+ years of experience building and operating enterprise-grade CI/CD automation, cloud infrastructure and DevSecOps pipelines on Microsoft Azure.\n\nMy primary expertise is Azure DevOps — designing multi-stage YAML pipelines, release gates, artifact management and environment-based approvals that connect code commits to production deployments safely and repeatably. I work hands-on with Azure Repos, Azure Pipelines, Azure Artifacts and Azure Test Plans daily across multi-team SaaS product environments.\n\nBeyond pipelines, I provision and manage the full Azure infrastructure stack using Terraform, Bicep and ARM Templates — from AKS clusters and App Services to VNets, Key Vault and Azure SQL. I've reduced deployment lead times by 60%+, led three cloud migration projects to Azure, and built observability stacks with Azure Monitor, Prometheus and Grafana that cut MTTR by 40%.\n\nI hold AZ-400 (DevOps Engineer Expert) and AZ-204 (Azure Developer Associate) certifications from Microsoft.",
+                descrption2: "", descrption3: "", descrption4: "Core DevOps Technologies I Work With",
+                isprofile: false, duration: const Duration(milliseconds: 400), index: 1,
+                isVisible: Measures.isInView(Variables.abt1key, context),
+              ),
+              const SizedBox(height: 70),
 
-                                                      // Trigger download
-                                                      download(stream,
-                                                          'CloudResume.pdf');
-                                                    } else if (value ==
-                                                        "flutter_resume") {
-                                                      final resumeBytes =
-                                                          await rootBundle.load(
-                                                              'Assets/Images/FlutterResume.pdf');
-                                                      final stream =
-                                                          Stream.fromIterable(
-                                                              resumeBytes.buffer
-                                                                  .asUint8List());
+              // ── 02. Where I've Worked (combined) ────────────────────
+              _WorkExperience(
+                keys: Variables.abt2key,
+                isVisible: Measures.isInView(Variables.abt2key, context),
+              ),
+              const SizedBox(height: 80),
 
-                                                      // Trigger download
-                                                      download(stream,
-                                                          'FlutterResume.pdf');
-                                                    }
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20.0,
-                                ),
-                                // Row(
-                                //     crossAxisAlignment:
-                                //         CrossAxisAlignment.start,
-                                //     mainAxisAlignment:
-                                //         MainAxisAlignment.spaceBetween,
-                                //     children: [
-                                //       CustomAnimation(
-                                //         index: 6,
-                                //         duration:
-                                //             const Duration(milliseconds: 500),
-                                //         horizontalOffset: 50.0,
-                                //         child: SizedBox(
-                                //           child: DottedBorder(
-                                //               color: Colors.white54,
-                                //               dashPattern: const [2, 4],
-                                //               radius:
-                                //                   const Radius.circular(20.0),
-                                //               borderType: BorderType.RRect,
-                                //               padding:
-                                //                   const EdgeInsets.all(20.0),
-                                //               strokeWidth: 3,
-                                //               child: Column(
-                                //                 crossAxisAlignment:
-                                //                     CrossAxisAlignment.center,
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment
-                                //                         .spaceBetween,
-                                //                 children: [
-                                //                   Container(
-                                //                     alignment: Alignment.center,
-                                //                     // color: Colors.white,
-                                //                     child: Text(
-                                //                       "Certificates",
-                                //                       style: Theme.of(context)
-                                //                           .textTheme
-                                //                           .titleSmall!
-                                //                           .copyWith(
-                                //                               fontSize: 15,
-                                //                               color:
-                                //                                   Colors.white),
-                                //                     ),
-                                //                   ),
-                                //                   SizedBox(
-                                //                     height: Measures.getHeight(
-                                //                             context) *
-                                //                         0.07,
-                                //                     width: Measures.getWidth(
-                                //                             context) *
-                                //                         0.07,
-                                //                     // color: Colors.white,
-                                //                     child: Row(
-                                //                       mainAxisAlignment:
-                                //                           MainAxisAlignment
-                                //                               .spaceBetween,
-                                //                       children: [
-                                //                         SizedBox(
-                                //                           width:
-                                //                               Measures.getWidth(
-                                //                                       context) *
-                                //                                   0.02,
-                                //                           child: Image.asset(
-                                //                               filterQuality:
-                                //                                   FilterQuality
-                                //                                       .high,
-                                //                               CustomIcons
-                                //                                   .mondoDb),
-                                //                         ),
-                                //                         SizedBox(
-                                //                           width:
-                                //                               Measures.getWidth(
-                                //                                       context) *
-                                //                                   0.02,
-                                //                           child: Image.asset(
-                                //                               filterQuality:
-                                //                                   FilterQuality
-                                //                                       .high,
-                                //                               CustomIcons
-                                //                                   .firebase),
-                                //                         ),
-                                //                         SizedBox(
-                                //                           width:
-                                //                               Measures.getWidth(
-                                //                                       context) *
-                                //                                   0.025,
-                                //                           child: Image.asset(
-                                //                               filterQuality:
-                                //                                   FilterQuality
-                                //                                       .high,
-                                //                               CustomIcons
-                                //                                   .nodejs),
-                                //                         )
-                                //                       ],
-                                //                     ),
-                                //                   )
-                                //                 ],
-                                //               )),
-                                //         ),
-                                //       ),
-                                //       CustomAnimation(
-                                //         index: 7,
-                                //         duration:
-                                //             const Duration(milliseconds: 700),
-                                //         horizontalOffset: 50.0,
-                                //         child: SizedBox(
-                                //           // width: Measures.getWidth(context) * 0.085,
-                                //           child: DottedBorder(
-                                //               color: Colors.white54,
-                                //               dashPattern: const [2, 4],
-                                //               radius:
-                                //                   const Radius.circular(20.0),
-                                //               borderType: BorderType.RRect,
-                                //               padding:
-                                //                   const EdgeInsets.all(20.0),
-                                //               strokeWidth: 3,
-                                //               child: Column(
-                                //                 crossAxisAlignment:
-                                //                     CrossAxisAlignment.center,
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment
-                                //                         .spaceBetween,
-                                //                 children: [
-                                //                   Container(
-                                //                     alignment: Alignment.center,
-                                //                     // color: Colors.white,
-                                //                     child: Text(
-                                //                       "Projects",
-                                //                       style: Theme.of(context)
-                                //                           .textTheme
-                                //                           .titleSmall!
-                                //                           .copyWith(
-                                //                               fontSize: 15,
-                                //                               color:
-                                //                                   Colors.white),
-                                //                     ),
-                                //                   ),
-                                //                   SizedBox(
-                                //                     height: Measures.getHeight(
-                                //                             context) *
-                                //                         0.07,
-                                //                     width: Measures.getWidth(
-                                //                             context) *
-                                //                         0.07,
-                                //                     //     color: Colors.white,
-                                //                   )
-                                //                 ],
-                                //               )),
-                                //         ),
-                                //       ),
-                                //       CustomAnimation(
-                                //         index: 8,
-                                //         duration:
-                                //             const Duration(milliseconds: 900),
-                                //         horizontalOffset: 50.0,
-                                //         child: SizedBox(
-                                //           // width: Measures.getWidth(context) * 0.085,
-                                //           child: DottedBorder(
-                                //               color: Colors.white54,
-                                //               dashPattern: const [2, 4],
-                                //               radius:
-                                //                   const Radius.circular(20.0),
-                                //               borderType: BorderType.RRect,
-                                //               padding:
-                                //                   const EdgeInsets.all(20.0),
-                                //               strokeWidth: 3,
-                                //               child: Column(
-                                //                 crossAxisAlignment:
-                                //                     CrossAxisAlignment.center,
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment
-                                //                         .spaceBetween,
-                                //                 children: [
-                                //                   Container(
-                                //                     alignment: Alignment.center,
-                                //                     // color: Colors.white,
-                                //                     child: Text(
-                                //                       "Cloud",
-                                //                       style: Theme.of(context)
-                                //                           .textTheme
-                                //                           .titleSmall!
-                                //                           .copyWith(
-                                //                               fontSize: 15,
-                                //                               color:
-                                //                                   Colors.white),
-                                //                     ),
-                                //                   ),
-                                //                   Container(
-                                //                     height: Measures.getHeight(
-                                //                             context) *
-                                //                         0.07,
-                                //                     width: Measures.getWidth(
-                                //                             context) *
-                                //                         0.07,
-                                //                     // color: Colors.white,
-                                //                     alignment: Alignment.center,
-                                //                     child: Image.asset(
-                                //                         filterQuality:
-                                //                             FilterQuality.high,
-                                //                         CustomIcons.azure),
-                                //                   )
-                                //                 ],
-                                //               )),
-                                //         ),
-                                //       )
-                                //     ])
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: Measures.getHeight(context) * 0.45,
-                            //color: Colors.amber,
-                            alignment: Alignment.center,
-                            child: Stack(
-                              children: [
-                                Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: CustomAnimation(
-                                      index: 9,
-                                      duration:
-                                          const Duration(milliseconds: 800),
-                                      horizontalOffset: 50.0,
-                                      child: Container(
-                                        height:
-                                            Measures.getHeight(context) * 0.35,
-                                        // width:
-                                        //     Measures.getWidth(context) * 0.25,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white24,
-                                            borderRadius:
-                                                BorderRadius.circular(20.0)),
-                                      ),
-                                    )),
-                                CustomAnimation(
-                                    index: 10,
-                                    duration: const Duration(milliseconds: 900),
-                                    verticalOffset: 50.0,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        height:
-                                            Measures.getHeight(context) * 0.4,
-                                        //  width: Measures.getWidth(context) * 0.2,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    CustomIcons.profile),
-                                                fit: BoxFit.cover)),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ]),
-              const SizedBox(height: 30.0),
-              MediaQuery.of(context).size.width < 600
-                  ? MobileAboutMe(
-                      txtno: "01.",
-                      keys: Variables.abt1key,
-                      title: "About Me",
-                      descrption:
-                          "I am a passionate Flutter Developer with expertise in building high-performance, scalable, and visually appealing cross-platform applications. My focus is on writing clean, maintainable code following best practices and leveraging state management solutions like Provider and BLoC to optimize app performance.Beyond app development, I have a strong background in Azure DevOps, specializing in CI/CD pipelines, containerized deployments, and infrastructure automation. I excel in setting up efficient DevOps workflows, ensuring seamless integration, deployment, and monitoring of applications in cloud environments.",
-                      descrption2: "",
-                      descrption3: "",
-                      descrption4:
-                          "Here are few Technologioes I've been Working with Recently",
-                      isprofile: true,
-                      duration: const Duration(milliseconds: 400),
-                      index: 1,
-                      isVisible: Measures.isInView(Variables.abt1key, context),
-                    )
-                  : AboutMe(
-                      txtno: "01.",
-                      keys: Variables.abt1key,
-                      title: "About Me",
-                      descrption:
-                          "I am a passionate Flutter Developer with expertise in building high-performance, scalable, and visually appealing cross-platform applications. My focus is on writing clean, maintainable code following best practices and leveraging state management solutions like Provider and BLoC to optimize app performance.Beyond app development, I have a strong background in Azure DevOps, specializing in CI/CD pipelines, containerized deployments, and infrastructure automation. I excel in setting up efficient DevOps workflows, ensuring seamless integration, deployment, and monitoring of applications in cloud environments.",
-                      descrption2: "",
-                      descrption3: "",
-                      descrption4:
-                          "Here are few Technologioes I've been Working with Recently",
-                      isprofile: true,
-                      duration: const Duration(milliseconds: 400),
-                      index: 1,
-                      isVisible: Measures.isInView(Variables.abt1key, context),
-                    ),
-              const SizedBox(height: 70.0),
-              MediaQuery.of(context).size.width < 600
-                  ? MobileAboutMe(
-                      txtno: "02.",
-                      keys: Variables.abt2key,
-                      title: "Where I've Worked",
-                      descrption:
-                          "At TamuInfotech , I honed my expertise in crafting seamless, high-performance Flutter applications, driving innovation through robust UI/UX design, state management, and cross-platform development.",
-                      descrption2: "",
-                      descrption3: "Senior Flutter Developer",
-                      descrption4: "January 2023 - January 2025  ",
-                      isprofile: false,
-                      duration: const Duration(milliseconds: 500),
-                      index: 2,
-                      isVisible: Measures.isInView(Variables.abt2key, context),
-                    )
-                  : AboutMe(
-                      txtno: "02.",
-                      keys: Variables.abt2key,
-                      title: "Where I've Worked",
-                      descrption:
-                          "At TamuInfotech , I honed my expertise in crafting seamless, high-performance Flutter applications, driving innovation through robust UI/UX design, state management, and cross-platform development.",
-                      descrption2: "",
-                      descrption3: "Senior Flutter Developer",
-                      descrption4: "January 2023 - January 2025 ",
-                      isprofile: false,
-                      duration: const Duration(milliseconds: 500),
-                      index: 2,
-                      isVisible: Measures.isInView(Variables.abt2key, context),
-                    ),
-              const SizedBox(height: 30.0),
-              MediaQuery.of(context).size.width < 600
-                  ? MobileAboutMe(
-                      txtno: "03.",
-                      keys: Variables.experkey,
-                      title: "Where I've Worked",
-                      descrption:
-                          "At TamuInfotech, I played a pivotal role in designing and implementing DevOps strategies, streamlining CI/CD pipelines, automating workflows, and ensuring system reliability at scale.",
-                      descrption2: "",
-                      descrption3: "Devops Engineer",
-                      descrption4: "November 2024 -  present ",
-                      isprofile: false,
-                      duration: const Duration(milliseconds: 500),
-                      index: 3,
-                      isVisible: Measures.isInView(Variables.experkey, context),
-                    )
-                  : AboutMe(
-                      txtno: "03.",
-                      keys: Variables.experkey,
-                      title: "Where I've Worked",
-                      descrption:
-                          "At TamuInfotech, I played a pivotal role in designing and implementing DevOps strategies, streamlining CI/CD pipelines, automating workflows, and ensuring system reliability at scale.",
-                      descrption2: "",
-                      descrption3: "Devops Engineer",
-                      descrption4: "November 2024 -  Present ",
-                      isprofile: false,
-                      duration: const Duration(milliseconds: 500),
-                      index: 3,
-                      isVisible: Measures.isInView(Variables.experkey, context),
-                    ),
-              const SizedBox(height: 80.0),
-              MediaQuery.of(context).size.width < 600
+              // ── 03. Projects ─────────────────────────────────────────
+              isMobile
                   ? MobileViewProjects(
-                      textno: "04.",
-                      keys: Variables.abt3key,
+                      textno: "03.", keys: Variables.abt3key,
                       duration: const Duration(milliseconds: 700),
-                      texttitle: "Featured Projects",
+                      texttitle: "Featured Project",
                       ischangePosition: false,
-                      textsubtitle: "Travel Management - Projects",
+                      textsubtitle: "Enterprise CI/CD & Azure DevOps Automation",
                       textdesc:
-                          "TravelEase is a live travel management app designed for seamless trip planning and bookings. Integrated with Razorpay for secure payments and Google Maps for smart navigation, it streamlines hotel and vehicle bookings with real-time updates. Whether for business or leisure, TravelEase makes traveling effortless and efficient.",
-                      textend: "Dart  Android  IOS",
-                      title: "Project's Which I've Build ",
-                      index: 3,
-                      isVisible: Measures.isInView(Variables.abt3key, context),
-                    )
+                          "Architected and delivered end-to-end multi-stage CI/CD pipelines on Azure DevOps for a multi-tenant SaaS platform serving 50+ enterprise clients. Built YAML-based pipelines covering build, unit test, SAST security scan, Docker image push, Helm chart validation and phased environment deployments (Dev → QA → Staging → Production) with automated approval gates.\n\nAutomated all cloud infrastructure provisioning using Bicep and Terraform — eliminating manual deployments and reducing environment spin-up time by 70%. Integrated Azure Key Vault for secrets injection, enforced RBAC policies across subscriptions and achieved full audit compliance.",
+                      textend: "Azure DevOps  |  GitHub Actions  |  Terraform  |  Bicep  |  Docker  |  AKS  |  Key Vault",
+                      title: "Projects I've Delivered", index: 3,
+                      isVisible: Measures.isInView(Variables.abt3key, context))
                   : projects(
-                      textno: "04.",
-                      keys: Variables.abt3key,
+                      textno: "03.", keys: Variables.abt3key,
                       duration: const Duration(milliseconds: 700),
-                      texttitle: "Featured Projects",
+                      texttitle: "Featured Project",
                       ischangePosition: false,
-                      textsubtitle: "Travel Management - Projects",
+                      textsubtitle: "Enterprise CI/CD & Azure DevOps Automation",
                       textdesc:
-                          "TravelEase is a live travel management app designed for seamless trip planning and bookings. Integrated with Razorpay for secure payments and Google Maps for smart navigation, it streamlines hotel and vehicle bookings with real-time updates. Whether for business or leisure, TravelEase makes traveling effortless and efficient.",
-                      textend: "Dart  Android  IOS",
-                      title: "Project's Which I've Build ",
-                      index: 3,
-                      isVisible: Measures.isInView(Variables.abt3key, context),
-                    ),
-              MediaQuery.of(context).size.width < 600
+                          "Architected end-to-end multi-stage CI/CD pipelines on Azure DevOps for a multi-tenant SaaS platform. Built YAML pipelines covering build, test, SAST scan, Docker image push, Helm validation and phased environment deployments (Dev → QA → Staging → Prod) with automated approval gates. Integrated Azure Key Vault for secrets injection, enforced RBAC policies and achieved full audit compliance. Reduced environment spin-up time by 70% using Bicep and Terraform IaC.",
+                      textend: "Azure DevOps  |  GitHub Actions  |  Terraform  |  Bicep  |  Docker  |  AKS  |  Key Vault",
+                      title: "Projects I've Delivered", index: 3,
+                      isVisible: Measures.isInView(Variables.abt3key, context)),
+
+              isMobile
                   ? MobileViewProjects(
-                      ischangePosition: true,
-                      keys: Variables.abt4key,
+                      ischangePosition: true, keys: Variables.abt4key,
                       duration: const Duration(milliseconds: 800),
-                      texttitle: "Featured Projects",
-                      textsubtitle: "AlgoTrading - Projects",
+                      texttitle: "Featured Project",
+                      textsubtitle: "Kubernetes (AKS) Microservices Platform",
                       textdesc:
-                          "AlgoTrading is a live automated trading app that analyzes market trends and executes trades with precision. Using advanced algorithms and real-time data, it optimizes strategies for maximum profit while minimizing risk. With multi-asset support, backtesting, and customizable indicators, it's the perfect tool for traders looking to automate and refine their decisions",
-                      textend: "Dart  Android  IOS",
-                      index: 4,
-                      isVisible: Measures.isInView(Variables.abt4key, context),
-                    )
+                          "Designed and deployed a production-grade Kubernetes (AKS) cluster hosting 12 microservices with auto-scaling (HPA/VPA), pod disruption budgets and zero-downtime rolling deployments. Managed Helm chart releases with versioned rollback capability. Implemented a full observability stack — Prometheus scraping, custom Grafana dashboards and PagerDuty alerting — reducing MTTR by 40%. Configured Azure CNI networking, ingress controllers and TLS certificate automation.",
+                      textend: "Kubernetes (AKS)  |  Helm  |  Prometheus  |  Grafana  |  Azure CNI  |  Azure Monitor",
+                      index: 4, isVisible: Measures.isInView(Variables.abt4key, context))
                   : projects(
-                      ischangePosition: true,
-                      keys: Variables.abt4key,
+                      ischangePosition: true, keys: Variables.abt4key,
                       duration: const Duration(milliseconds: 800),
-                      texttitle: "Featured Projects",
-                      textsubtitle: "AlgoTrading - Projects",
+                      texttitle: "Featured Project",
+                      textsubtitle: "Kubernetes (AKS) Microservices Platform",
                       textdesc:
-                          "AlgoTrading is a live automated trading app that analyzes market trends and executes trades with precision. Using advanced algorithms and real-time data, it optimizes strategies for maximum profit while minimizing risk. With multi-asset support, backtesting, and customizable indicators, it's the perfect tool for traders looking to automate and refine their decisions",
-                      textend: "Dart  Android  IOS",
-                      index: 4,
-                      isVisible: Measures.isInView(Variables.abt4key, context),
-                    ),
-              ResponsiveWrapper.of(context).screenWidth < 1024
-                  ? const SizedBox(
-                      height: 30,
-                    )
-                  : const SizedBox(),
-              MediaQuery.of(context).size.width < 600
+                          "Designed and deployed a production-grade AKS cluster hosting 12 microservices with auto-scaling (HPA/VPA) and zero-downtime rolling deployments. Managed Helm chart releases with versioned rollback. Implemented full observability — Prometheus, custom Grafana dashboards and PagerDuty alerting — reducing MTTR by 40%. Configured Azure CNI networking, ingress controllers and TLS certificate automation.",
+                      textend: "Kubernetes (AKS)  |  Helm  |  Prometheus  |  Grafana  |  Azure CNI  |  Azure Monitor",
+                      index: 4, isVisible: Measures.isInView(Variables.abt4key, context)),
+
+              const SizedBox(height: 30),
+
+              // ── 04. Certifications ────────────────────────────────────
+              isMobile
                   ? MobileViewCertificate(
-                      textno: "05.",
-                      keys: Variables.certificatekey,
+                      textno: "04.", keys: Variables.certificatekey,
                       duration: const Duration(milliseconds: 500),
-                      texttitle: "Certification",
-                      ischangePosition: false,
-                      textsubtitle:
-                          "AZ-204: Developing Solutions for Microsoft Azure",
-                      textdesc:
-                          "Successfully completed the AZ-204 certification, demonstrating expertise in developing, deploying, and maintaining cloud applications on Microsoft Azure.",
-                      textend: "Microsoft Azure  Cloud Development  DevOps",
-                      title: "Certification Earned",
-                      index: 5,
-                      isVisible:
-                          Measures.isInView(Variables.certificatekey, context),
-                    )
+                      texttitle: "Certification", ischangePosition: false,
+                      textsubtitle: "AZ-204: Developing Solutions for Microsoft Azure",
+                      textdesc: "Validates expertise in developing cloud-native solutions on Azure — including Azure Functions, Cosmos DB, Blob Storage, API Management and Azure AD authentication flows.",
+                      textend: "Microsoft Azure  |  Cloud Development  |  Serverless  |  DevOps",
+                      title: "Certifications Earned", index: 5,
+                      isVisible: Measures.isInView(Variables.certificatekey, context))
                   : Certification(
-                      textno: "05.",
-                      keys: Variables.certificatekey,
+                      textno: "04.", keys: Variables.certificatekey,
                       duration: const Duration(milliseconds: 500),
-                      texttitle: "Certification",
-                      ischangePosition: false,
-                      textsubtitle:
-                          "AZ-204: Developing Solutions for Microsoft Azure",
-                      textdesc:
-                          "Successfully completed the AZ-204 certification, demonstrating expertise in developing, deploying, and maintaining cloud applications on Microsoft Azure.",
-                      textend: "Microsoft Azure  Cloud Development  DevOps",
-                      title: "Certification Earned",
-                      index: 5,
-                      isVisible:
-                          Measures.isInView(Variables.certificatekey, context),
-                    ),
-              MediaQuery.of(context).size.width < 600
+                      texttitle: "Certification", ischangePosition: false,
+                      textsubtitle: "AZ-204: Developing Solutions for Microsoft Azure",
+                      textdesc: "Validates expertise in developing cloud-native solutions on Azure — including Azure Functions, Cosmos DB, Blob Storage, API Management and Azure AD authentication flows.",
+                      textend: "Microsoft Azure  |  Cloud Development  |  Serverless  |  DevOps",
+                      title: "Certifications Earned", index: 5,
+                      isVisible: Measures.isInView(Variables.certificatekey, context)),
+
+              isMobile
                   ? MobileViewCertificate(
-                      ischangePosition: true,
-                      keys: Variables.certificatekey2,
+                      ischangePosition: true, keys: Variables.certificatekey2,
                       duration: const Duration(milliseconds: 500),
                       texttitle: "Certification",
-                      textsubtitle:
-                          "AZ-400: Designing and Implementing DevOps Solutions",
-                      textdesc:
-                          "Successfully earned the AZ-400 certification, showcasing expertise in designing and implementing DevOps practices, CI/CD pipelines, and automation on Microsoft Azure.",
-                      textend: "Microsoft Azure  DevOps  CI/CD  Automation",
-                      index: 6,
-                      isVisible:
-                          Measures.isInView(Variables.certificatekey2, context),
-                    )
+                      textsubtitle: "AZ-400: Designing and Implementing DevOps Solutions",
+                      textdesc: "Microsoft's highest-level DevOps certification — demonstrates mastery in CI/CD pipeline design, infrastructure automation, dependency management, continuous feedback and DevSecOps practices at enterprise scale.",
+                      textend: "Azure DevOps  |  CI/CD  |  IaC  |  DevSecOps  |  Automation",
+                      index: 6, isVisible: Measures.isInView(Variables.certificatekey2, context))
                   : Certification(
-                      ischangePosition: true,
-                      keys: Variables.certificatekey2,
+                      ischangePosition: true, keys: Variables.certificatekey2,
                       duration: const Duration(milliseconds: 500),
                       texttitle: "Certification",
-                      textsubtitle:
-                          "AZ-400: Designing and Implementing DevOps Solutions",
-                      textdesc:
-                          "Successfully earned the AZ-400 certification, showcasing expertise in designing and implementing DevOps practices, CI/CD pipelines, and automation on Microsoft Azure.",
-                      textend: "Microsoft Azure  DevOps  CI/CD  Automation",
-                      index: 6,
-                      isVisible:
-                          Measures.isInView(Variables.certificatekey2, context),
-                    ),
-              const SizedBox(height: 30.0),
+                      textsubtitle: "AZ-400: Designing and Implementing DevOps Solutions",
+                      textdesc: "Microsoft's highest-level DevOps certification — demonstrates mastery in CI/CD pipeline design, infrastructure automation, dependency management, continuous feedback and DevSecOps practices at enterprise scale.",
+                      textend: "Azure DevOps  |  CI/CD  |  IaC  |  DevSecOps  |  Automation",
+                      index: 6, isVisible: Measures.isInView(Variables.certificatekey2, context)),
+
+              const SizedBox(height: 40),
+
+              // ── 05. Tech Stack ────────────────────────────────────────
               TechStackSection(
-                techkeys: Variables.techstackkey,
-                index: 7,
+                techkeys: Variables.techstackkey, index: 7,
                 duration: const Duration(milliseconds: 500),
                 isVisible: Measures.isInView(Variables.techstackkey, context),
               ),
-              const SizedBox(height: 50.0),
-              MediaQuery.of(context).size.width < 600
-                  ? const MobileViewContactus()
-                  : const Contactus()
+              const SizedBox(height: 60),
+
+              // ── Contact ───────────────────────────────────────────────
+              isMobile ? const MobileViewContactus() : const Contactus(),
+              const SizedBox(height: 40),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  // ignore: non_constant_identifier_names
-  Row ProfileRowContent(BuildContext context) {
-    return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                //  height: Measures.getHeight(context) * 0.38,
-                width: Measures.getWidth(context) * 0.3,
-                // color: Colors.pink,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomAnimation(
-                        index: 1,
-                        duration: const Duration(milliseconds: 500),
-                        horizontalOffset: 50.0,
-                        child: FadeInAnimation(
-                            child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hey I'm",
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(width: 20.0),
-                            SizedBox(
-                              height: Measures.getHeight(context) * 0.04,
-                              child: Lottie.asset("Assets/Animation/Wave.json"),
-                            )
-                          ],
-                        ))),
-                    const SizedBox(height: 10.0),
-                    CustomAnimation(
-                        index: 2,
-                        duration: const Duration(milliseconds: 800),
-                        horizontalOffset: 50.0,
-                        child: AnimatedTextKit(
-                          animatedTexts: [
-                            TypewriterAnimatedText(
-                              'Tarun Krishna',
-                              cursor: '',
-                              textStyle: TextStyle(
-                                foreground: Paint()
-                                  ..shader = AppColorPalette.textGradient,
-                                fontSize: 70.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              speed: const Duration(milliseconds: 200),
-                            ),
-                          ],
-                          totalRepeatCount: 4,
-                          pause: const Duration(milliseconds: 200),
-                          displayFullTextOnTap: true,
-                          stopPauseOnTap: true,
-                        )
-                        // runs after the above w/new duration
-                        ),
-                    const SizedBox(height: 10.0),
-                    CustomAnimation(
-                        index: 3,
-                        duration: const Duration(milliseconds: 900),
-                        horizontalOffset: 50.0,
-                        child: Text(
-                          "Flutter Developer & Devops Engineer",
-                          textAlign: TextAlign.start,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(fontSize: 40, color: Colors.white),
-                        )),
-                    const SizedBox(height: 10.0),
-                    CustomAnimation(
-                        index: 4,
-                        duration: const Duration(milliseconds: 1000),
-                        horizontalOffset: 50.0,
-                        child: Text(
-                          "Passionate about crafting beautiful and functional mobile applications with Flutter. Specializing in creating seamless user experiences with cutting-edge technology.",
-                          textAlign: TextAlign.start,
-                          style:
-                              Theme.of(context).textTheme.titleSmall!.copyWith(
-                                    fontSize: 18,
-                                    color: Colors.white54,
-                                  ),
-                        )),
-                    const SizedBox(height: 30.0),
-                    Row(
-                      children: [
-                        MouseRegion(
-                          onEnter: (event) => _onabtmeHover(true),
-                          onExit: (event) => _onabtmeHover(false),
-                          child: CustomAnimation(
-                            index: 5,
-                            duration: const Duration(milliseconds: 1100),
-                            horizontalOffset: 50.0,
-                            child: GestureDetector(
-                              onTap: () {
-                                Scrollable.ensureVisible(
-                                    duration: const Duration(seconds: 1),
-                                    curve: Curves.easeInOut,
-                                    Variables.key1.currentContext!);
-                              },
-                              child: AnimatedContainer(
-                                key: Variables.key1,
-                                duration: const Duration(milliseconds: 200),
-                                transform: Matrix4.translationValues(
-                                    0, Variables.abtmeisHovered ? -5 : 0, 0),
-                                height: Measures.getHeight(context) * 0.07,
-                                width: Measures.getWidth(context) * 0.07,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Variables.abtmeisHovered
-                                        ? Colors.transparent
-                                        : const Color.fromARGB(
-                                            255, 135, 24, 245),
-                                  ),
+// ══════════════════════════════════════════════════════════════════════
+// WORK EXPERIENCE  —  single section with timeline cards
+// ══════════════════════════════════════════════════════════════════════
+class _WorkExperience extends StatelessWidget {
+  final Key? keys;
+  final double? isVisible;
+  const _WorkExperience({this.keys, this.isVisible});
 
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: Variables.abtmeisHovered
-                                      ? const LinearGradient(
-                                          colors: [
-                                            Color.fromARGB(255, 135, 24, 245),
-                                            Color.fromARGB(255, 154, 11, 173)
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomRight,
-                                        )
-                                      : null, // No gradient when not hovered
-                                  color: Variables.abtmeisHovered
-                                      ? null
-                                      : Colors
-                                          .transparent, // White background when not hovered
-                                ),
-                                child: Text(
-                                  "About me",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                          fontSize:
-                                              ResponsiveWrapper.of(context)
-                                                      .isTablet
-                                                  ? 12
-                                                  : 15,
-                                          color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 40.0),
-                        MouseRegion(
-                          onEnter: (event) => _ondownHover(true),
-                          onExit: (event) => _ondownHover(false),
-                          child: Stack(
-                            children: [
-                              CustomAnimation(
-                                index: 6,
-                                duration: const Duration(milliseconds: 1100),
-                                horizontalOffset: 50.0,
-                                child: GestureDetector(
-                                  onTap:
-                                      () {}, // Prevents accidental taps on hover
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    padding: const EdgeInsets.all(10.0),
-                                    transform: Matrix4.translationValues(
-                                        0,
-                                        Variables.resumedownHovered ? -5 : 0,
-                                        0),
-                                    height: ResponsiveWrapper.of(context)
-                                                .screenWidth ==
-                                            1024
-                                        ? Measures.getHeight(context) * 0.07
-                                        : Measures.getHeight(context) * 0.07,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Variables.resumedownHovered
-                                            ? Colors.transparent
-                                            : const Color.fromARGB(
-                                                255, 135, 24, 245),
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                      gradient: Variables.resumedownHovered
-                                          ? const LinearGradient(
-                                              colors: [
-                                                Color.fromARGB(
-                                                    255, 135, 24, 245),
-                                                Color.fromARGB(
-                                                    255, 154, 11, 173)
-                                              ],
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomRight,
-                                            )
-                                          : null,
-                                      color: Variables.resumedownHovered
-                                          ? null
-                                          : Colors.transparent,
-                                    ),
-                                    child: Text(
-                                      "Download Resume",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              fontSize:
-                                                  ResponsiveWrapper.of(context)
-                                                          .isTablet
-                                                      ? 12
-                                                      : 15,
-                                              color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              if (Variables
-                                  .resumedownHovered) // Show options on hover
-                                AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
-                                  opacity:
-                                      Variables.resumedownHovered ? 1.0 : 0.0,
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                    transform: Matrix4.translationValues(
-                                        0,
-                                        Variables.resumedownHovered ? 0 : -10,
-                                        0),
-                                    width: 145,
-                                    margin: const EdgeInsets.only(top: 65),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          blurRadius: 5,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        _downloadOption(
-                                          context,
-                                          "Cloud Resume",
-                                          () async {
-                                            final resumeBytes =
-                                                await rootBundle.load(
-                                                    'Assets/Images/DevopsResume.pdf');
-                                            final stream = Stream.fromIterable(
-                                                resumeBytes.buffer
-                                                    .asUint8List());
+  @override
+  Widget build(BuildContext context) {
+    final sw = MediaQuery.of(context).size.width;
+    final double vis = isVisible ?? 0.0;
 
-                                            // Trigger download
-                                            download(stream, 'CloudResume.pdf');
-                                          },
-                                        ),
-                                        _downloadOption(
-                                            context, "Flutter Resume",
-                                            () async {
-                                          final resumeBytes = await rootBundle.load(
-                                              'Assets/Images/FlutterResume.pdf');
-                                          final stream = Stream.fromIterable(
-                                              resumeBytes.buffer.asUint8List());
-
-                                          // Trigger download
-                                          download(stream, 'FlutterResume.pdf');
-                                        }),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ],
+    return AnimatedOpacity(
+      opacity: vis,
+      duration: const Duration(milliseconds: 500),
+      child: SizedBox(
+        key: keys,
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Section header
+            if (vis != 0.0)
+              CustomAnimation(
+                index: 2, duration: const Duration(milliseconds: 500),
+                horizontalOffset: 40.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  child: Row(children: [
+                    Text("02.",
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontSize: 19,
+                            foreground: Paint()..shader = AppColorPalette.textGradient)),
+                    const SizedBox(width: 20),
+                    Flexible(
+                      child: Text("Where I've Worked",
+                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              fontSize: 22,
+                              foreground: Paint()..shader = AppColorPalette.white)),
                     ),
-                  ],
+                    const SizedBox(width: 20),
+                    const Expanded(child: Divider(height: 0.3, color: Colors.white60)),
+                  ]),
                 ),
               ),
-              const SizedBox(height: 30.0),
-              // Container(
-              //     width: Measures.getWidth(context) * 0.5,
-              //     child: Row(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           CustomAnimation(
-              //             index: 6,
-              //             duration: const Duration(milliseconds: 500),
-              //             horizontalOffset: 50.0,
-              //             child: DottedBorder(
-              //                 color: Colors.white54,
-              //                 dashPattern: const [2, 4],
-              //                 radius: const Radius.circular(20.0),
-              //                 borderType: BorderType.RRect,
-              //                 padding: const EdgeInsets.all(20.0),
-              //                 strokeWidth: 3,
-              //                 child: Container(
-              //                   // alignment: Alignment.center,
-              //                   child: Column(
-              //                     children: [
-              //                       Text(
-              //                         "Certificates",
-              //                         style: Theme.of(context)
-              //                             .textTheme
-              //                             .titleSmall!
-              //                             .copyWith(
-              //                                 fontSize: 15,
-              //                                 color: Colors.white),
-              //                       ),
-              //                       const SizedBox(height: 20.0),
-              //                       Container(
-              //                         height:
-              //                             Measures.getHeight(context) * 0.07,
-              //                         padding:
-              //                             const EdgeInsets.only(right: 20.0),
-              //                         // color: Colors.white,
-              //                         child: Row(
-              //                             crossAxisAlignment:
-              //                                 CrossAxisAlignment.center,
-              //                             mainAxisAlignment:
-              //                                 MainAxisAlignment.center,
-              //                             children: [
-              //                               Image.asset(
-              //                                   scale: 5,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.az204),
-              //                               Image.asset(
-              //                                   scale: 5,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.az400),
-              //                             ]),
-              //                       )
-              //                     ],
-              //                   ),
-              //                 )),
-              //           ),
-              //           CustomAnimation(
-              //             index: 7,
-              //             duration: const Duration(milliseconds: 700),
-              //             horizontalOffset: 50.0,
-              //             child: SizedBox(
-              //               // width: Measures.getWidth(context) * 0.085,
-              //               child: DottedBorder(
-              //                   color: Colors.white54,
-              //                   dashPattern: const [2, 4],
-              //                   radius: const Radius.circular(20.0),
-              //                   borderType: BorderType.RRect,
-              //                   padding: const EdgeInsets.all(20.0),
-              //                   strokeWidth: 3,
-              //                   child: Column(
-              //                     crossAxisAlignment: CrossAxisAlignment.center,
-              //                     mainAxisAlignment:
-              //                         MainAxisAlignment.spaceBetween,
-              //                     children: [
-              //                       Container(
-              //                         alignment: Alignment.center,
-              //                         // color: Colors.white,
-              //                         child: Text(
-              //                           "Projects",
-              //                           style: Theme.of(context)
-              //                               .textTheme
-              //                               .titleSmall!
-              //                               .copyWith(
-              //                                   fontSize: 15,
-              //                                   color: Colors.white),
-              //                         ),
-              //                       ),
-              //                       const SizedBox(height: 20.0),
-              //                       SizedBox(
-              //                         height:
-              //                             Measures.getHeight(context) * 0.07,
 
-              //                         // color: Colors.white,
-              //                         child: Row(
-              //                             mainAxisAlignment:
-              //                                 MainAxisAlignment.center,
-              //                             children: [
-              //                               Image.asset(
-              //                                   scale: 4,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.alogoapp),
-              //                               const SizedBox(width: 20.0),
-              //                               Image.asset(
-              //                                   scale: 2,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.logicapp),
-              //                             ]),
-              //                       )
-              //                     ],
-              //                   )),
-              //             ),
-              //           ),
-              //           CustomAnimation(
-              //             index: 8,
-              //             duration: const Duration(milliseconds: 900),
-              //             horizontalOffset: 50.0,
-              //             child: SizedBox(
-              //               // width: Measures.getWidth(context) * 0.085,
-              //               child: DottedBorder(
-              //                   color: Colors.white54,
-              //                   dashPattern: const [2, 4],
-              //                   radius: const Radius.circular(20.0),
-              //                   borderType: BorderType.RRect,
-              //                   padding: const EdgeInsets.all(20.0),
-              //                   strokeWidth: 3,
-              //                   child: Column(
-              //                     crossAxisAlignment: CrossAxisAlignment.center,
-              //                     mainAxisAlignment:
-              //                         MainAxisAlignment.spaceBetween,
-              //                     children: [
-              //                       Container(
-              //                         alignment: Alignment.center,
-              //                         // color: Colors.white,
-              //                         child: Text(
-              //                           "Technology",
-              //                           style: Theme.of(context)
-              //                               .textTheme
-              //                               .titleSmall!
-              //                               .copyWith(
-              //                                   fontSize: 15,
-              //                                   color: Colors.white),
-              //                         ),
-              //                       ),
-              //                       const SizedBox(height: 20.0),
-              //                       SizedBox(
-              //                         height:
-              //                             Measures.getHeight(context) * 0.07,
-
-              //                         // color: Colors.white,
-              //                         child: Row(
-              //                             mainAxisAlignment:
-              //                                 MainAxisAlignment.center,
-              //                             children: [
-              //                               Image.asset(
-              //                                   scale: 6,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.azure),
-              //                               const SizedBox(width: 20.0),
-              //                               Image.asset(
-              //                                   scale: 2,
-              //                                   filterQuality:
-              //                                       FilterQuality.high,
-              //                                   CustomIcons.flutter),
-              //                             ]),
-              //                       )
-              //                     ],
-              //                   )),
-              //             ),
-              //           )
-              //         ]))
+            // Experience cards
+            if (vis != 0.0) ...[
+              CustomAnimation(
+                index: 3, duration: const Duration(milliseconds: 600),
+                horizontalOffset: 40.0,
+                child: _ExperienceCard(
+                  role: "Azure DevOps Engineer",
+                  company: "Tamuinfotech Pvt. Ltd.",
+                  period: "January 2023 – Present",
+                  points: const [
+                    "Designed and maintained multi-stage CI/CD pipelines on Azure DevOps and GitHub Actions for 5+ product teams, reducing release cycle time by over 60%.",
+                    "Provisioned and managed Azure infrastructure (AKS, App Service, Azure SQL, Storage Accounts, VNets) using Bicep and Terraform IaC templates with GitOps-based promotion workflows.",
+                    "Deployed and operated Kubernetes (AKS) clusters hosting microservices workloads — configuring HPA, pod disruption budgets, rolling updates and Helm-based release management.",
+                    "Implemented DevSecOps practices: integrated SAST/DAST scanning in pipelines, managed secrets via Azure Key Vault, enforced RBAC policies across Azure subscriptions.",
+                    "Built full observability stack with Azure Monitor, Log Analytics, Application Insights, Prometheus and Grafana — reducing MTTR by 40% through proactive alerting.",
+                    "Led cloud migration of 3 legacy on-premise applications to Azure, achieving 99.9% uptime SLA post-migration.",
+                  ],
+                  sw: sw,
+                ),
+              ),
             ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ExperienceCard extends StatelessWidget {
+  final String role;
+  final String company;
+  final String period;
+  final List<String> points;
+  final double sw;
+
+  const _ExperienceCard({
+    required this.role,
+    required this.company,
+    required this.period,
+    required this.points,
+    required this.sw,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final double bodyFs = sw < 480 ? 13 : sw < 768 ? 14 : 15;
+    final double maxW = sw < 600 ? double.infinity : sw * 0.65;
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxW),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          color: const Color.fromARGB(255, 135, 24, 245).withOpacity(0.06),
+          border: Border.all(
+            color: const Color.fromARGB(255, 135, 24, 245).withOpacity(0.25),
           ),
-          Container(
-            height: Measures.getHeight(context) * 0.6,
-            width: Measures.getWidth(context) * 0.3,
-            // color: Colors.amber,
-            alignment: Alignment.center,
-            child: Stack(
-              children: [
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: CustomAnimation(
-                      index: 9,
-                      duration: const Duration(milliseconds: 800),
-                      horizontalOffset: 50.0,
-                      child: Container(
-                        height: Measures.getHeight(context) * 0.35,
-                        width: Measures.getWidth(context) * 0.25,
-                        decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(20.0)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Role + company + period
+            Text(role,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: sw < 480 ? 16 : 18,
+                    foreground: Paint()..shader = AppColorPalette.textGradient,
+                    fontWeight: FontWeight.w700)),
+            const SizedBox(height: 4),
+            Text(company,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: bodyFs, color: Colors.white70,
+                    fontWeight: FontWeight.w500)),
+            const SizedBox(height: 2),
+            Text(period,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: bodyFs - 1, color: Colors.white38)),
+            const SizedBox(height: 18),
+            // Bullet points
+            ...points.map((p) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6, right: 10),
+                    child: Container(
+                      width: 5, height: 5,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color.fromARGB(255, 135, 24, 245),
                       ),
-                    )),
-                CustomAnimation(
-                    index: 10,
-                    duration: const Duration(milliseconds: 900),
-                    verticalOffset: 50.0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: Measures.getHeight(context) * 0.4,
-                        width: Measures.getWidth(context) * 0.2,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(CustomIcons.profile),
-                                fit: BoxFit.cover)),
-                      ),
-                    ))
-              ],
-            ),
-          )
-        ]);
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(p,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: bodyFs, color: Colors.white60, height: 1.6)),
+                  ),
+                ],
+              ),
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// HERO – DESKTOP
+// ══════════════════════════════════════════════════════════════════════
+class _HeroDesktop extends StatelessWidget {
+  final void Function(bool) onAbtHover;
+  final void Function(bool) onDownHover;
+  final Future<void> Function() downloadResume;
+  const _HeroDesktop({required this.onAbtHover, required this.onDownHover, required this.downloadResume});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(flex: 6, child: _HeroText(onAbtHover: onAbtHover, onDownHover: onDownHover, downloadResume: downloadResume)),
+        const SizedBox(width: 40),
+        const Expanded(flex: 4, child: _HeroProfileImage()),
+      ],
+    );
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// HERO – MOBILE
+// ══════════════════════════════════════════════════════════════════════
+class _HeroMobile extends StatelessWidget {
+  final void Function(bool) onAbtHover;
+  final void Function(bool) onDownHover;
+  final Future<void> Function() downloadResume;
+  const _HeroMobile({required this.onAbtHover, required this.onDownHover, required this.downloadResume});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _HeroProfileImage(compact: true),
+        const SizedBox(height: 24),
+        _HeroText(onAbtHover: onAbtHover, onDownHover: onDownHover, downloadResume: downloadResume),
+      ],
+    );
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// HERO TEXT
+// ══════════════════════════════════════════════════════════════════════
+class _HeroText extends StatelessWidget {
+  final void Function(bool) onAbtHover;
+  final void Function(bool) onDownHover;
+  final Future<void> Function() downloadResume;
+  const _HeroText({required this.onAbtHover, required this.onDownHover, required this.downloadResume});
+
+  @override
+  Widget build(BuildContext context) {
+    final sw = MediaQuery.of(context).size.width;
+    final double nameFontSize = sw < 480 ? 36 : sw < 768 ? 48 : 62;
+    final double titleFontSize = sw < 480 ? 18 : sw < 768 ? 24 : 34;
+    final double descFontSize = sw < 480 ? 13 : sw < 768 ? 14 : 15;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomAnimation(index: 1, duration: const Duration(milliseconds: 500), horizontalOffset: 40.0,
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
+            Text("Hey I'm", style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontSize: sw < 480 ? 16 : 20, color: Colors.white70, fontWeight: FontWeight.w400)),
+            const SizedBox(width: 10),
+            SizedBox(height: 28, child: Lottie.asset("Assets/Animation/Wave.json")),
+          ]),
+        ),
+        const SizedBox(height: 6),
+        CustomAnimation(index: 2, duration: const Duration(milliseconds: 700), horizontalOffset: 40.0,
+          child: AnimatedTextKit(
+            animatedTexts: [TypewriterAnimatedText('Tarun Krishna', cursor: '',
+              textStyle: TextStyle(foreground: Paint()..shader = AppColorPalette.textGradient,
+                  fontSize: nameFontSize, fontWeight: FontWeight.bold),
+              speed: const Duration(milliseconds: 70))],
+            totalRepeatCount: 1, displayFullTextOnTap: true,
+          ),
+        ),
+        const SizedBox(height: 6),
+        CustomAnimation(index: 3, duration: const Duration(milliseconds: 800), horizontalOffset: 40.0,
+          child: Text("Azure DevOps Engineer",
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontSize: titleFontSize, color: Colors.white, fontWeight: FontWeight.w600)),
+        ),
+        const SizedBox(height: 12),
+        CustomAnimation(index: 4, duration: const Duration(milliseconds: 900), horizontalOffset: 40.0,
+          child: Text("3+ years building enterprise CI/CD pipelines, Kubernetes clusters and cloud infrastructure on Microsoft Azure. AZ-400 & AZ-204 certified.",
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontSize: descFontSize, color: Colors.white54, height: 1.65)),
+        ),
+        const SizedBox(height: 26),
+        CustomAnimation(index: 5, duration: const Duration(milliseconds: 1000), horizontalOffset: 40.0,
+          child: Wrap(spacing: 14, runSpacing: 12, children: [
+            _HeroButton(label: "About me", isHovered: Variables.abtmeisHovered,
+                onHover: onAbtHover, keyRef: Variables.key1,
+                onTap: () => Scrollable.ensureVisible(Variables.key1.currentContext!,
+                    duration: const Duration(milliseconds: 800), curve: Curves.easeInOut)),
+            _HeroButton(label: "Download Resume", isHovered: Variables.resumedownHovered,
+                onHover: onDownHover, onTap: downloadResume),
+          ]),
+        ),
+      ],
+    );
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// HERO BUTTON
+// ══════════════════════════════════════════════════════════════════════
+class _HeroButton extends StatelessWidget {
+  final String label;
+  final bool isHovered;
+  final void Function(bool) onHover;
+  final VoidCallback onTap;
+  final GlobalKey? keyRef;
+  const _HeroButton({required this.label, required this.isHovered, required this.onHover, required this.onTap, this.keyRef});
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => onHover(true),
+      onExit: (_) => onHover(false),
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          key: keyRef,
+          duration: const Duration(milliseconds: 200),
+          transform: Matrix4.translationValues(0, isHovered ? -4 : 0, 0),
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 11),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: isHovered ? Colors.transparent : const Color.fromARGB(255, 135, 24, 245)),
+            gradient: isHovered ? const LinearGradient(
+              colors: [Color.fromARGB(255, 135, 24, 245), Color.fromARGB(255, 154, 11, 173)],
+              begin: Alignment.topLeft, end: Alignment.bottomRight) : null,
+          ),
+          child: Text(label, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 13, color: Colors.white, fontWeight: FontWeight.w500)),
+        ),
+      ),
+    );
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// HERO PROFILE IMAGE  — subtle float animation
+// ══════════════════════════════════════════════════════════════════════
+class _HeroProfileImage extends StatefulWidget {
+  final bool compact;
+  const _HeroProfileImage({this.compact = false});
+  @override
+  State<_HeroProfileImage> createState() => _HeroProfileImageState();
+}
+
+class _HeroProfileImageState extends State<_HeroProfileImage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _float;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(vsync: this, duration: const Duration(seconds: 3))..repeat(reverse: true);
+    _float = Tween<double>(begin: 0, end: -10).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
   }
 
-  Widget _downloadOption(
-      BuildContext context, String text, Future<void> Function() onTap) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => Variables.resumedownHovered = true),
-      onExit: (_) => setState(() => Variables.resumedownHovered = false),
-      child: GestureDetector(
-        onTap: () async {
-          await onTap();
-          setState(() =>
-              Variables.resumedownHovered = false); // Reset hover after click
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.all(10.0),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: text == "Flutter Resume"
-                ? const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10))
-                : const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-            gradient: Variables.resumedownHovered
-                ? const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 135, 24, 245),
-                      Color.fromARGB(255, 154, 11, 173)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomRight,
-                  )
-                : null,
-            color: Variables.resumedownHovered ? null : Colors.transparent,
-          ),
-          child: MouseRegion(
-            cursor: SystemMouseCursors
-                .click, // Changes cursor to hand pointer on hover
+  @override
+  void dispose() { _ctrl.dispose(); super.dispose(); }
 
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    fontSize: 14,
-                    color: Variables.resumedownHovered
-                        ? Colors.white
-                        : Colors.black,
-                  ),
+  @override
+  Widget build(BuildContext context) {
+    final double size = widget.compact ? 150 : 260;
+    return CustomAnimation(
+      index: 9, duration: const Duration(milliseconds: 900), verticalOffset: 30.0,
+      child: Center(
+        child: AnimatedBuilder(
+          animation: _float,
+          builder: (_, child) => Transform.translate(offset: Offset(0, _float.value), child: child),
+          child: Container(
+            width: size, height: size,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [BoxShadow(
+                color: const Color.fromARGB(255, 135, 24, 245).withOpacity(0.28),
+                blurRadius: 28, spreadRadius: 3)],
+              border: Border.all(
+                color: const Color.fromARGB(255, 135, 24, 245).withOpacity(0.55), width: 2),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(CustomIcons.profile, fit: BoxFit.cover),
             ),
           ),
         ),

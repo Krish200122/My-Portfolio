@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:myportfolio/App/Screens/HomeScreen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Krish',
       theme: CustomStyles.themeData,
+      scrollBehavior: const _SmoothScrollBehavior(),
       builder: (context, child) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, child!),
         defaultScale: true,
@@ -33,7 +35,22 @@ class MyApp extends StatelessWidget {
           const ResponsiveBreakpoint.resize(1281, name: "4k"),
         ],
       ),
+      // ✅ No const — HomePage has AnimationControllers
       home: const HomePage(),
     );
   }
+}
+
+// Enables smooth mouse-drag scrolling on web/desktop
+class _SmoothScrollBehavior extends ScrollBehavior {
+  const _SmoothScrollBehavior();
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) =>
+      const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
 }

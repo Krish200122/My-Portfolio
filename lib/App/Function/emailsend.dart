@@ -67,7 +67,7 @@ class emailservice {
 
         // Load PDF from assets
         ByteData data =
-            await rootBundle.load("Assets/Images/FlutterResume.pdf");
+            await rootBundle.load("Assets/Images/DevopsResume.pdf");
         List<int> bytes = data.buffer.asUint8List();
         File file = File(savePath);
         await file.writeAsBytes(bytes);
