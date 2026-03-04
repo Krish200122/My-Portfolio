@@ -7,7 +7,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - krish/UIChanges         # deploy on every push to main
+      - Krish/UIChanges         # deploy on every push to main
   
 jobs:
   deploy:
