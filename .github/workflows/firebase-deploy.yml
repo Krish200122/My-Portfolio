@@ -7,11 +7,8 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main          # deploy on every push to main
-  pull_request:
-    branches:
-      - main          # preview deploy on every PR
-
+      - krish/UIChanges         # deploy on every push to main
+  
 jobs:
   deploy:
     name: Build & Deploy
@@ -22,15 +19,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. (Optional) Node setup — only needed if you add a build step later
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '20'
+    
 
       # 3. Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting (Live)
-        if: github.event_name == 'push'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +32,6 @@ jobs:
 
       # 4. Preview deploy on Pull Requests
       - name: Deploy Preview (PR)
-        if: github.event_name == 'pull_request'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
