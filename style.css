@@ -394,8 +394,9 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   position: absolute;
   font-family: var(--mono); font-size: 0.72rem;
   background: rgba(8,11,18,0.9); border: 1px solid var(--border-hi);
-  color: var(--accent); padding: 6px 14px; border-radius: 100px;
+  color: white; padding: 6px 14px; border-radius: 100px;
   white-space: nowrap; backdrop-filter: blur(8px);
+  border-color: white;
 }
 .chip-a { bottom: 24px; left: -20px; }
 .chip-b { top: 30px; right: -16px; }
@@ -424,7 +425,6 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 
 /* ── Sections ────────────────────────────────── */
 .sec { padding: 110px 28px; }
-/* .sec-alt { background: var(--bg-alt); } */
 .container { max-width: 1220px; margin: 0 auto; }
 
 .sec-head {
