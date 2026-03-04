@@ -148,7 +148,13 @@ document.querySelectorAll('.tp').forEach(tp => {
 });
 
 
-// ── Contact form ──────────────────────────────────────────
+// ── Contact form — EmailJS ────────────────────────────────
+// REPLACE these 3 values with your EmailJS credentials:
+//   https://dashboard.emailjs.com/admin
+const EMAILJS_SERVICE_ID  = 'service_co42jyb';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_09j0nrw';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'LCX5Odd5orbnK5GaQ';   // e.g. 'abcDEFghiJKL'
+
 const form    = document.getElementById('contactForm');
 const sendBtn = document.getElementById('sendBtn');
 const formOk  = document.getElementById('formOk');
@@ -165,30 +171,49 @@ form.addEventListener('submit', async (e) => {
   const msg   = document.getElementById('fMsg').value.trim();
 
   if (!first || !last || !email || !msg) {
+    formErr.textContent = 'Please fill in all fields.';
     formErr.classList.add('show');
     return;
   }
 
-  // Email validation
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     formErr.textContent = 'Please enter a valid email address.';
     formErr.classList.add('show');
     return;
   }
 
-  // Simulate send
+  // Send via EmailJS
   sendBtn.classList.add('loading');
   const label = sendBtn.querySelector('.btn-label');
   label.textContent = 'Sending…';
 
-  await new Promise(r => setTimeout(r, 1400));
+  try {
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        from_name:  first + ' ' + last,
+        from_email: email,
+        message:    msg,
+        to_name:    'Tarun Krishna',
+      },
+      EMAILJS_PUBLIC_KEY
+    );
 
-  sendBtn.classList.remove('loading');
-  label.textContent = 'Send Message';
-  formOk.classList.add('show');
-  form.reset();
+    sendBtn.classList.remove('loading');
+    label.textContent = 'Send Message';
+    formOk.textContent = '✓ Message sent — I\'ll be in touch soon!';
+    formOk.classList.add('show');
+    form.reset();
+    setTimeout(() => formOk.classList.remove('show'), 5000);
 
-  setTimeout(() => formOk.classList.remove('show'), 5000);
+  } catch (err) {
+    sendBtn.classList.remove('loading');
+    label.textContent = 'Send Message';
+    formErr.textContent = 'Failed to send. Please email me directly at tarunkrish2001@gmail.com';
+    formErr.classList.add('show');
+    console.error('EmailJS error:', err);
+  }
 });
 
 
