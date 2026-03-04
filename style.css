@@ -15,8 +15,8 @@
   --accent2:   #9a0bad;
   --glow:      rgba(135,40,245,0.22);
   --text:      #e8edf5;
-  --text-muted:#aab8cc;
-  --text-dim:  #7a8a9a;
+  --text-muted:#c8d4e6;
+  --text-dim:  #9aaabb;
   --mono:      'JetBrains Mono', monospace;
   --syne:      'Inter', sans-serif;
   --body:      'Manrope', sans-serif;
@@ -45,6 +45,88 @@ button { border: none; background: none; font: inherit; cursor: pointer; }
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   opacity: 0.45;
 }
+
+/* ── Animated Global Background ─────────────── */
+.bg-animated {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+
+/* Subtle dot-grid overlay */
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridDrift 25s linear infinite;
+  opacity: 1;
+}
+@keyframes gridDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Floating blurred orbs — bold and clearly visible */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  mix-blend-mode: screen;
+}
+
+.bg-orb-1 {
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(135,40,245,0.35) 0%, rgba(100,0,200,0.3) 40%, transparent 70%);
+  top: -20%; left: -15%;
+  animation: drift1 8s ease-in-out infinite alternate;
+}
+.bg-orb-2 {
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, rgba(180,0,255,0.55) 0%, rgba(120,0,180,0.25) 40%, transparent 70%);
+  top: 30%; right: -10%;
+  animation: drift2 10s ease-in-out infinite alternate;
+}
+.bg-orb-3 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(80,0,220,0.5) 0%, rgba(60,0,160,0.2) 40%, transparent 70%);
+  bottom: 0%; left: 10%;
+  animation: drift3 12s ease-in-out infinite alternate;
+}
+.bg-orb-4 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(160,40,255,0.5) 0%, transparent 65%);
+  top: 50%; left: 40%;
+  animation: drift4 9s ease-in-out infinite alternate;
+}
+.bg-orb-5 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(120,0,200,0.45) 0%, transparent 65%);
+  top: 0%; right: 20%;
+  animation: drift5 11s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(180px, 150px) scale(1.15); }
+}
+@keyframes drift2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-160px, 180px) scale(1.1); }
+}
+@keyframes drift3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(140px, -160px) scale(1.12); }
+}
+@keyframes drift4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-140px, -120px) scale(1.08); }
+}
+@keyframes drift5 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(100px, 160px) scale(1.1); }
+}
+
+/* Make sure all sections sit above background */
+#navbar, section, footer, .drawer { position: relative; z-index: 1; }
 
 /* ── Custom Cursor — clean minimal dot ──────── */
 .cursor { display: none; }
@@ -208,7 +290,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 }
 
 .hero-desc {
-  font-size: 1.05rem; color: #c0cede; line-height: 1.75;
+  font-size: 1.05rem; color: #f0f4ff; line-height: 1.75;
   max-width: 520px; margin-bottom: 32px;
 }
 
@@ -342,7 +424,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 
 /* ── Sections ────────────────────────────────── */
 .sec { padding: 110px 28px; }
-.sec-alt { background: var(--bg-alt); }
+/* .sec-alt { background: var(--bg-alt); } */
 .container { max-width: 1220px; margin: 0 auto; }
 
 .sec-head {
@@ -377,7 +459,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
 }
 .about-copy p {
-  color: #c8d4e4; line-height: 1.85; margin-bottom: 18px;
+  color: #edf1fa; line-height: 1.85; margin-bottom: 18px;
   font-size: 1rem;
 }
 .about-copy strong { color: var(--text); }
@@ -460,7 +542,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 
 .exp-list { display: flex; flex-direction: column; gap: 16px; }
 .exp-list li {
-  color: #bccadb; line-height: 1.75; font-size: 0.97rem;
+  color: #edf1fa; line-height: 1.75; font-size: 0.97rem;
   padding-left: 22px; position: relative;
 }
 .exp-list li::before {
@@ -518,7 +600,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   font-size: 1.4rem; line-height: 1.25; color: var(--text);
 }
 .proj-desc p {
-  color: #bccadb; font-size: 0.95rem; line-height: 1.8;
+  color: #edf1fa; font-size: 0.95rem; line-height: 1.8;
 }
 .proj-desc mark {
   background: rgba(135,40,245,0.12); color: var(--accent);
@@ -621,7 +703,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   color: var(--text); margin-bottom: 10px; line-height: 1.3;
 }
 .cert-body p {
-  color: var(--text); font-size: 0.88rem; line-height: 1.7;
+  color: #edf1fa; font-size: 0.88rem; line-height: 1.7;
   margin-bottom: 14px;
 }
 .cert-pills { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -638,11 +720,11 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   font-family: var(--syne); font-size: 1.5rem; font-weight: 800;
   color: var(--text); margin-bottom: 14px;
 }
-.contact-info > p { color: var(--text-muted); font-size: 0.97rem; margin-bottom: 32px; }
+.contact-info > p { color: #edf1fa; font-size: 0.97rem; margin-bottom: 32px; }
 .contact-rows { display: flex; flex-direction: column; gap: 16px; }
 .crow {
   display: flex; align-items: center; gap: 14px;
-  font-size: 0.95rem; color: var(--text-muted);
+  font-size: 0.95rem; color: #edf1fa;
 }
 .crow a { color: var(--accent); transition: opacity var(--transition); }
 .crow a:hover { opacity: 0.75; }
@@ -663,7 +745,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   font-family: var(--syne); font-size: 1.3rem; font-weight: 700;
   margin-bottom: 6px;
 }
-.form-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 28px; }
+.form-sub { color: #edf1fa; font-size: 0.9rem; margin-bottom: 28px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .field {
@@ -751,7 +833,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 }
 .footer-col-brand .footer-brand span { color: var(--accent); }
 .footer-bio {
-  color: var(--text-muted); font-size: 0.9rem; line-height: 1.75;
+  color: #d8e0f0; font-size: 0.9rem; line-height: 1.75;
   margin-bottom: 20px; max-width: 300px;
 }
 .footer-cert-badges { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -777,11 +859,11 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
   display: flex; flex-direction: column; gap: 11px;
 }
 .footer-links li {
-  font-size: 0.88rem; color: var(--text-muted);
+  font-size: 0.88rem; color: #d0d8ea;
   transition: color var(--transition);
 }
 .footer-links li a {
-  color: var(--text-muted);
+  color: #d0d8ea;
   transition: color var(--transition);
 }
 .footer-links li a:hover,
@@ -793,19 +875,19 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 }
 .footer-contact-list li {
   display: flex; align-items: flex-start; gap: 10px;
-  font-size: 0.88rem; color: var(--text-muted);
+  font-size: 0.88rem; color: #d0d8ea;
 }
 .footer-contact-list li svg {
   width: 15px; height: 15px; flex-shrink: 0;
   color: var(--accent); margin-top: 2px;
 }
 .footer-contact-list li a {
-  color: var(--text-muted); transition: color var(--transition);
+  color: #d0d8ea; transition: color var(--transition);
 }
 .footer-contact-list li a:hover { color: var(--accent); }
 .footer-address address {
   font-style: normal; line-height: 1.7;
-  color: var(--text-muted); font-size: 0.88rem;
+  color: #d0d8ea; font-size: 0.88rem;
 }
 
 /* Divider */
