@@ -339,7 +339,7 @@ body:has(button:hover) .cursor-dot { width: 14px; height: 14px; opacity: 0.7; }
 }
 .hcard-num span { font-size: 1rem; color: var(--text-muted); }
 .hcard-imgs { display: flex; gap: 6px; align-items: center; }
-.hcard-imgs img { width: 36px; height: 36px; object-fit: contain; }
+.hcard-imgs img { width: 50px; height: 50px; object-fit: cover; }
 
 /* Profile photo */
 .hero-photo {
