@@ -1,0 +1,49 @@
+# ═══════════════════════════════════════════════════════════════
+#  GitHub Actions — Auto Deploy to Firebase Hosting
+#  Triggers on every push to main branch
+# ═══════════════════════════════════════════════════════════════
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main          # deploy on every push to main
+  pull_request:
+    branches:
+      - main          # preview deploy on every PR
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. (Optional) Node setup — only needed if you add a build step later
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
+
+      # 3. Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting (Live)
+        if: github.event_name == 'push'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          channelId: live          # deploy to live channel
+
+      # 4. Preview deploy on Pull Requests
+      - name: Deploy Preview (PR)
+        if: github.event_name == 'pull_request'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          # no channelId = auto preview channel per PR
