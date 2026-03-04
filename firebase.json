@@ -1,39 +1,22 @@
 {
   "hosting": {
-    "site": "krishportfolio",
     "public": ".",
     "ignore": [
       "firebase.json",
-      ".github/**",
       ".firebaserc",
-      "README.md",
+      ".github/**",
+      "DEPLOY_SETUP.md",
+      ".git/**",
       "node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ],
     "headers": [
       {
         "source": "**/*.@(js|css)",
-        "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-        ]
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
       },
       {
-        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico)",
-        "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=86400" }
-        ]
-      },
-      {
-        "source": "**",
-        "headers": [
-          { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-          { "key": "X-Content-Type-Options", "value": "nosniff" }
-        ]
+        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|pdf)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
       }
     ]
   }

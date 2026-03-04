@@ -1,32 +1,21 @@
-# ═══════════════════════════════════════════════════════════════
-#  GitHub Actions — Auto Deploy to Firebase Hosting
-#  Triggers on every push to main branch
-# ═══════════════════════════════════════════════════════════════
 name: Deploy to Firebase Hosting
 
 on:
   push:
     branches:
-      - Krish/UIChanges         # deploy on every push to main
-  
+      - "Krish/UIChanges"
+
 jobs:
   deploy:
-    name: Build & Deploy
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-    
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
-      # 3. Deploy to Firebase Hosting
-      - name: Deploy to Firebase Hosting (Live)
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-          channelId: live          # deploy to live channel
-          target: hosting         # deploy hosting only
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting --project travelapp-f8502 --token "${{ secrets.FIREBASE_TOKEN }}" --non-interactive
