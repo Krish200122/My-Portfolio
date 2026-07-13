@@ -2,542 +2,409 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Tarun Krishna | Azure DevOps Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tarun Krishna — Azure DevOps Engineer</title>
+  <meta name="description" content="Azure DevOps Engineer · 3.5+ years · AZ-400 & AZ-204 · Secure multi-tenant CI/CD, Bicep/Terraform IaC, AKS, hub-and-spoke networking. Also AWS DevOps & Azure Integration Specialist."/>
   <link rel="stylesheet" href="style.css"/>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-  <rect width='100' height='100' rx='18' fill='%230078d4'/>
-  <path d='M22 50 C22 32, 50 32, 50 50 
-  C50 68, 78 68, 78 50 
-  C78 32, 50 32, 50 50 
-  C50 68, 22 68, 22 50'
-  stroke='white' stroke-width='7' fill='none'/>
-  </svg>">
 </head>
 <body>
 
-  <!-- Global animated background -->
-  <div class="bg-animated">
-    <div class="bg-orb bg-orb-1"></div>
-    <div class="bg-orb bg-orb-2"></div>
-    <div class="bg-orb bg-orb-3"></div>
-    <div class="bg-orb bg-orb-4"></div>
-    <div class="bg-orb bg-orb-5"></div>
-    <div class="bg-grid"></div>
+<div class="bg-grid"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Cinematic splash: Earth video -->
+<div id="splash">
+  <video id="splashVideo" class="splash-video" src="Assets/video/earth.mp4" preload="auto" muted playsinline></video>
+  <div class="splash-whiteout" id="splashWhiteout"></div>
+  <div class="splash-hud">
+    <span class="splash-count" id="splashCount">0%</span>
+    <span class="splash-caption" id="splashCaption">Approaching Earth · Azure DevOps</span>
   </div>
+</div>
 
-  <!-- Grain texture overlay -->
-  <div class="grain"></div>
-
-  <!-- Custom cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
-
-  <!-- ════════════════════════ NAVBAR ════════════════════════ -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <div class="nav-brand">
-        <span class="brand-typed" id="brandTyped"></span><span class="brand-suffix">.io</span><span class="brand-caret" id="brandCaret">|</span>
-      </div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#hero"     class="nl active">Home</a></li>
-        <li><a href="#about"    class="nl">About</a></li>
-        <li><a href="#work"     class="nl">Experience</a></li>
-        <li><a href="#projects" class="nl">Projects</a></li>
-        <li><a href="#certs"    class="nl">Certs</a></li>
-      </ul>
-      <a href="#contact" class="nav-cta">Contact</a>
-      <button class="burger" id="burger"><span></span><span></span><span></span></button>
-    </div>
-    <div class="nav-progress" id="navProgress"></div>
+<header>
+  <div class="logo">TARUN<span class="dot">.</span>KRISHNA</div>
+  <nav>
+    <ul>
+      <li><a href="#about" data-hover>About</a></li>
+      <li><a href="#roles" data-hover>Roles</a></li>
+      <li><a href="#work" data-hover>Projects</a></li>
+      <li><a href="#experience" data-hover>Experience</a></li>
+      <li><a href="#contact" data-hover>Contact</a></li>
+    </ul>
   </nav>
+  <a href="#contact" class="talk" data-hover>Let's talk</a>
+</header>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer">
-    <a href="#hero"     class="dr-link">Home</a>
-    <a href="#about"    class="dr-link">About</a>
-    <a href="#work"     class="dr-link">Experience</a>
-    <a href="#projects" class="dr-link">Projects</a>
-    <a href="#certs"    class="dr-link">Certificates</a>
-    <a href="#contact"  class="dr-link">Contact</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <div class="hero-eyebrow" id="heroEyebrow">
+        <span class="ping"></span>AZ-400 &amp; AZ-204 CERTIFIED · 3.5+ YEARS · BANGALORE
+      </div>
+      <p class="hero-name" id="heroName"><span class="n1">Tarun</span> <span class="n2">Krishna</span></p>
+      <h1 class="headline" id="headline">
+        <span><em>Build.</em></span>
+        <span><em class="accent">Automate.</em></span>
+        <span><em>Secure.</em></span>
+      </h1>
+      <p class="hero-sub" id="heroSub">Azure DevOps Engineer at Tamuinfotech — building secure, multi-tenant CI/CD pipelines, Bicep &amp; Terraform IaC, AKS orchestration, and hub-and-spoke private networking on Azure.</p>
+      <div class="terminal" id="terminal">
+        <div class="term-bar"><span></span><span></span><span></span></div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+    </div>
+    <div class="hero-photo-frame" id="heroPhoto">
+      <div class="photo-accent"></div>
+      <img src="Assets/Images/Profile.jpeg" alt="Tarun Krishna — Azure DevOps Engineer"/>
+      <span class="photo-label">Azure DevOps Engineer</span>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="scroll-cue"><span>SCROLL</span><span class="arrow">↓</span></div>
+    <a href="#contact" class="get-touch" id="getTouch" data-hover>Get in touch →</a>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>Azure DevOps</span><span>Bicep</span><span>Terraform</span><span>AKS</span><span>KEDA</span><span>APIM</span>
+    <span>Logic Apps</span><span>Service Bus</span><span>Key Vault</span><span>Private Endpoints</span><span>Container Apps</span>
+    <span>Azure DevOps</span><span>Bicep</span><span>Terraform</span><span>AKS</span><span>KEDA</span><span>APIM</span>
+    <span>Logic Apps</span><span>Service Bus</span><span>Key Vault</span><span>Private Endpoints</span><span>Container Apps</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="statement" id="about">
+  <div class="tag reveal">01 — Profile</div>
+  <h2 class="reveal-line"><span>I build the secure, automated backbone that lets teams ship without fear.</span></h2>
+  <div class="about-grid reveal">
+    <div class="about-main">
+      <p class="about-lead"><strong>Azure DevOps Engineer</strong> with <strong>3.5+ years</strong> at <strong>Tamuinfotech</strong>, specializing in secure multi-tenant CI/CD, Infrastructure-as-Code, and hub-and-spoke private networking on Azure.</p>
+      <ul class="about-points">
+        <li>Design multi-stage Azure Pipelines with release gates, SAST, and Key Vault-backed secrets</li>
+        <li>Author reusable Bicep &amp; Terraform module libraries adopted company-wide</li>
+        <li>Run production AKS with Docker, Helm, KEDA autoscaling at 99.9% uptime</li>
+        <li>Architect VNet-isolated, private-endpoint infrastructure with zero public exposure</li>
+      </ul>
+      <p class="about-tail"><strong>Certified:</strong> AZ-400 DevOps Engineer Expert · AZ-204 Developer Associate</p>
+    </div>
+    <ul class="about-highlights">
+      <li><span>67%</span> faster deployments (45m → 15m)</li>
+      <li><span>78→97%</span> release success rate</li>
+      <li><span>70%</span> less provisioning workload</li>
+      <li><span>80%</span> faster infra setup via IaC</li>
+      <li><span>100%</span> pipelines SOC 2 compliant</li>
+      <li><span>99.9%</span> uptime for 12 months</li>
+    </ul>
+  </div>
+</section>
+
+<section class="stats" id="stats">
+  <div class="stat reveal"><div class="num" data-count="67" data-suffix="%">0</div><div class="label">faster deployments</div></div>
+  <div class="stat reveal"><div class="num" data-count="97" data-suffix="%">0</div><div class="label">release success rate</div></div>
+  <div class="stat reveal"><div class="num" data-count="70" data-suffix="%">0</div><div class="label">less provisioning work</div></div>
+  <div class="stat reveal"><div class="num" data-count="99.9" data-suffix="%">0</div><div class="label">uptime maintained</div></div>
+</section>
+
+<!-- ROLES -->
+<section class="roles" id="roles">
+  <div class="roles-head">
+    <div class="eyebrow reveal">02 — What I Do</div>
+    <h3 class="reveal">Three specializations, one engineer.</h3>
+    <p class="reveal">Primary focus is Azure DevOps. I also deliver AWS DevOps and Azure Integration work — each with a dedicated, role-specific resume.</p>
   </div>
 
-  <!-- ════════════════════════ HERO ════════════════════════ -->
-  <section id="hero">
-    <div class="hero-mesh"></div>
-    <div class="hero-orb orb-a"></div>
-    <div class="hero-orb orb-b"></div>
-
-    <div class="hero-inner">
-      <!-- Left — text -->
-      <div class="hero-text">
-        <div class="greeting fade-up" style="--i:0">
-          <span>Hey, I'm</span>
-          <span class="wave">👋</span>
-        </div>
-
-        <h1 class="hero-name fade-up" style="--i:1">
-          <span class="name-line" id="heroTyped"></span><span class="name-cursor" id="nameCursor">|</span>
-        </h1>
-
-        <div class="hero-role-wrap fade-up" style="--i:2">
-          <span class="role-tag">Azure DevOps Engineer</span>
-        </div>
-
-        <p class="hero-desc fade-up" style="--i:3">
-          3+ years building enterprise CI/CD pipelines, Kubernetes&nbsp;(AKS) clusters and cloud infrastructure on Microsoft&nbsp;Azure. AZ-400 &amp; AZ-204 certified.
-        </p>
-
-        <div class="hero-btns fade-up" style="--i:4">
-          <a href="#about" class="btn btn-ghost">About me</a>
-          <a href="Assets/TarunKrishna_Resume.pdf" download class="btn btn-solid">Download Resume</a>
-        </div>
-
-        <!-- Mini stat cards -->
-        <div class="hero-cards fade-up" style="--i:5">
-          <div class="hcard">
-            <div class="hcard-label">Certifications</div>
-            <div class="hcard-imgs">
-              <img src="Assets/Images/az204.png" alt="AZ-204"/>
-              <img src="Assets/Images/az400.png" alt="AZ-400"/>
-            </div>
-          </div>
-          <div class="hcard">
-            <div class="hcard-num">5<span>+</span></div>
-            <div class="hcard-label">Teams Served</div>
-          </div>
-          <div class="hcard">
-            <div class="hcard-num">3<span>+</span></div>
-            <div class="hcard-label">Years</div>
-          </div>
-          <div class="hcard">
-            <div class="hcard-num">60<span>%↓</span></div>
-            <div class="hcard-label">Release Cycles</div>
-          </div>
-        </div>
+  <div class="roles-grid">
+    <!-- Primary: Azure DevOps -->
+    <article class="role-card featured reveal">
+      <div class="role-top">
+        <div class="role-logo"><img src="Assets/Icons/Azure.png" alt="Microsoft Azure"/></div>
+        <span class="role-badge">Primary</span>
       </div>
+      <h4 class="role-title">Azure DevOps Engineer</h4>
+      <p class="role-focus">Secure, multi-tenant CI/CD &amp; Infrastructure-as-Code on Azure.</p>
+      <ul class="role-points">
+        <li>Multi-stage Azure Pipelines with release gates &amp; SAST</li>
+        <li>Bicep / Terraform IaC module library — 80% faster setup</li>
+        <li>AKS, Docker, Helm &amp; KEDA container orchestration</li>
+        <li>Hub-and-spoke VNet, Private Endpoints, Private DNS</li>
+      </ul>
+      <div class="role-tags"><span>Azure DevOps</span><span>Bicep</span><span>AKS</span><span>APIM</span><span>Key Vault</span></div>
+      <a class="role-download" href="Assets/TarunKrishna_Resume.pdf" download data-hover>Download Azure DevOps Resume →</a>
+    </article>
 
-      <!-- Right — profile photo -->
-      <div class="hero-photo">
-        <div class="photo-ring ring-1"></div>
-        <div class="photo-ring ring-2"></div>
-        <div class="photo-glow"></div>
-        <div class="photo-frame">
-          <img src="Assets/Images/Profile.jpeg" alt="Tarun Krishna" id="profileImg"/>
-        </div>
-        <div class="photo-chip chip-a">AZ-400 Expert</div>
-        <div class="photo-chip chip-b">DevOps · Azure</div>
+    <!-- AWS DevOps -->
+    <article class="role-card reveal">
+      <div class="role-top">
+        <div class="role-logo"><img src="Assets/Icons/AWS.png" alt="Amazon Web Services"/></div>
+      </div>
+      <h4 class="role-title">AWS DevOps Engineer</h4>
+      <p class="role-focus">Terraform-driven CI/CD &amp; VPC architecture on AWS.</p>
+      <ul class="role-points">
+        <li>CodePipeline / Jenkins multi-stage delivery</li>
+        <li>Terraform modules, remote state &amp; DynamoDB locking</li>
+        <li>ECS Fargate &amp; EKS containerized deployments</li>
+        <li>Hub-and-spoke VPC, Transit Gateway, PrivateLink</li>
+      </ul>
+      <div class="role-tags"><span>CodePipeline</span><span>Terraform</span><span>ECS Fargate</span><span>Transit Gateway</span><span>IAM</span></div>
+      <a class="role-download" href="Assets/Tarun_Krishna_AWS_DevOps_Resume.pdf" download data-hover>Download AWS Resume →</a>
+    </article>
+
+    <!-- Azure Integration Specialist -->
+    <article class="role-card reveal">
+      <div class="role-top">
+        <div class="role-logo"><img src="Assets/Icons/Azure.png" alt="Microsoft Azure"/></div>
+      </div>
+      <h4 class="role-title">Azure Integration Specialist</h4>
+      <p class="role-focus">Event-driven ERP &amp; EDI integration on Azure.</p>
+      <ul class="role-points">
+        <li>Logic Apps Standard + Service Bus messaging patterns</li>
+        <li>XSLT (XML) &amp; Liquid (JSON) data transformation</li>
+        <li>API Management gateways &amp; content-based routing</li>
+        <li>Cosmos DB / Azure SQL enrichment &amp; persistence</li>
+      </ul>
+      <div class="role-tags"><span>Logic Apps</span><span>Service Bus</span><span>APIM</span><span>XSLT</span><span>Cosmos DB</span></div>
+      <a class="role-download" href="Assets/Tarun_Krishna_Azure_Integration_Specialist_Resume.pdf" download data-hover>Download Integration Resume →</a>
+    </article>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="work" id="work">
+  <div class="work-head">
+    <div>
+      <div class="eyebrow reveal">03 — Key Projects</div>
+      <p class="reveal">Production systems from my resumes — the problem, what I built, and the measurable outcome.</p>
+    </div>
+    <h3 class="reveal">Projects</h3>
+  </div>
+
+  <!-- Project 1: Azure Integration Services Platform -->
+  <article class="case reveal" data-case>
+    <div class="case-body">
+      <div class="case-num">01 / Azure · Multi-Customer Integration Services Platform</div>
+      <h3 class="case-title">A private hub-and-spoke platform with zero public exposure.</h3>
+      <p class="case-role"><strong>Role:</strong> Architect — designed the shared hub, per-customer spokes, and event-driven agent.</p>
+      <ul class="case-bullets">
+        <li>Migrated Logic Apps, Function Apps, Key Vault &amp; Service Bus to fully private, VNet-isolated infrastructure</li>
+        <li>Shared hub (private ACR, APIM, self-hosted agent) serving unlimited customers with no duplication</li>
+        <li>KEDA-driven Container Apps agent that scales to zero when idle, deploying inside private VNets</li>
+        <li>Onboarding reduced to a single parameter file — automates VNet peering, private endpoints, DNS &amp; RBAC</li>
+      </ul>
+      <div class="case-tags"><span>Bicep</span><span>Azure DevOps</span><span>Container Apps</span><span>KEDA</span><span>APIM</span><span>Private Endpoints</span></div>
+      <div class="case-metrics">
+        <div class="m"><div class="n">0</div><div class="l">public exposure</div></div>
+        <div class="m"><div class="n">1 file</div><div class="l">to onboard</div></div>
+        <div class="m"><div class="n">Scale-to-0</div><div class="l">idle cost</div></div>
       </div>
     </div>
-
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+    <div class="case-visual" data-case-visual>
+      <div class="case-placeholder"><span>Project image coming soon</span></div>
     </div>
-  </section>
+  </article>
 
-  <!-- ════════════════════════ ABOUT ════════════════════════ -->
-  <section id="about" class="sec">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-num">01.</span>
-        <h2 class="sec-title">About Me</h2>
-        <div class="sec-rule"></div>
-      </div>
-
-      <div class="about-layout">
-        <div class="about-copy reveal">
-          <p>I'm <strong>Tarun Krishna</strong>, a certified Azure DevOps Engineer <mark>AZ-400</mark> with 3+ years of hands-on experience building enterprise-grade CI/CD automation, Kubernetes infrastructure and cloud operations on Microsoft Azure.</p>
-          <p>My primary expertise is <mark>Azure DevOps</mark> — designing multi-stage YAML pipelines, release gates, artifact management and environment-based approvals that connect code commits to production safely and repeatably. I work daily with Azure Repos, Azure Pipelines, Azure Artifacts and Azure Test Plans across multi-team SaaS product environments.</p>
-          <p>Beyond pipelines, I provision and manage the full Azure infrastructure stack using <mark>Terraform, Bicep and ARM Templates</mark> — from AKS clusters and App Services to VNets, Key Vault and Azure SQL. I've reduced deployment lead times by <mark>60%+</mark>, led three cloud migration projects and built observability stacks cutting MTTR by 40%.</p>
-          <p class="tech-intro">Core DevOps Technologies I Work With</p>
-        </div>
-
-        <div class="about-tech reveal">
-          <div class="tech-grid">
-            <span class="tp">Azure DevOps</span>
-            <span class="tp">GitHub Actions</span>
-            <span class="tp">Docker</span>
-            <span class="tp">Kubernetes (AKS)</span>
-            <span class="tp">Terraform</span>
-            <span class="tp">Bicep / ARM</span>
-            <span class="tp">Prometheus</span>
-            <span class="tp">Grafana</span>
-            <span class="tp">Azure Key Vault</span>
-            <span class="tp">Bash / PowerShell</span>
-            <span class="tp">Helm</span>
-            <span class="tp">Azure Monitor</span>
-            <span class="tp">Git / GitHub</span>
-            <span class="tp">YAML Pipelines</span>
-            <span class="tp">Azure App Service</span>
-            <span class="tp">DevSecOps</span>
-          </div>
-        </div>
+  <!-- Project 2: Automated Infra Provisioning & Secure CI/CD -->
+  <article class="case reveal case-reverse" data-case>
+    <div class="case-body">
+      <div class="case-num">02 / Azure · Automated Infrastructure &amp; Secure CI/CD</div>
+      <h3 class="case-title">From portal clicks to version-controlled Infrastructure-as-Code.</h3>
+      <p class="case-role"><strong>Role:</strong> DevOps engineer — replaced manual provisioning with automated IaC pipelines.</p>
+      <ul class="case-bullets">
+        <li>Eliminated configuration drift &amp; manual setup errors with Bicep/Terraform pipelines</li>
+        <li>Secure CI/CD with RBAC, Key Vault secrets management &amp; automated SAST scanning</li>
+        <li>Cut manual provisioning and deployment workload by 70%</li>
+        <li>Achieved SOC 2 compliance across 100% of pipelines and mentored junior engineers</li>
+      </ul>
+      <div class="case-tags"><span>Bicep</span><span>Terraform</span><span>Azure DevOps</span><span>Key Vault</span><span>RBAC</span><span>SAST</span></div>
+      <div class="case-metrics">
+        <div class="m"><div class="n">-70%</div><div class="l">manual work</div></div>
+        <div class="m"><div class="n">100%</div><div class="l">SOC 2 pipelines</div></div>
+        <div class="m"><div class="n">0</div><div class="l">config drift</div></div>
       </div>
     </div>
-  </section>
+    <div class="case-visual" data-case-visual>
+      <div class="case-placeholder"><span>Project image coming soon</span></div>
+    </div>
+  </article>
 
-  <!-- ════════════════════════ EXPERIENCE ════════════════════════ -->
-  <section id="work" class="sec sec-alt">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-num">02.</span>
-        <h2 class="sec-title">Where I've Worked</h2>
-        <div class="sec-rule"></div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-top">
-          <div class="exp-left">
-            <h3 class="exp-role">Azure DevOps Engineer</h3>
-            <div class="exp-co">Tamuinfotech Pvt. Ltd.</div>
-            <div class="exp-period">
-              <span class="period-dot"></span>January 2023 – Present
-            </div>
-          </div>
-        </div>
-        <ul class="exp-list">
-          <li>Designed and maintained multi-stage CI/CD pipelines on Azure DevOps and GitHub Actions for <mark>5+ product teams</mark>, reducing release cycle time by over <mark>60%</mark>.</li>
-          <li>Provisioned and managed Azure infrastructure (AKS, App Service, Azure SQL, Storage, VNets) using <mark>Bicep and Terraform</mark> IaC with GitOps-based promotion workflows.</li>
-          <li>Deployed and operated <mark>Kubernetes (AKS)</mark> clusters hosting microservices — configuring HPA, pod disruption budgets, rolling updates and Helm-based release management.</li>
-          <li>Implemented DevSecOps: integrated SAST/DAST scanning, managed secrets via <mark>Azure Key Vault</mark>, enforced RBAC policies across Azure subscriptions.</li>
-          <li>Built full observability stack with Azure Monitor, Log Analytics, App Insights, Prometheus and <mark>Grafana</mark> — reducing MTTR by 40% through proactive alerting.</li>
-          <li>Led cloud migration of <mark>3 legacy applications</mark> to Azure, achieving 99.9% uptime SLA post-migration.</li>
-        </ul>
+  <!-- Project 3: AWS Medical Application Platform -->
+  <article class="case reveal" data-case>
+    <div class="case-body">
+      <div class="case-num">03 / AWS · Multi-Environment Medical Application Platform</div>
+      <h3 class="case-title">Hub-and-spoke VPC architecture for a regulated medical app.</h3>
+      <p class="case-role"><strong>Role:</strong> AWS architect — hub VPC, per-environment spokes, private connectivity.</p>
+      <ul class="case-bullets">
+        <li>Central hub VPC connected to per-environment spokes via Transit Gateway — no public exposure</li>
+        <li>Private app &amp; database endpoints, cross-environment traffic via PrivateLink</li>
+        <li>Route 53 Private Hosted Zones with a single API Gateway VPC Link entry point</li>
+        <li>ECS Fargate services with secrets &amp; access via Secrets Manager and IAM</li>
+      </ul>
+      <div class="case-tags"><span>Transit Gateway</span><span>VPC Peering</span><span>API Gateway</span><span>ECS Fargate</span><span>PrivateLink</span><span>Terraform</span></div>
+      <div class="case-metrics">
+        <div class="m"><div class="n">Hub-Spoke</div><div class="l">topology</div></div>
+        <div class="m"><div class="n">1 run</div><div class="l">new environment</div></div>
+        <div class="m"><div class="n">Private</div><div class="l">all traffic</div></div>
       </div>
     </div>
-  </section>
+    <div class="case-visual" data-case-visual>
+      <div class="case-placeholder"><span>Project image coming soon</span></div>
+    </div>
+  </article>
 
-  <!-- ════════════════════════ PROJECTS ════════════════════════ -->
-  <section id="projects" class="sec">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-num">03.</span>
-        <h2 class="sec-title">Projects I've Delivered</h2>
-        <div class="sec-rule"></div>
-      </div>
-
-      <!-- Project 1 -->
-      <div class="proj-card reveal">
-        <div class="proj-img proj-img-svg">
-          <div class="proj-img-shine"></div>
-          <div class="cicd-visual">
-            <div class="cicd-header">
-              <span class="cicd-dot red"></span><span class="cicd-dot yellow"></span><span class="cicd-dot green"></span>
-              <span class="cicd-filename">azure-pipelines.yml</span>
-              <span class="cicd-live"><span class="live-dot"></span>LIVE</span>
-            </div>
-            <div class="cicd-stages">
-              <div class="cicd-stage done">
-                <div class="stage-icon">✓</div>
-                <div class="stage-info"><span class="stage-name">BUILD</span><span class="stage-sub">Docker image pushed</span></div>
-              </div>
-              <div class="cicd-arrow">→</div>
-              <div class="cicd-stage done">
-                <div class="stage-icon">✓</div>
-                <div class="stage-info"><span class="stage-name">SAST</span><span class="stage-sub">0 critical findings</span></div>
-              </div>
-              <div class="cicd-arrow">→</div>
-              <div class="cicd-stage done">
-                <div class="stage-icon">✓</div>
-                <div class="stage-info"><span class="stage-name">TEST</span><span class="stage-sub">142 passed · 0 failed</span></div>
-              </div>
-              <div class="cicd-arrow">→</div>
-              <div class="cicd-stage warn">
-                <div class="stage-icon">✓</div>
-                <div class="stage-info"><span class="stage-name">STAGING</span><span class="stage-sub">Deployed to QA</span></div>
-              </div>
-              <div class="cicd-arrow">→</div>
-              <div class="cicd-stage pending">
-                <div class="stage-icon">⏳</div>
-                <div class="stage-info"><span class="stage-name">PROD</span><span class="stage-sub">Awaiting approval</span></div>
-              </div>
-            </div>
-            <div class="cicd-envflow">
-              <span class="env-chip active">DEV</span>
-              <span class="env-arrow">→</span>
-              <span class="env-chip active">QA</span>
-              <span class="env-arrow">→</span>
-              <span class="env-chip active">STAGING</span>
-              <span class="env-arrow">→</span>
-              <span class="env-chip pending">PROD</span>
-            </div>
-          </div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-label">Featured Project</div>
-          <h3 class="proj-title">Enterprise CI/CD &amp; Azure DevOps Automation</h3>
-          <div class="proj-desc">
-            <p>Architected multi-stage YAML pipelines (Code→Build→Test→Scan→Deploy) for a multi-tenant SaaS platform serving <mark>50+ enterprise clients</mark>. Built release gates with automated approval workflows, integrated Azure Key Vault for secrets injection and SAST/DAST scanning gates. Reduced environment spin-up time by <mark>70%</mark> using Terraform and Bicep IaC with GitOps promotion workflows.</p>
-          </div>
-          <div class="proj-tags">
-            <span>Azure DevOps</span><span>Terraform</span><span>Bicep</span><span>Docker</span><span>AKS</span><span>Key Vault</span><span>GitHub Actions</span>
-          </div>
-          <a href="https://github.com/Krish200122" target="_blank" class="proj-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="proj-card proj-card-flip reveal">
-        <div class="proj-img proj-img-svg">
-          <div class="proj-img-shine"></div>
-          <div class="k8s-visual">
-            <div class="k8s-header">
-              <div class="k8s-title-row">
-                <span class="k8s-icon">⎈</span>
-                <div>
-                  <div class="k8s-cluster-name">aks-prod-cluster</div>
-                  <div class="k8s-cluster-sub">12 nodes · Azure AKS · East US</div>
-                </div>
-                <span class="k8s-spinning">⚙</span>
-              </div>
-            </div>
-            <div class="k8s-pods-label">PODS &nbsp;<span class="pods-ok">12/12 running</span></div>
-            <div class="k8s-pods">
-              <span class="pod green"></span><span class="pod green"></span><span class="pod green"></span><span class="pod green"></span>
-              <span class="pod green"></span><span class="pod green"></span><span class="pod green"></span><span class="pod green"></span>
-              <span class="pod green"></span><span class="pod green"></span><span class="pod green"></span><span class="pod yellow"></span>
-            </div>
-            <div class="k8s-metrics">
-              <div class="k8s-metric"><span class="metric-val blue">34%</span><span class="metric-label">CPU</span></div>
-              <div class="k8s-metric"><span class="metric-val teal">62%</span><span class="metric-label">MEM</span></div>
-              <div class="k8s-metric"><span class="metric-val yellow">-40%</span><span class="metric-label">MTTR</span></div>
-            </div>
-            <div class="k8s-services">
-              <span class="svc-chip">nginx-ingress</span>
-              <span class="svc-chip">prometheus</span>
-              <span class="svc-chip">grafana</span>
-              <span class="svc-chip">cert-manager</span>
-              <span class="svc-chip">pagerduty</span>
-            </div>
-          </div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-label">Featured Project</div>
-          <h3 class="proj-title">Kubernetes (AKS) Microservices Platform</h3>
-          <div class="proj-desc">
-            <p>Deployed production-grade AKS cluster hosting <mark>5 microservices</mark> with HPA/VPA, pod disruption budgets and zero-downtime rolling deployments. Managed Helm chart releases with versioned rollback capability. Built Prometheus + Grafana observability stack cutting MTTR by <mark>40%</mark>. Configured Azure CNI networking, ingress controllers and TLS certificate automation.</p>
-          </div>
-          <div class="proj-tags">
-            <span>Kubernetes</span><span>Helm</span><span>Prometheus</span><span>Grafana</span><span>Azure CNI</span><span>Azure Monitor</span>
-          </div>
-          <a href="https://github.com/Krish200122" target="_blank" class="proj-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            View on GitHub
-          </a>
-        </div>
+  <!-- Project 4: Azure Integration — EDI & ERP -->
+  <article class="case reveal case-reverse" data-case>
+    <div class="case-body">
+      <div class="case-num">04 / Azure Integration · Enterprise EDI &amp; ERP</div>
+      <h3 class="case-title">Automated EDI invoice flow between trading partners and ERP.</h3>
+      <p class="case-role"><strong>Role:</strong> Integration developer — end-to-end Logic Apps &amp; messaging design.</p>
+      <ul class="case-bullets">
+        <li>Logic Apps Standard workflows automating EDI invoice processing end to end</li>
+        <li>XSLT XML-to-XML mapping from UBL EDI messages into ERP-compatible formats</li>
+        <li>Service Bus topic-subscription routing with content-based filtering</li>
+        <li>Cosmos DB enrichment, Blob triggers &amp; Azure SQL persistence — Bicep across Dev/Acc/Prod</li>
+      </ul>
+      <div class="case-tags"><span>Logic Apps Standard</span><span>Service Bus</span><span>XSLT</span><span>Cosmos DB</span><span>Azure SQL</span><span>Bicep</span></div>
+      <div class="case-metrics">
+        <div class="m"><div class="n">EDI→ERP</div><div class="l">automated</div></div>
+        <div class="m"><div class="n">Event-driven</div><div class="l">architecture</div></div>
+        <div class="m"><div class="n">3 envs</div><div class="l">repeatable IaC</div></div>
       </div>
     </div>
-  </section>
+    <div class="case-visual" data-case-visual>
+      <div class="case-placeholder"><span>Project image coming soon</span></div>
+    </div>
+  </article>
+</section>
 
-  <!-- ════════════════════════ CERTIFICATIONS ════════════════════════ -->
-  <section id="certs" class="sec sec-alt">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-num">04.</span>
-        <h2 class="sec-title">Certifications</h2>
-        <div class="sec-rule"></div>
-      </div>
-      <div class="certs-grid">
-        <a class="cert-card cert-card-link reveal" style="--i:0" href="https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/AEA48F7A80C874EB?sharingId=15C466BCFBAB71DD" target="_blank" rel="noopener">
-          <div class="cert-badge-wrap">
-            <img src="Assets/Images/az204.png" alt="AZ-204"/>
-          </div>
-          <div class="cert-body">
-            <span class="cert-issuer">Microsoft Certified</span>
-            <h3>AZ-204: Developer Associate</h3>
-            <p>Validates expertise in developing cloud-native solutions on Azure — including Azure Functions, Cosmos DB, Blob Storage, API Management and Azure AD authentication flows.</p>
-            <div class="cert-pills">
-              <span>Azure</span><span>Cloud Dev</span><span>Serverless</span><span>DevOps</span>
-            </div>
-          </div>
-          <div class="cert-hover-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>View Certificate</span>
-          </div>
-        </a>
-        <a class="cert-card cert-card-link reveal" style="--i:1" href="https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/FE428A667ED49C58?sharingId=15C466BCFBAB71DD" target="_blank" rel="noopener">
-          <div class="cert-badge-wrap">
-            <img src="Assets/Images/az400.png" alt="AZ-400"/>
-          </div>
-          <div class="cert-body">
-            <span class="cert-issuer">Microsoft Certified</span>
-            <h3>AZ-400: DevOps Engineer Expert</h3>
-            <p>Microsoft's highest-level DevOps certification — demonstrates mastery in CI/CD pipeline design, infrastructure automation, dependency management, continuous feedback and DevSecOps practices at enterprise scale.</p>
-            <div class="cert-pills">
-              <span>DevOps Expert</span><span>CI/CD</span><span>IaC</span><span>DevSecOps</span>
-            </div>
-          </div>
-          <div class="cert-hover-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span>View Certificate</span>
-          </div>
-        </a>
+<!-- CERTIFICATIONS -->
+<section class="certs" id="certs">
+  <div class="certs-inner">
+    <div class="certs-intro reveal">
+      <div class="eyebrow">04 — Certifications</div>
+      <h3>Microsoft Azure</h3>
+      <p>Industry-validated credentials in enterprise DevOps and cloud-native Azure development.</p>
+    </div>
+    <div class="cert-grid">
+      <a class="cert-card reveal" href="https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/FE428A667ED49C58?sharingId=15C466BCFBAB71DD" target="_blank" rel="noopener" data-hover>
+        <div class="cert-badge"><img src="Assets/Images/az400.png" alt="AZ-400"/></div>
+        <span class="cert-code">AZ-400</span>
+        <h4>DevOps Engineer Expert</h4>
+        <p>Enterprise CI/CD, IaC, DevSecOps at scale</p>
+        <span class="cert-link">Verify credential →</span>
+      </a>
+      <a class="cert-card reveal" href="https://learn.microsoft.com/api/credentials/share/en-us/TarunKrishna-8878/AEA48F7A80C874EB?sharingId=15C466BCFBAB71DD" target="_blank" rel="noopener" data-hover>
+        <div class="cert-badge"><img src="Assets/Images/az204.png" alt="AZ-204"/></div>
+        <span class="cert-code">AZ-204</span>
+        <h4>Developer Associate</h4>
+        <p>Azure Functions, Service Bus, API Management</p>
+        <span class="cert-link">Verify credential →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-sec" id="experience">
+  <div class="exp-head">
+    <div class="eyebrow reveal">05 — Work Experience</div>
+    <h3 class="reveal">Tamuinfotech OPC Pvt. Ltd.</h3>
+    <p class="exp-meta reveal">Azure DevOps Engineer · Jan 2023 – Present · Madurai / Bangalore, India</p>
+  </div>
+
+  <div class="exp-blocks two">
+    <div class="exp-block">
+      <h4>Azure DevOps Engineer — Promoted</h4>
+      <span class="exp-period">Jan 2024 – Present</span>
+      <ul>
+        <li>Architected <strong>multi-tenant SaaS infrastructure</strong> with JSON-driven auto-provisioning — onboarding cut from 3 days to 2 hours</li>
+        <li>Led a <strong>DevSecOps transformation</strong> (SAST, vuln scanning, Key Vault + RBAC) — SOC 2 on 100% of pipelines for 6+ months</li>
+        <li>Built a company-wide <strong>Bicep &amp; Terraform module library</strong> — infra setup time down 80%</li>
+        <li>Designed <strong>VNet-isolated deployments</strong> with self-hosted agents, automated peering &amp; private DNS</li>
+        <li>Mentored junior engineers on CI/CD, IaC, and secure cloud architecture</li>
+      </ul>
+    </div>
+    <div class="exp-block">
+      <h4>DevOps Engineer — CI/CD &amp; Infrastructure</h4>
+      <span class="exp-period">Jan 2023 – Dec 2023</span>
+      <ul>
+        <li>Built <strong>15+ production CI/CD pipelines</strong> across 4 SaaS tenants — deploys 45m → 15m (67% faster), errors down 60%</li>
+        <li>Operated <strong>AKS clusters</strong> with Docker, Helm &amp; HPA at <strong>99.9% uptime</strong> for 12 months — cluster cost down 30%</li>
+        <li>Built observability with Azure Monitor, Grafana &amp; Prometheus — <strong>50+ alert rules</strong>, MTTD down 35%</li>
+        <li>Added release gates &amp; artifact management — release success <strong>78% → 97%</strong>, 3× more releases per sprint</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="edu reveal">
+    <span class="edu-year">2019 – 2022</span>
+    <strong>B.Com — Information Technology</strong> · The American College, Madurai, India
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="stack">
+  <div class="skills-head">
+    <div class="eyebrow reveal">06 — Technical Skills</div>
+    <h3 class="reveal">Stack</h3>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card reveal"><h4>CI/CD &amp; DevOps</h4><p>Azure DevOps Pipelines, GitHub Actions, Jenkins, Multi-stage YAML, Release Gates, Self-Hosted Agents</p></div>
+    <div class="skill-card reveal"><h4>Azure Services</h4><p>App Services, Functions, Logic Apps, AKS, ACR, APIM, Container Apps, Service Bus, Key Vault, Azure SQL</p></div>
+    <div class="skill-card reveal"><h4>Infrastructure-as-Code</h4><p>Bicep, Terraform, ARM Templates, JSON-driven provisioning, Remote State</p></div>
+    <div class="skill-card reveal"><h4>Networking &amp; Security</h4><p>VNet Peering, Private Endpoints, Private DNS, NSG, RBAC, Key Vault, SAST, SOC 2</p></div>
+    <div class="skill-card reveal"><h4>Containers &amp; Orchestration</h4><p>Kubernetes (AKS), Docker, Helm, KEDA, Container Apps Jobs, HPA</p></div>
+    <div class="skill-card reveal"><h4>Monitoring &amp; Scripting</h4><p>Azure Monitor, Log Analytics, Grafana, Prometheus, PagerDuty · Bash, PowerShell, Python, YAML</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="eyebrow">07 — Contact</div>
+      <h2>Let's connect.</h2>
+      <p>Open to Azure DevOps, AWS DevOps, and Azure Integration roles. Based in Bangalore, India — available remotely.</p>
+      <div class="contact-details">
+        <a href="mailto:krishtarun2001@gmail.com" data-hover>krishtarun2001@gmail.com</a>
+        <a href="tel:+919597176872" data-hover>+91 95971 76872</a>
+        <a href="https://github.com/Krish200122" target="_blank" rel="noopener" data-hover>github.com/Krish200122</a>
+        <a href="https://linkedin.com/in/tarun-krish" target="_blank" rel="noopener" data-hover>linkedin.com/in/tarun-krish</a>
+        <a href="Assets/TarunKrishna_Resume.pdf" download data-hover>Download Azure DevOps Resume (PDF)</a>
       </div>
     </div>
-  </section>
-
-  <!-- ════════════════════════ CONTACT ════════════════════════ -->
-  <section id="contact" class="sec">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-num">05.</span>
-        <h2 class="sec-title">Contact</h2>
-        <div class="sec-rule"></div>
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <input type="text" id="fFirst" placeholder="First name" required/>
+        <input type="text" id="fLast" placeholder="Last name" required/>
       </div>
-      <div class="contact-layout">
-        <div class="contact-info reveal">
-          <h3>Let's build something great</h3>
-          <p>Have a project or just want to chat cloud automation? My inbox is always open.</p>
-          <div class="contact-rows">
-            <div class="crow">
-              <span class="cicon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-              </span>
-              <span>tarunkrish2001@gmail.com</span>
-            </div>
-            <div class="crow">
-              <span class="cicon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-              </span>
-              <span>+91 9597176872</span>
-            </div>
-            <div class="crow">
-              <span class="cicon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </span>
-              <span>15/48, Temcy Colony, 1st Street, Old Vilangudi,<br>Madurai – 625018, Tamil Nadu, India</span>
-            </div>
-            <div class="crow">
-              <span class="cicon">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-              </span>
-              <a href="https://github.com/Krish200122" target="_blank">github.com/Krish200122</a>
-            </div>
-          </div>
-        </div>
+      <input type="email" id="fEmail" placeholder="Email address" required/>
+      <textarea id="fMsg" rows="5" placeholder="Tell me about the role or project…" required></textarea>
+      <button type="submit" class="submit-btn" id="sendBtn" data-hover>Send message →</button>
+      <p class="form-msg ok" id="formOk">Message sent successfully.</p>
+      <p class="form-msg err" id="formErr"></p>
+    </form>
+  </div>
+</section>
 
-        <form class="contact-form reveal" id="contactForm" novalidate>
-          <h3>Send a message</h3>
-          <p class="form-sub">I'll get back to you as soon as possible.</p>
-          <div class="form-row">
-            <div class="field">
-              <input type="text" id="fFirst" placeholder=" " required/>
-              <label for="fFirst">First Name</label>
-            </div>
-            <div class="field">
-              <input type="text" id="fLast" placeholder=" " required/>
-              <label for="fLast">Last Name</label>
-            </div>
-          </div>
-          <div class="field">
-            <input type="email" id="fEmail" placeholder=" " required/>
-            <label for="fEmail">Email</label>
-          </div>
-          <div class="field">
-            <textarea id="fMsg" rows="5" placeholder=" " required></textarea>
-            <label for="fMsg">Message</label>
-          </div>
-          <button type="submit" class="btn-send" id="sendBtn">
-            <span class="btn-label">Send Message</span>
-            <span class="btn-icon">→</span>
-          </button>
-          <div class="form-ok" id="formOk">✓ Message sent — I'll be in touch soon!</div>
-          <div class="form-err" id="formErr">Please fill in all fields.</div>
-        </form>
-      </div>
-    </div>
-  </section>
+<footer class="site-footer">
+  <span class="foot-copy">© 2026 Tarun Krishna · Azure DevOps Engineer · AZ-400 &amp; AZ-204</span>
+  <div class="foot-links">
+    <a href="#about" data-hover>About</a>
+    <a href="#roles" data-hover>Roles</a>
+    <a href="#work" data-hover>Projects</a>
+    <a href="#experience" data-hover>Experience</a>
+    <a href="#contact" data-hover>Contact</a>
+  </div>
+</footer>
 
-  <!-- ════════════════════════ FOOTER ════════════════════════ -->
-  <footer id="footer">
-    <div class="footer-inner">
-
-      <!-- 4-column grid -->
-      <div class="footer-grid">
-
-        <!-- Col 1: Brand -->
-        <div class="footer-col footer-col-brand">
-          <div class="footer-brand">KrishPortfolio<span>.web.app</span></div>
-          <p class="footer-bio">Azure DevOps Engineer building enterprise-grade CI/CD pipelines, Kubernetes infrastructure and cloud automation on Microsoft Azure.</p>
-          <div class="footer-cert-badges">
-            <span class="fcert">AZ-400</span>
-            <span class="fcert">AZ-204</span>
-            <span class="fcert">Microsoft Certified</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Quick Links -->
-        <div class="footer-col">
-          <div class="footer-col-title">Quick Links</div>
-          <ul class="footer-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#certs">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Tech Stack -->
-        <div class="footer-col">
-          <div class="footer-col-title">Tech Stack</div>
-          <ul class="footer-links">
-            <li>Azure DevOps</li>
-            <li>Kubernetes · AKS</li>
-            <li>Terraform · Bicep</li>
-            <li>GitHub Actions</li>
-            <li>Docker · Helm</li>
-            <li>Prometheus · Grafana</li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Contact -->
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul class="footer-contact-list">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-              <a href="mailto:tarunkrish2001@gmail.com">tarunkrish2001@gmail.com</a>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-              <a href="tel:+919597176872">+91 95971 76872</a>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-              <a href="https://github.com/Krish200122" target="_blank">github.com/Krish200122</a>
-            </li>
-            <li class="footer-address">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <address>
-                15/48, Temcy Colony, 1st Street,<br>
-                Old Vilangudi,<br>
-                Madurai – 625018,<br>
-                Tamil Nadu, India
-              </address>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Divider -->
-      <div class="footer-rule"></div>
-
-    </div>
-  </footer>
-
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="script.js"></script>
+<script src="splash-video.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

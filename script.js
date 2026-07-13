@@ -1,297 +1,228 @@
-/* KrishPortfolio.web.app — Portfolio Script */
-'use strict';
+/* Portfolio — splash, scroll reveal, contact */
 
-// ── Custom Cursor — minimal glowing dot ───────────────────
-const cursorDot = document.getElementById('cursorDot');
+(function () {
+  'use strict';
 
-document.addEventListener('mousemove', e => {
-  cursorDot.style.left = e.clientX + 'px';
-  cursorDot.style.top  = e.clientY + 'px';
-});
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ===== custom cursor ===== */
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-// ── Navbar scroll behaviour ───────────────────────────────
-const navbar = document.getElementById('navbar');
-const navProgress = document.getElementById('navProgress');
-
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const pct = (scrolled / maxScroll) * 100;
-  navProgress.style.width = pct + '%';
-  navbar.classList.toggle('scrolled', scrolled > 40);
-});
-
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nl');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const match = document.querySelector(`.nl[href="#${e.target.id}"]`);
-      if (match) match.classList.add('active');
-    }
-  });
-}, { threshold: 0.35 });
-sections.forEach(s => observer.observe(s));
-
-
-// ── Hamburger / Drawer ────────────────────────────────────
-const burger  = document.getElementById('burger');
-const drawer  = document.getElementById('drawer');
-
-burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  drawer.classList.toggle('open');
-});
-document.querySelectorAll('.dr-link').forEach(l => {
-  l.addEventListener('click', () => {
-    burger.classList.remove('open');
-    drawer.classList.remove('open');
-  });
-});
-
-
-// ── Typewriter — navbar brand ─────────────────────────────
-const brandTyped = document.getElementById('brandTyped');
-const brandCaret = document.getElementById('brandCaret');
-const BRAND_TEXT  = 'KrishPortfolio';
-
-function typewriterBrand() {
-  let i = 0;
-  const tick = setInterval(() => {
-    brandTyped.textContent = BRAND_TEXT.slice(0, ++i);
-    if (i >= BRAND_TEXT.length) {
-      clearInterval(tick);
-      setTimeout(() => { brandCaret.style.display = 'none'; }, 800);
-    }
-  }, 90);
-}
-window.addEventListener('load', () => setTimeout(typewriterBrand, 300));
-
-
-// ── Typewriter — hero name (looping) ─────────────────────
-const heroTyped  = document.getElementById('heroTyped');
-const nameCursor = document.getElementById('nameCursor');
-const HERO_TEXTS = ['Tarun', 'Tarun Krishna'];
-
-function typewriterHero() {
-  let textIdx = 0;
-  let charCount = 0;
-  let deleting = false;
-
-  function tick() {
-    const current = HERO_TEXTS[textIdx];
-    if (!deleting) {
-      charCount++;
-      heroTyped.textContent = current.slice(0, charCount);
-      if (charCount >= current.length) {
-        // fully typed — pause then delete
-        setTimeout(() => { deleting = true; tick(); }, 1600);
-        return;
-      }
-    } else {
-      charCount--;
-      heroTyped.textContent = current.slice(0, charCount);
-      if (charCount <= 0) {
-        // fully deleted — move to next text, pause then type
-        deleting = false;
-        textIdx = (textIdx + 1) % HERO_TEXTS.length;
-        setTimeout(tick, 400);
-        return;
-      }
-    }
-    setTimeout(tick, deleting ? 50 : 80);
-  }
-
-  // keep cursor always visible and blinking
-  nameCursor.style.animation = '';
-  nameCursor.style.opacity = '1';
-  tick();
-}
-window.addEventListener('load', () => setTimeout(typewriterHero, 600));
-
-
-// ── Scroll-reveal ─────────────────────────────────────────
-const revealEls = document.querySelectorAll('.reveal');
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach((e, idx) => {
-    if (e.isIntersecting) {
-      // stagger siblings by reading --i var or index
-      const delay = e.target.style.getPropertyValue('--i') || 0;
-      e.target.style.transitionDelay = (parseFloat(delay) * 0.15) + 's';
-      e.target.classList.add('visible');
-      revealObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-revealEls.forEach(el => revealObs.observe(el));
-
-
-// ── Smooth scroll for all anchor links ───────────────────
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-
-// ── Tech pill hover ripple ────────────────────────────────
-document.querySelectorAll('.tp').forEach(tp => {
-  tp.addEventListener('mouseenter', () => {
-    tp.style.setProperty('--ripple', '1');
-  });
-});
-
-
-// ── Contact form — EmailJS ────────────────────────────────
-// REPLACE these 3 values with your EmailJS credentials:
-//   https://dashboard.emailjs.com/admin
-const EMAILJS_SERVICE_ID  = 'service_co42jyb';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_09j0nrw';  // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = 'LCX5Odd5orbnK5GaQ';   // e.g. 'abcDEFghiJKL'
-
-const form    = document.getElementById('contactForm');
-const sendBtn = document.getElementById('sendBtn');
-const formOk  = document.getElementById('formOk');
-const formErr = document.getElementById('formErr');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  formOk.classList.remove('show');
-  formErr.classList.remove('show');
-
-  const first = document.getElementById('fFirst').value.trim();
-  const last  = document.getElementById('fLast').value.trim();
-  const email = document.getElementById('fEmail').value.trim();
-  const msg   = document.getElementById('fMsg').value.trim();
-
-  if (!first || !last || !email || !msg) {
-    formErr.textContent = 'Please fill in all fields.';
-    formErr.classList.add('show');
-    return;
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    formErr.textContent = 'Please enter a valid email address.';
-    formErr.classList.add('show');
-    return;
-  }
-
-  // Send via EmailJS
-  sendBtn.classList.add('loading');
-  const label = sendBtn.querySelector('.btn-label');
-  label.textContent = 'Sending…';
-
-  try {
-    await emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      {
-        from_name:  first + ' ' + last,
-        from_email: email,
-        message:    msg,
-        to_name:    'Tarun Krishna',
-      },
-      EMAILJS_PUBLIC_KEY
-    );
-
-    sendBtn.classList.remove('loading');
-    label.textContent = 'Send Message';
-    formOk.textContent = '✓ Message sent — I\'ll be in touch soon!';
-    formOk.classList.add('show');
-    form.reset();
-    setTimeout(() => formOk.classList.remove('show'), 5000);
-
-  } catch (err) {
-    sendBtn.classList.remove('loading');
-    label.textContent = 'Send Message';
-    formErr.textContent = 'Failed to send. Please email me directly at tarunkrish2001@gmail.com';
-    formErr.classList.add('show');
-    console.error('EmailJS error:', err);
-  }
-});
-
-
-// ── Magnetic effect on buttons ────────────────────────────
-document.querySelectorAll('.btn, .nav-cta, .btn-send').forEach(el => {
-  el.addEventListener('mousemove', function(e) {
-    const rect = this.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top  + rect.height / 2;
-    const dx = (e.clientX - cx) * 0.2;
-    const dy = (e.clientY - cy) * 0.2;
-    this.style.transform = `translate(${dx}px, ${dy}px)`;
-  });
-  el.addEventListener('mouseleave', function() {
-    this.style.transform = '';
-  });
-});
-
-
-// ── Profile image tilt on hover ───────────────────────────
-const photoFrame = document.querySelector('.photo-frame');
-const heroPhoto  = document.querySelector('.hero-photo');
-
-if (heroPhoto) {
-  heroPhoto.addEventListener('mousemove', e => {
-    const rect = heroPhoto.getBoundingClientRect();
-    const cx = rect.left + rect.width  / 2;
-    const cy = rect.top  + rect.height / 2;
-    const rx = ((e.clientY - cy) / (rect.height / 2)) * -8;
-    const ry = ((e.clientX - cx) / (rect.width  / 2)) *  8;
-    if (photoFrame) {
-      photoFrame.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    }
-  });
-  heroPhoto.addEventListener('mouseleave', () => {
-    if (photoFrame) photoFrame.style.transform = '';
-  });
-}
-
-
-// ── Counter animation for stat numbers ───────────────────
-function animateCounter(el, target, suffix, duration = 1200) {
-  let start = 0;
-  const step = (timestamp) => {
-    if (!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(eased * target) + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-
-const counters = document.querySelectorAll('.hcard-num');
-let countersStarted = false;
-
-const counterObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !countersStarted) {
-      countersStarted = true;
-      counters.forEach(c => {
-        const raw = c.textContent;
-        const num = parseFloat(raw);
-        const suffix = raw.replace(String(num), '');
-        if (!isNaN(num)) animateCounter(c, num, suffix);
+  if (cursor && ring && !matchMedia('(hover: none)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    (function ringLoop() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(ringLoop);
+    })();
+    document.querySelectorAll('[data-hover], a, button').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('grow');
+        ring.classList.add('grow');
       });
-    }
-  });
-}, { threshold: 0.5 });
-
-const heroCards = document.querySelector('.hero-cards');
-if (heroCards) counterObs.observe(heroCards);
-
-
-// ── Keyboard navigation ───────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    burger.classList.remove('open');
-    drawer.classList.remove('open');
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('grow');
+        ring.classList.remove('grow');
+      });
+    });
   }
-});
+
+  /* ===== Earth video splash (step 1) ===== */
+  const splash = document.getElementById('splash');
+
+  function revealHero() {
+    document.getElementById('heroEyebrow')?.classList.add('show');
+    document.getElementById('heroName')?.classList.add('show');
+    document.getElementById('headline')?.classList.add('show');
+    document.getElementById('heroSub')?.classList.add('show');
+    document.getElementById('terminal')?.classList.add('show');
+    document.getElementById('getTouch')?.classList.add('show');
+    document.getElementById('heroPhoto')?.classList.add('show');
+    typeTerminal();
+    initScrollAnim();
+    revealInView();
+  }
+
+  function openHeroSection() {
+    document.body.classList.remove('splash-active');
+    splash?.classList.add('done');
+    window.scrollTo(0, 0);
+    setTimeout(revealHero, 250);
+  }
+
+  if (window.VideoSplash) {
+    VideoSplash.start(openHeroSection);
+  } else {
+    openHeroSection();
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (splash && !splash.classList.contains('done')) {
+        splash.classList.add('done');
+        openHeroSection();
+      }
+      revealInView();
+    }, 30000);
+  });
+
+  /* ===== hero terminal ===== */
+  const termLines = [
+    { p: '$ ', t: 'az pipelines run --name saas-onboarding' },
+    { p: '', t: '✓ Tenant infra provisioned · Logic Apps deployed' },
+    { p: '$ ', t: 'kubectl get pods -n production' },
+    { p: '', t: '5/5 running · 99.9% uptime · 0 downtime' }
+  ];
+
+  function typeTerminal() {
+    const body = document.getElementById('termBody');
+    if (!body) return;
+    body.innerHTML = '';
+    let li = 0;
+
+    function nextLine() {
+      if (li >= termLines.length) {
+        const c = document.createElement('span');
+        c.className = 'term-cursor';
+        body.appendChild(c);
+        return;
+      }
+      const row = document.createElement('div');
+      row.innerHTML = termLines[li].p ? `<span class="prompt">${termLines[li].p}</span>` : '';
+      body.appendChild(row);
+      const textNode = document.createElement('span');
+      row.appendChild(textNode);
+      let ci = 0;
+      const full = termLines[li].t;
+
+      function typeChar() {
+        if (ci <= full.length) {
+          textNode.textContent = full.slice(0, ci);
+          ci++;
+          setTimeout(typeChar, reduced ? 0 : 22);
+        } else {
+          li++;
+          setTimeout(nextLine, reduced ? 0 : 260);
+        }
+      }
+      typeChar();
+    }
+    nextLine();
+  }
+
+  /* ===== scroll reveal (CSS only — no GSAP opacity traps) ===== */
+  function revealInView() {
+    document.querySelectorAll('.reveal, .reveal-line').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) el.classList.add('in');
+    });
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) en.target.classList.add('in');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-line').forEach((el) => io.observe(el));
+
+  window.addEventListener('scroll', revealInView, { passive: true });
+
+  /* ===== subtle scroll fade (no 3D) ===== */
+  function initScrollAnim() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('[data-case]').forEach((caseEl) => {
+      const body = caseEl.querySelector('.case-body');
+      if (!body) return;
+      gsap.from(body, {
+        scrollTrigger: { trigger: caseEl, start: 'top 82%', once: true },
+        opacity: 0, y: 30, duration: 0.7, ease: 'power2.out',
+        clearProps: 'opacity,transform'
+      });
+    });
+  }
+
+  /* ===== counters ===== */
+  const counters = document.querySelectorAll('.num[data-count]');
+  const cIo = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const target = parseFloat(el.dataset.count);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const isFloat = target % 1 !== 0;
+      const dur = reduced ? 0 : 1400;
+      const start = performance.now();
+
+      function step(now) {
+        const p = dur === 0 ? 1 : Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const cur = target * eased;
+        el.textContent = prefix + (isFloat ? cur.toFixed(1) : Math.floor(cur)) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      cIo.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach((el) => cIo.observe(el));
+
+  /* ===== EmailJS ===== */
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init('LCX5Odd5orbnK5GaQ');
+  }
+
+  const form = document.getElementById('contactForm');
+  const sendBtn = document.getElementById('sendBtn');
+  const formOk = document.getElementById('formOk');
+  const formErr = document.getElementById('formErr');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formOk?.classList.remove('show');
+      formErr?.classList.remove('show');
+
+      const first = document.getElementById('fFirst').value.trim();
+      const last = document.getElementById('fLast').value.trim();
+      const email = document.getElementById('fEmail').value.trim();
+      const msg = document.getElementById('fMsg').value.trim();
+
+      if (!first || !last || !email || !msg) {
+        formErr.textContent = 'Please fill in all fields.';
+        formErr.classList.add('show');
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending…';
+
+      try {
+        await emailjs.send('service_co42jyb', 'template_09j0nrw', {
+          from_name: first + ' ' + last,
+          from_email: email,
+          message: msg
+        });
+        formOk?.classList.add('show');
+        form.reset();
+      } catch (err) {
+        formErr.textContent = 'Failed to send. Email krishtarun2001@gmail.com directly.';
+        formErr.classList.add('show');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send message →';
+      }
+    });
+  }
+})();
