@@ -25,7 +25,7 @@
 
 <header>
   <div class="logo">TARUN<span class="dot">.</span>KRISHNA</div>
-  <nav>
+  <nav id="siteNav">
     <ul>
       <li><a href="#about" data-hover>About</a></li>
       <li><a href="#roles" data-hover>Roles</a></li>
@@ -35,6 +35,9 @@
     </ul>
   </nav>
   <a href="#contact" class="talk" data-hover>Let's talk</a>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <!-- HERO -->
@@ -42,12 +45,12 @@
   <div class="hero-layout">
     <div class="hero-copy">
       <div class="hero-eyebrow" id="heroEyebrow">
-        <span class="ping"></span>AZ-400 &amp; AZ-204 CERTIFIED · 3.5+ YEARS · BANGALORE
+        <span class="ping"></span>AZ-400 &amp; AZ-204 CERTIFIED · 3.5+ YEARS · MADURAI
       </div>
       <p class="hero-name" id="heroName"><span class="n1">Tarun</span> <span class="n2">Krishna</span></p>
       <h1 class="headline" id="headline">
-        <span><em>Build.</em></span>
-        <span><em class="accent">Automate.</em></span>
+        <span><em class="type-line"><span id="typeBuild" class="type-text"></span><span class="type-cursor" aria-hidden="true">|</span></em></span>
+        <span><em class="accent type-line"><span id="typeAutomate" class="type-text"></span><span class="type-cursor" aria-hidden="true">|</span></em></span>
         <span><em>Secure.</em></span>
       </h1>
       <p class="hero-sub" id="heroSub">Azure DevOps Engineer at Tamuinfotech — building secure, multi-tenant CI/CD pipelines, Bicep &amp; Terraform IaC, AKS orchestration, and hub-and-spoke private networking on Azure.</p>
@@ -203,7 +206,9 @@
       </div>
     </div>
     <div class="case-visual" data-case-visual>
-      <div class="case-placeholder"><span>Project image coming soon</span></div>
+      <div class="case-media diagram">
+        <img src="Assets/Images/Projects/azure-hub-spoke.png" alt="Hub-and-Spoke Private Network Architecture — Multi-Customer Azure Integration Platform"/>
+      </div>
     </div>
   </article>
 
@@ -227,7 +232,9 @@
       </div>
     </div>
     <div class="case-visual" data-case-visual>
-      <div class="case-placeholder"><span>Project image coming soon</span></div>
+      <div class="case-media diagram">
+        <img src="Assets/Images/Projects/azure-iac-cicd.png" alt="Infrastructure as Code, Secure CI/CD, Monitoring and Governance architecture"/>
+      </div>
     </div>
   </article>
 
@@ -251,7 +258,9 @@
       </div>
     </div>
     <div class="case-visual" data-case-visual>
-      <div class="case-placeholder"><span>Project image coming soon</span></div>
+      <div class="case-media diagram">
+        <img src="Assets/Images/Projects/aws-hub-spoke.png" alt="AWS Hub-and-Spoke Network Architecture — Multi-Environment Medical Application Platform"/>
+      </div>
     </div>
   </article>
 
@@ -275,7 +284,9 @@
       </div>
     </div>
     <div class="case-visual" data-case-visual>
-      <div class="case-placeholder"><span>Project image coming soon</span></div>
+      <div class="case-media diagram">
+        <img src="Assets/Images/Projects/azure-integration-edi.png" alt="Azure Integration — Enterprise EDI and ERP architecture"/>
+      </div>
     </div>
   </article>
 </section>
@@ -312,7 +323,7 @@
   <div class="exp-head">
     <div class="eyebrow reveal">05 — Work Experience</div>
     <h3 class="reveal">Tamuinfotech OPC Pvt. Ltd.</h3>
-    <p class="exp-meta reveal">Azure DevOps Engineer · Jan 2023 – Present · Madurai / Bangalore, India</p>
+    <p class="exp-meta reveal">Azure DevOps Engineer · Jan 2023 – Present · Madurai, India</p>
   </div>
 
   <div class="exp-blocks two">
@@ -367,7 +378,7 @@
     <div class="contact-left">
       <div class="eyebrow">07 — Contact</div>
       <h2>Let's connect.</h2>
-      <p>Open to Azure DevOps, AWS DevOps, and Azure Integration roles. Based in Bangalore, India — available remotely.</p>
+      <p>Open to Azure DevOps, AWS DevOps, and Azure Integration roles. Based in Madurai, India — available remotely.</p>
       <div class="contact-details">
         <a href="mailto:krishtarun2001@gmail.com" data-hover>krishtarun2001@gmail.com</a>
         <a href="tel:+919597176872" data-hover>+91 95971 76872</a>

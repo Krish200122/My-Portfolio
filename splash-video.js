@@ -1,9 +1,9 @@
-/* Step 1: Earth video splash at 2× speed (cloud + about section comes next) */
+/* Earth video splash — slightly faster than 2× */
 window.VideoSplash = (function () {
   'use strict';
 
   const EARTH_SRC = 'Assets/video/earth.mp4';
-  const PLAYBACK_RATE = 2;
+  const PLAYBACK_RATE = 2.4;
   const CLOUD_FLASH_MS = 240;
 
   function start(onComplete) {
